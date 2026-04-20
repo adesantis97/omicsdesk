@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OmicsDesk — Bioinformatics analysis, delivered as a report</title>
+  <meta name="description" content="Per-omics bioinformatics analysis for biotechs and academic labs. Fixed pricing, 7-10 day turnaround, reproducible pipelines." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            ink: '#0f172a',
+            accent: '#0d9488',
+            'accent-dark': '#0f766e',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .prose-p { color: #334155; line-height: 1.65; }
+  </style>
+</head>
+<body class="font-sans text-ink bg-white antialiased">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-100">
+    <div class="max-w-5xl mx-auto px-5 py-3 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-2 font-semibold text-ink">
+        <span class="inline-block w-2.5 h-2.5 rounded-sm bg-accent"></span>
+        <span>OmicsDesk</span>
+      </a>
+      <div class="hidden sm:flex items-center gap-6 text-sm text-slate-600">
+        <a href="#services" class="hover:text-ink">Services</a>
+        <a href="#pricing" class="hover:text-ink">Pricing</a>
+        <a href="#how" class="hover:text-ink">How it works</a>
+        <a href="#contact" class="hover:text-ink">Contact</a>
+      </div>
+      <a href="#contact" class="text-sm font-medium bg-ink text-white px-3.5 py-1.5 rounded-md hover:bg-slate-800 transition">Request a quote</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="top" class="max-w-5xl mx-auto px-5 pt-20 pb-16">
+    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4">Omics analysis, on demand</p>
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+      Bioinformatics analysis,<br />
+      <span class="text-accent">delivered as a report.</span>
+    </h1>
+    <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl leading-relaxed">
+      Per-omics pricing, fixed turnaround, reproducible pipelines. For biotechs and academic labs that need results — not a full-time hire.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="#contact" class="inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition">
+        Request a quote
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#pricing" class="inline-flex items-center gap-2 bg-white text-ink border border-slate-200 px-5 py-3 rounded-md font-medium hover:bg-slate-50 transition">
+        See pricing
+      </a>
+    </div>
+  </header>
+
+  <!-- WHAT WE DO -->
+  <section class="max-w-5xl mx-auto px-5 py-14 border-t border-slate-100">
+    <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">What we do</h2>
+    <div class="mt-6 grid sm:grid-cols-2 gap-8 max-w-4xl">
+      <p class="prose-p">
+        OmicsDesk turns your raw sequencing or mass-spec data into a decision-ready report. You send FASTQs, raw MS files, or count matrices and a sample sheet. You get back a QC report, full statistical results, publication-ready figures, and a branded PDF summary — usually within 7–10 business days.
+      </p>
+      <p class="prose-p">
+        Every analysis is run on a versioned Snakemake pipeline with pinned conda environments. You receive the code alongside the results, so nothing is a black box.
+      </p>
+    </div>
+  </section>
+
+  <!-- SERVICES & PRICING -->
+  <section id="services" class="bg-slate-50 border-y border-slate-100">
+    <div class="max-w-5xl mx-auto px-5 py-16" id="pricing">
+      <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Services &amp; pricing</h2>
+      <p class="prose-p mt-3 max-w-2xl">Flat fees. No surprises. Every analysis includes QC, figures, Excel results, a PDF report, and the pipeline code.</p>
+
+      <div class="mt-8 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50 text-slate-600">
+            <tr>
+              <th class="text-left font-medium px-5 py-3">Omics type</th>
+              <th class="text-left font-medium px-5 py-3">Price</th>
+              <th class="text-left font-medium px-5 py-3">Up to</th>
+              <th class="text-left font-medium px-5 py-3">Turnaround</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="px-5 py-3 font-medium">RNA-seq (bulk)</td><td class="px-5 py-3 font-mono">€2,500</td><td class="px-5 py-3">24 samples</td><td class="px-5 py-3">7 business days</td></tr>
+            <tr><td class="px-5 py-3 font-medium">scRNA-seq</td><td class="px-5 py-3 font-mono">€3,500</td><td class="px-5 py-3">16 libraries</td><td class="px-5 py-3">10 business days</td></tr>
+            <tr><td class="px-5 py-3 font-medium">Proteomics</td><td class="px-5 py-3 font-mono">€3,000</td><td class="px-5 py-3">24 samples</td><td class="px-5 py-3">7 business days</td></tr>
+            <tr><td class="px-5 py-3 font-medium">Phosphoproteomics</td><td class="px-5 py-3 font-mono">€3,500</td><td class="px-5 py-3">24 samples</td><td class="px-5 py-3">10 business days</td></tr>
+            <tr><td class="px-5 py-3 font-medium">ChIP-seq</td><td class="px-5 py-3 font-mono">€2,500</td><td class="px-5 py-3">24 samples</td><td class="px-5 py-3">7 business days</td></tr>
+            <tr><td class="px-5 py-3 font-medium">ATAC-seq</td><td class="px-5 py-3 font-mono">€2,500</td><td class="px-5 py-3">24 samples</td><td class="px-5 py-3">7 business days</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg border border-slate-200 p-6">
+          <h3 class="font-semibold">Multi-omics integration</h3>
+          <p class="prose-p mt-2">
+            <span class="font-mono text-ink">€2,000</span> base fee + each per-omics analysis at list price. Example: RNA-seq + Proteomics + Integration = <span class="font-mono text-ink">€7,500</span>.
+          </p>
+          <p class="prose-p mt-3 text-sm">Includes MOFA2 factor analysis, a patient-specific regulatory network, and cross-omics pathway convergence.</p>
+        </div>
+        <div class="bg-white rounded-lg border border-slate-200 p-6">
+          <h3 class="font-semibold">Add-ons</h3>
+          <ul class="prose-p mt-2 text-sm space-y-1.5">
+            <li>Rush delivery (3 business days): <span class="font-mono">+50%</span></li>
+            <li>Extra samples (per batch of 6): <span class="font-mono">+€250</span></li>
+            <li>Follow-up re-analysis (up to 2 changes): <span class="font-mono">+€400</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="mt-6 text-sm text-slate-500 leading-relaxed">
+        Prices in EUR. USD invoicing available on request. 15% academic discount for requests from <span class="font-mono text-slate-600">.edu</span> / <span class="font-mono text-slate-600">.ac.*</span> institutional emails (excluding rush).
+      </p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="max-w-5xl mx-auto px-5 py-16">
+    <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">How it works</h2>
+    <div class="mt-10 grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-semibold flex items-center justify-center">1</span>
+          <h3 class="font-semibold">Intake &amp; NDA</h3>
+          <span class="text-xs text-slate-400 font-mono">day 0</span>
+        </div>
+        <p class="prose-p text-sm">You fill a short intake form (organism, sample count, contrasts, data access). NDA signed before any data is shared. Quote and proposal back within 2 business days.</p>
+      </div>
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-semibold flex items-center justify-center">2</span>
+          <h3 class="font-semibold">Analysis &amp; QC</h3>
+          <span class="text-xs text-slate-400 font-mono">days 1–7</span>
+        </div>
+        <p class="prose-p text-sm">Raw data is processed on a validated Snakemake pipeline. You receive a QC check-in after alignment so we can catch data-level issues early — before the clock runs out on downstream analysis.</p>
+      </div>
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-semibold flex items-center justify-center">3</span>
+          <h3 class="font-semibold">Report &amp; handoff</h3>
+          <span class="text-xs text-slate-400 font-mono">day 7 or 10</span>
+        </div>
+        <p class="prose-p text-sm">Branded PDF report, Excel workbook with full statistical results, figures at 300 dpi, and the pipeline code. Raw data is deleted within 30 days of delivery.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="bg-slate-50 border-y border-slate-100">
+    <div class="max-w-5xl mx-auto px-5 py-16">
+      <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">What you get, every time</h2>
+      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl">
+        <div class="bg-white rounded-lg border border-slate-200 p-5">
+          <h4 class="font-semibold text-sm">QC report</h4>
+          <p class="text-sm text-slate-500 mt-1">HTML + summary table</p>
+        </div>
+        <div class="bg-white rounded-lg border border-slate-200 p-5">
+          <h4 class="font-semibold text-sm">Full statistical results</h4>
+          <p class="text-sm text-slate-500 mt-1">TSV + Excel workbook</p>
+        </div>
+        <div class="bg-white rounded-lg border border-slate-200 p-5">
+          <h4 class="font-semibold text-sm">Publication-ready figures</h4>
+          <p class="text-sm text-slate-500 mt-1">PNG at 300 dpi</p>
+        </div>
+        <div class="bg-white rounded-lg border border-slate-200 p-5">
+          <h4 class="font-semibold text-sm">Branded PDF report</h4>
+          <p class="text-sm text-slate-500 mt-1">Executive summary, methods, conclusions</p>
+        </div>
+        <div class="bg-white rounded-lg border border-slate-200 p-5">
+          <h4 class="font-semibold text-sm">Reproducible pipeline code</h4>
+          <p class="text-sm text-slate-500 mt-1">Snakemake + conda, versioned</p>
+        </div>
+        <div class="bg-white rounded-lg border border-slate-200 p-5">
+          <h4 class="font-semibold text-sm">NDA by default</h4>
+          <p class="text-sm text-slate-500 mt-1">Raw data deleted within 30 days</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLE DELIVERABLE -->
+  <section class="max-w-5xl mx-auto px-5 py-16">
+    <div class="bg-ink text-white rounded-xl p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 justify-between">
+      <div>
+        <h3 class="text-xl md:text-2xl font-semibold">Want to see a sample report?</h3>
+        <p class="text-slate-300 mt-2 max-w-2xl">A sanitized example (human melanoma RNA-seq, public GEO dataset) is available on request. We send the PDF back the same day.</p>
+      </div>
+      <a href="#contact" class="inline-flex shrink-0 items-center gap-2 bg-accent hover:bg-accent-dark text-white px-5 py-3 rounded-md font-medium transition">
+        Request the sample
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="max-w-5xl mx-auto px-5 py-16 border-t border-slate-100">
+    <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">About</h2>
+    <p class="prose-p mt-6 max-w-3xl">
+      OmicsDesk is run by <span class="font-semibold text-ink">Alessandro De Santis</span>, a computational biologist and co-founder of SynMiR (Italian biotech developing synthetic miRNA cancer therapeutics). The target discovery pipeline at SynMiR is built on the same multi-omics integration approach offered here: transcriptomics, proteomics, phosphoproteomics, and mutation data combined into patient-specific signaling networks.
+    </p>
+    <p class="prose-p mt-4 max-w-3xl">
+      OmicsDesk exists to make that capability available to labs and biotechs without an in-house bioinformatics hire.
+    </p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="bg-slate-50 border-y border-slate-100">
+    <div class="max-w-5xl mx-auto px-5 py-16">
+      <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Get a quote</h2>
+      <p class="prose-p mt-3 max-w-2xl">Email <a class="text-accent font-medium underline-offset-4 hover:underline" href="mailto:a.desantiss97@gmail.com">a.desantiss97@gmail.com</a>. Quote back within 2 business days.</p>
+
+      <div class="mt-8 grid md:grid-cols-2 gap-6 max-w-4xl">
+        <div class="bg-white rounded-lg border border-slate-200 p-6">
+          <h4 class="font-semibold">Include in your email</h4>
+          <ul class="prose-p mt-3 text-sm space-y-1.5 list-disc list-inside">
+            <li>Omics type(s) and sample count</li>
+            <li>Species and genome build (if known)</li>
+            <li>The biological contrast you want tested</li>
+            <li>Any deadline you're working against</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-lg border border-slate-200 p-6 flex flex-col justify-between">
+          <div>
+            <h4 class="font-semibold">Prefer a call?</h4>
+            <p class="prose-p mt-2 text-sm">Mention that in your email and we'll send a calendar link. Most projects don't need a call — the intake form is enough.</p>
+          </div>
+          <a href="mailto:a.desantiss97@gmail.com?subject=OmicsDesk%20quote%20request" class="mt-5 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition self-start">
+            Email us
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="max-w-5xl mx-auto px-5 py-10 text-sm text-slate-500 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div class="flex items-center gap-2">
+      <span class="inline-block w-2.5 h-2.5 rounded-sm bg-accent"></span>
+      <span class="font-semibold text-ink">OmicsDesk</span>
+      <span class="text-slate-400">— Your data, explained.</span>
+    </div>
+    <div class="text-slate-400">
+      NDA available on request · © OmicsDesk 2026
+    </div>
+  </footer>
+
+</body>
+</html>
