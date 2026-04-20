@@ -25,25 +25,21 @@ No build step. Tailwind is loaded from the CDN (`cdn.tailwindcss.com`), which is
 fine for v1. If you want to ship a compiled Tailwind build later, see
 <https://tailwindcss.com/docs/installation>.
 
-## Deploy to GitHub Pages
+## Deploy status
 
-This folder is designed to live in its own **public** repo, separate from the
-private BioAnalytics repo.
+- **Live URL**: <https://adesantis97.github.io/omicsdesk/>
+- **GitHub repo**: <https://github.com/adesantis97/omicsdesk>
+- **Pages source**: `main` branch, `/` root
 
-1. Create a new public repo on GitHub (e.g. `omicsdesk/omicsdesk.github.io` or
-   `alessandrodesantis/omicsdesk-site`).
-2. Copy the contents of this folder into the new repo root:
-   ```sh
-   cp -R omicsdesk_site/. /path/to/new/repo/
-   cd /path/to/new/repo
-   git init && git add . && git commit -m "Initial site"
-   git branch -M main
-   git remote add origin git@github.com:<user>/<repo>.git
-   git push -u origin main
-   ```
-3. In the repo on GitHub → Settings → Pages → Source: `Deploy from a branch`,
-   Branch: `main` / `/ (root)`. Save.
-4. Site goes live at `https://<user>.github.io/<repo>/` within a few minutes.
+To update the site, edit `index.html` here, then:
+
+```sh
+cd omicsdesk_site
+git add -A && git commit -m "Your change"
+git push
+```
+
+Pages rebuilds automatically (~1 minute).
 
 ## Custom domain (optional)
 
