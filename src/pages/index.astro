@@ -161,26 +161,36 @@ import Base from '../layouts/Base.astro';
   <section id="contact" class="bg-slate-50 border-y border-slate-100">
     <div class="max-w-5xl mx-auto px-5 py-16">
       <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Get a quote</h2>
-      <p class="prose-p mt-3 max-w-2xl">Email <a class="text-accent font-medium underline-offset-4 hover:underline" href="mailto:hello@omicsdesk.com">hello@omicsdesk.com</a>. Quote back within 2 business days.</p>
+      <p class="prose-p mt-3 max-w-2xl">
+        Upload your data and a short brief. The intake agent drafts an analysis plan and a fixed quote — usually within 24 hours, often the same day.
+      </p>
 
       <div class="mt-8 grid md:grid-cols-2 gap-6 max-w-4xl">
-        <div class="bg-white rounded-lg border border-slate-200 p-6">
-          <h4 class="font-semibold">Include in your email</h4>
-          <ul class="prose-p mt-3 text-sm space-y-1.5 list-disc list-inside">
-            <li>Omics type(s) and sample count</li>
-            <li>Species and genome build (if known)</li>
-            <li>The biological contrast you want tested</li>
-            <li>Any deadline you're working against</li>
-          </ul>
+        <div class="bg-white rounded-lg border border-slate-200 p-6 flex flex-col justify-between">
+          <div>
+            <h4 class="font-semibold">Submit your data</h4>
+            <p class="prose-p mt-2 text-sm">FASTQ files + an optional metadata sheet + a short description of what you measured and what you want compared. We send back a plan and quote.</p>
+            <ul class="prose-p mt-4 text-sm space-y-1.5 list-disc list-inside text-slate-600">
+              <li>Omics type and sample count</li>
+              <li>Species and genome build (if known)</li>
+              <li>The biological contrast you want tested</li>
+              <li>Any deadline you're working against</li>
+            </ul>
+          </div>
+          <a href="https://submit.omicsdesk.com/" class="mt-5 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition self-start">
+            Submit your data
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
         </div>
         <div class="bg-white rounded-lg border border-slate-200 p-6 flex flex-col justify-between">
           <div>
-            <h4 class="font-semibold">Prefer a call?</h4>
-            <p class="prose-p mt-2 text-sm">Mention that in your email and we'll send a calendar link. Most projects don't need a call — the intake form is enough.</p>
+            <h4 class="font-semibold">Prefer to email or talk first?</h4>
+            <p class="prose-p mt-2 text-sm">
+              Reach out to <a class="text-accent font-medium underline-offset-4 hover:underline" href="mailto:hello@omicsdesk.com">hello@omicsdesk.com</a> if you want to discuss scope before uploading, ask about custom work, or book a quick call.
+            </p>
           </div>
-          <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20quote%20request" class="mt-5 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition self-start">
+          <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20pre-submission%20question" class="mt-5 inline-flex items-center gap-2 border border-slate-300 text-ink px-5 py-3 rounded-md font-medium hover:bg-slate-100 transition self-start">
             Email us
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
         </div>
       </div>
