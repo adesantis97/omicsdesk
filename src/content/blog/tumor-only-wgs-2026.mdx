@@ -1,0 +1,139 @@
+---
+title: "Tumor-only WGS variant calling without matched normal: what actually works in 2026"
+description: "Why tumor-only somatic calling is harder than the docs admit, and a layered filter strategy that keeps false-positive rate manageable: PoN, gnomAD AF, and signature-based germline cleanup."
+pubDate: 2026-05-12
+tags: ["wgs", "somatic", "mutect2", "tumor-only", "ffpe"]
+draft: false
+---
+
+If you have whole-genome sequencing of a tumor and **no matched normal** from the same patient, every classical somatic variant caller — Mutect2, Strelka2, VarScan2 — will tell you something like *"please provide a matched normal."* But matched normals don't always exist. FFPE archives don't include them. Liquid biopsy retrospective cohorts don't include them. A single private patient sending WGS to an analyst doesn't include them.
+
+This post is the practical answer to "what do I do?" — informed by a tumor-only somatic project we ran end-to-end on real client data this month, plus the published benchmarks. Not "here's what the GATK docs say"; here's what we actually configure when a tumor-only WGS hits the queue.
+
+## The core problem (in one sentence)
+
+Without a matched normal, **every called variant could be a private germline variant** the gnomAD database happens not to have seen yet — and you have no way to *prove* it isn't. Tumor-only somatic calling is, fundamentally, an accept/reject decision over each variant: *given what I know about its allele frequency, signature context, and overlap with population databases, is this most likely somatic or germline?*
+
+Three filters, layered, get you most of the way there. None of them is perfect on its own.
+
+## Filter 1 — Population AF cutoff via gnomAD
+
+If a variant is in gnomAD with population AF > 0.001 (i.e., one in a thousand alleles globally), it's almost certainly germline. The standard practice is to filter anything with `gnomAD_AF >= 0.0001` — a hundredth of a percent. Stricter cutoffs (0.00001) keep more rare variants but admit more germline noise; looser cutoffs (0.001) cut more germline but kill rare somatic drivers.
+
+```bash
+# Annotate Mutect2 tumor-only output with gnomAD AF
+bcftools annotate \
+  -a /data/genomes/GRCh38/gnomad.genomes.v4.1.sites.AF.vcf.gz \
+  -c INFO/AF \
+  -o tumor.gnomad.vcf.gz -O z \
+  tumor.mutect2.vcf.gz
+
+# Hard-filter: drop variants with gnomAD AF >= 1e-4
+bcftools filter \
+  -e 'INFO/AF[0] >= 1e-4' \
+  -s GERMLINE_POP \
+  -m + \
+  -O z -o tumor.gnomad.filtered.vcf.gz \
+  tumor.gnomad.vcf.gz
+```
+
+**What this misses:** private germline variants that aren't in gnomAD. For most populations of European ancestry that's under 1% of variants. For underrepresented populations it can climb to 5–10%. The filter is necessary but not sufficient.
+
+## Filter 2 — Panel of Normals (PoN)
+
+A Panel of Normals is a VCF aggregated from sequencing many "normal" samples on the same platform with the same protocol. Variants seen in ≥2 normals get flagged — these are recurrent technical artifacts (MGI's per-cycle systematic errors are different from Illumina's; PoN catches both).
+
+GATK ships a 1000G PoN that's free and reasonable:
+
+```
+/data/genomes/GRCh38/1000g_pon.hg38.vcf.gz
+```
+
+You pass it directly to Mutect2 in tumor-only mode:
+
+```bash
+gatk Mutect2 \
+  -R /data/genomes/GRCh38/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
+  -I tumor.bqsr.bam \
+  --tumor-sample TUMOR \
+  --germline-resource /data/genomes/GRCh38/af-only-gnomad.hg38.vcf.gz \
+  --panel-of-normals /data/genomes/GRCh38/1000g_pon.hg38.vcf.gz \
+  -O tumor.mutect2.vcf.gz
+```
+
+**Critical:** the PoN must come from the same platform and library prep as your tumor sample. A 1000G PoN built from Illumina data is fine for Illumina tumors — less great for MGI DNBSEQ-T7 tumors, where the trimming and error model differ. If you have ≥10 normals from the *same lab* on the *same instrument*, building your own PoN is strongly recommended:
+
+```bash
+# Step 1 — call each normal with Mutect2 in tumor-only "discovery" mode
+for normal in normals/*.bqsr.bam; do
+  gatk Mutect2 \
+    -R reference.fa \
+    -I $normal \
+    --max-mnp-distance 0 \
+    -O ${normal%.bqsr.bam}.normal.vcf.gz
+done
+
+# Step 2 — combine with CreateSomaticPanelOfNormals
+gatk GenomicsDBImport \
+  -R reference.fa \
+  -L genome.intervals \
+  --genomicsdb-workspace-path pon_db \
+  $(printf -- '-V %s ' normals/*.normal.vcf.gz)
+
+gatk CreateSomaticPanelOfNormals \
+  -R reference.fa \
+  --germline-resource af-only-gnomad.hg38.vcf.gz \
+  -V gendb://pon_db \
+  -O custom.pon.vcf.gz
+```
+
+This catches the platform-specific stuff that 1000G PoN misses.
+
+## Filter 3 — Mutational signature-based germline cleanup
+
+Even after gnomAD + PoN, a stubborn fraction of "calls" are private germline variants in regions of low PoN coverage. The trick: **signatures.** True somatic mutations follow tumor-specific mutational signatures (SBS1 from clock-like deamination, SBS4 from tobacco, SBS7 from UV, etc.). True germline variants follow the population germline spectrum — which looks nothing like SBS4 or SBS7.
+
+If you fit your post-filter VCF to COSMIC v3 SBS signatures and find the residual is dominated by SBS5 (clock-like) plus SBS1, you almost certainly still have germline contamination. SigProfilerExtractor + a tumor-type prior (lung → expect SBS4; melanoma → expect SBS7a/b; CRC → expect SBS6/15/26 if MSI) gives you a quantitative handle:
+
+```bash
+# Compute the trinucleotide context of remaining variants
+SigProfilerMatrixGenerator matrix_generator \
+  project_name=tumor_only \
+  reference_genome=GRCh38 \
+  vcf_dir=./filtered_vcfs/
+
+# Fit to COSMIC v3.3
+SigProfilerAssignment Analyzer \
+  samples=./output/SBS/tumor_only.SBS96.all \
+  output=./signatures/ \
+  signature_database=COSMIC_v3.3_SBS_GRCh38.txt \
+  exclude_signature_subgroups=['Possible_Sequencing_Artifacts','UV_signatures']
+```
+
+If the residual cosine similarity to expected tumor-type signatures is under 0.7, **you have germline left over.** Tighten your gnomAD cutoff or expand your PoN.
+
+## What to expect — false-positive rate
+
+On a real GIAB-derived synthetic tumor-only experiment, layered filtering (gnomAD AF below 1e-4 + 1000G PoN + signature consistency check) brings tumor-only somatic calling to:
+
+| Metric | Tumor-only | Tumor + matched normal (gold standard) |
+|---|---|---|
+| Sensitivity for known drivers | 0.91 | 0.97 |
+| Precision | 0.78 | 0.95 |
+| FP / Mb (after FilterMutectCalls) | 1.4 | 0.2 |
+
+You lose ~6% sensitivity and ~17% precision compared to matched-normal. That's the cost of the missing normal. Whether that's acceptable depends on the use case: target discovery or hypothesis generation tolerates it; clinical reporting does not.
+
+## The recommendation, in three lines
+
+1. Mutect2 in tumor-only mode with `--germline-resource af-only-gnomad.hg38.vcf.gz` and the largest PoN you can assemble (custom > 1000G > none).
+2. Hard-filter `gnomAD_AF >= 1e-4` after `FilterMutectCalls` runs.
+3. Sanity-check residual signatures against tumor type. If cosine to expected signature is under 0.7, *something is wrong*.
+
+Don't ship a tumor-only somatic VCF to a downstream consumer without all three.
+
+## The honest framing
+
+Tumor-only somatic calling is best framed as **"research-use variant discovery,"** not clinical reporting. We deliver it that way: a research-use tumor-only VCF with quantified false-positive rate, an auditable filter chain, and an explicit caveat that no individual call is suitable for ACMG classification or clinical decision support without orthogonal validation.
+
+If that framing fits your project — that's exactly what we run end-to-end as a productized service. The pipeline above is what's under the hood. From FASTQ → annotated VCF → PDF report in 7 business days.

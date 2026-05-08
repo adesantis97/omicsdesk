@@ -4,3 +4,12 @@
 node_modules/
 .vscode/
 .idea/
+
+# Astro
+.astro/
+dist/
+.env
+.env.production
+
+# Build artifacts (deployed via GitHub Actions, not committed)
+.cache/

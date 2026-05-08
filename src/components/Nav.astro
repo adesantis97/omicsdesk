@@ -1,0 +1,21 @@
+---
+const { pathname } = Astro.url;
+const isActive = (href: string) => pathname === href || pathname === href + '/';
+---
+<nav class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-100">
+  <div class="max-w-5xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 font-semibold text-ink">
+      <span class="inline-block w-2.5 h-2.5 rounded-sm bg-accent"></span>
+      <span>OmicsDesk</span>
+    </a>
+    <div class="hidden sm:flex items-center gap-6 text-sm text-slate-600">
+      <a href="/pricing/" class={`hover:text-ink ${isActive('/pricing') ? 'text-ink font-medium' : ''}`}>Pricing</a>
+      <a href="/publications/" class={`hover:text-ink ${isActive('/publications') ? 'text-ink font-medium' : ''}`}>Publications</a>
+      <a href="/blog/" class={`hover:text-ink ${pathname.startsWith('/blog') ? 'text-ink font-medium' : ''}`}>Blog</a>
+      <a href="/#contact" class="hover:text-ink">Contact</a>
+    </div>
+    <a href="https://submit.omicsdesk.com/" class="text-sm font-medium bg-ink text-white px-3.5 py-1.5 rounded-md hover:bg-slate-800 transition">
+      Submit your data
+    </a>
+  </div>
+</nav>

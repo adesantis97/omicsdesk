@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const isProd = import.meta.env.PROD;
+  const posts = await getCollection('blog', ({ data }) => !isProd || !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+<Base
+  title={`${post.data.title} — OmicsDesk Blog`}
+  description={post.data.description}
+  ogImage={post.data.heroImage ?? '/og_image.png'}
+>
+  <article class="max-w-3xl mx-auto px-5 pt-12 pb-20">
+    <a href="/blog/" class="text-sm text-slate-500 hover:text-ink">← All posts</a>
+    <header class="mt-6">
+      <div class="text-xs font-mono uppercase tracking-wide text-slate-500">
+        {post.data.pubDate.toISOString().slice(0, 10)} · by {post.data.author}
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mt-3 leading-tight">
+        {post.data.title}
+      </h1>
+      <p class="mt-4 text-lg text-slate-600 leading-relaxed">
+        {post.data.description}
+      </p>
+      {post.data.tags.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-1.5">
+          {post.data.tags.map((t) => (
+            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">#{t}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="prose prose-slate prose-lg mt-10 max-w-none prose-headings:tracking-tight prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:rounded-lg">
+      <Content />
+    </div>
+
+    <hr class="my-12 border-slate-100" />
+
+    <aside class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+      <h2 class="text-lg font-semibold tracking-tight">Need this run on your data?</h2>
+      <p class="text-sm text-slate-600 mt-2 max-w-2xl">
+        OmicsDesk runs this analysis end-to-end as a productized service —
+        from FASTQ to a branded PDF report, fixed price, fixed turnaround.
+        See <a href="/pricing/" class="text-accent underline">pricing</a> or email
+        <a href="mailto:hello@omicsdesk.com" class="text-accent underline">hello@omicsdesk.com</a>.
+      </p>
+    </aside>
+  </article>
+</Base>
