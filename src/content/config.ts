@@ -10,6 +10,8 @@ const blog = defineCollection({
     author: z.string().default('Alessandro De Santis'),
     tags: z.array(z.string()).default([]),
     heroImage: z.string().optional(),
+    heroAlt: z.string().optional(),
+    heroCaption: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });

@@ -40,7 +40,33 @@ const { Content } = await post.render();
       )}
     </header>
 
-    <div class="prose prose-slate prose-lg mt-10 max-w-none prose-headings:tracking-tight prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:rounded-lg">
+    {post.data.heroImage && (
+      <figure class="mt-10">
+        <img
+          src={post.data.heroImage}
+          alt={post.data.heroAlt ?? post.data.title}
+          class="w-full rounded-xl border border-slate-200 bg-slate-50"
+          loading="eager"
+        />
+        {post.data.heroCaption && (
+          <figcaption class="text-xs text-slate-500 mt-3 leading-relaxed">
+            {post.data.heroCaption}
+          </figcaption>
+        )}
+      </figure>
+    )}
+
+    <div class="prose prose-slate prose-lg mt-10 max-w-none
+                prose-headings:tracking-tight prose-headings:font-semibold
+                prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-slate-100
+                prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-2
+                prose-p:leading-relaxed
+                prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:rounded-lg prose-pre:shadow-sm prose-pre:border prose-pre:border-slate-800 prose-pre:text-sm
+                prose-table:text-sm
+                prose-th:bg-slate-50 prose-th:font-semibold prose-th:text-ink prose-th:px-3 prose-th:py-2 prose-th:text-left
+                prose-td:px-3 prose-td:py-2 prose-td:align-top prose-td:border-t prose-td:border-slate-100
+                prose-blockquote:border-l-accent prose-blockquote:text-slate-600 prose-blockquote:not-italic
+                prose-hr:border-slate-200">
       <Content />
     </div>
 
