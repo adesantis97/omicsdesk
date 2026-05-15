@@ -1,0 +1,106 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('case-studies');
+  return cases.map((cs) => ({ params: { slug: cs.slug }, props: { cs } }));
+}
+
+type Props = { cs: CollectionEntry<'case-studies'> };
+const { cs } = Astro.props as Props;
+const { Content } = await cs.render();
+---
+<Base title={`${cs.data.title} — OmicsDesk case study`} description={cs.data.problem}>
+  <header class="max-w-3xl mx-auto px-5 pt-16 pb-8">
+    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4">Case study · {cs.data.omicsType}</p>
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight leading-tight">{cs.data.title}</h1>
+    <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">{cs.data.problem}</p>
+    <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-500">
+      <span><span class="font-medium text-slate-700">Client:</span> {cs.data.client}</span>
+      <span><span class="font-medium text-slate-700">Samples:</span> {cs.data.sampleCount}</span>
+      {cs.data.turnaroundDays && (
+        <span><span class="font-medium text-slate-700">Turnaround:</span> {cs.data.turnaroundDays} business days</span>
+      )}
+    </div>
+  </header>
+
+  <section class="max-w-3xl mx-auto px-5">
+    <figure>
+      <img src={cs.data.heroImage} alt={cs.data.heroAlt} class="w-full rounded-lg border border-slate-200" />
+      <figcaption class="mt-2 text-xs text-slate-500 italic">{cs.data.heroAlt}</figcaption>
+    </figure>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-5 mt-10">
+    <h2 class="text-xl font-semibold tracking-tight">What we found</h2>
+    <ul class="mt-4 space-y-3">
+      {cs.data.findings.map((finding) => (
+        <li class="flex gap-3">
+          <span class="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0"></span>
+          <span class="text-slate-700 leading-relaxed">{finding}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-5 mt-12 prose prose-slate max-w-none prose-headings:tracking-tight prose-h2:text-xl prose-h2:font-semibold prose-h2:mt-10 prose-h2:mb-3 prose-p:text-slate-700 prose-p:leading-relaxed">
+    <Content />
+  </section>
+
+  <section class="max-w-3xl mx-auto px-5 mt-12">
+    <div class="bg-ink text-white rounded-xl p-6 sm:p-8">
+      <div class="flex flex-col sm:flex-row sm:items-start gap-5 justify-between">
+        <div class="flex-1">
+          <h3 class="text-lg font-semibold">Download the full deliverable</h3>
+          <p class="text-slate-300 text-sm mt-1">The actual client deliverable layout — same files, same structure, same format.</p>
+          <ul class="mt-4 space-y-1.5 text-sm text-slate-200">
+            <li class="flex items-start gap-2">
+              <span class="text-accent mt-1">•</span>
+              <span><span class="font-medium">report.pdf</span> — {cs.data.reportPages ? `${cs.data.reportPages}-page ` : ''}branded PDF report</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-accent mt-1">•</span>
+              <span><span class="font-medium">results_workbook.xlsx</span> — Excel workbook with the full statistical results</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-accent mt-1">•</span>
+              <span><span class="font-medium">figures/</span> — {cs.data.figuresCount ?? ''} publication-quality PNG figures</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-accent mt-1">•</span>
+              <span><span class="font-medium">README.txt</span> — what's in the zip, and what live clients also receive (pipeline code, conda envs, QC HTML)</span>
+            </li>
+          </ul>
+        </div>
+        {cs.data.deliverablesZip && (
+          <a href={cs.data.deliverablesZip} download class="inline-flex shrink-0 items-center gap-2 bg-accent hover:bg-accent-dark text-white px-5 py-3 rounded-md font-medium transition">
+            Download zip {cs.data.deliverablesZipSize && (<span class="text-xs opacity-80">({cs.data.deliverablesZipSize})</span>)}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          </a>
+        )}
+      </div>
+      <div class="mt-5 pt-4 border-t border-white/10 text-xs text-slate-400">
+        Prefer just the PDF? <a href={cs.data.reportPdf} download class="text-accent hover:underline underline-offset-4">Download report.pdf only</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-5 mt-12 pb-20">
+    <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
+      <h3 class="font-semibold">Start a project like this</h3>
+      <p class="prose-p text-sm mt-2">Fixed-fee, 7–10 business days. Email with your omics type + sample count and a quote comes back within 2 business days.</p>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="inline-flex items-center gap-2 bg-ink text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-slate-800 transition">
+          Request a quote
+        </a>
+        <a href="/pricing/" class="inline-flex items-center gap-2 border border-slate-300 text-ink px-4 py-2 rounded-md text-sm font-medium hover:bg-white transition">
+          See pricing
+        </a>
+        <a href="/case-studies/" class="inline-flex items-center gap-2 text-slate-600 px-4 py-2 rounded-md text-sm font-medium hover:text-ink transition">
+          ← All case studies
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

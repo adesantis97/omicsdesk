@@ -1,5 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const featuredCases = (await getCollection('case-studies'))
+  .filter((c) => c.data.featured)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 <Base>
   <header id="top" class="max-w-5xl mx-auto px-5 pt-20 pb-16">
@@ -12,12 +17,15 @@ import Base from '../layouts/Base.astro';
       Per-omics pricing, fixed turnaround, reproducible pipelines. For biotechs and academic labs that need results — not a full-time hire.
     </p>
     <div class="mt-8 flex flex-wrap gap-3">
-      <a href="https://submit.omicsdesk.com/" class="inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition">
-        Submit your data
+      <a href="/case-studies/" class="inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition">
+        See sample reports
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
-      <a href="/pricing/" class="inline-flex items-center gap-2 bg-white text-ink border border-slate-200 px-5 py-3 rounded-md font-medium hover:bg-slate-50 transition">
-        See pricing
+      <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="inline-flex items-center gap-2 bg-white text-ink border border-slate-200 px-5 py-3 rounded-md font-medium hover:bg-slate-50 transition">
+        Request a quote
+      </a>
+      <a href="/pricing/" class="inline-flex items-center gap-2 text-slate-600 px-3 py-3 rounded-md font-medium hover:text-ink transition">
+        See pricing →
       </a>
     </div>
   </header>
@@ -26,10 +34,10 @@ import Base from '../layouts/Base.astro';
     <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">What we do</h2>
     <div class="mt-6 grid sm:grid-cols-2 gap-8 max-w-4xl">
       <p class="prose-p">
-        OmicsDesk turns your raw sequencing or mass-spec data into a decision-ready report. You send FASTQs, raw MS files, or count matrices and a sample sheet. You get back a QC report, full statistical results, publication-ready figures, and a branded PDF summary — usually within 7–10 business days.
+        OmicsDesk turns raw sequencing or mass-spec data into a decision-ready report. You email a short brief (omics type, samples, contrast), we send back a fixed quote, and once kicked off you receive a QC report, full statistical results, publication-ready figures, and a branded PDF summary — usually within 7–10 business days.
       </p>
       <p class="prose-p">
-        Every analysis is run on a versioned Snakemake pipeline with pinned conda environments. You receive the code alongside the results, so nothing is a black box.
+        Every analysis is run on a versioned Snakemake pipeline with pinned conda environments. You receive the code alongside the results, so nothing is a black box. See the same report format on <a class="text-accent font-medium underline-offset-4 hover:underline" href="/case-studies/">real case studies</a>.
       </p>
     </div>
   </section>
@@ -136,15 +144,37 @@ import Base from '../layouts/Base.astro';
   </section>
 
   <section class="max-w-5xl mx-auto px-5 py-16">
-    <div class="bg-ink text-white rounded-xl p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 justify-between">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
       <div>
-        <h3 class="text-xl md:text-2xl font-semibold">See a real sample report</h3>
-        <p class="text-slate-300 mt-2 max-w-2xl">Mouse heart scRNA-seq + Visium spatial transcriptomics (public dataset GSE308859, 30k cells, 4 timepoints). Same format every client receives: QC, UMAP, cell-type annotation, trajectory, spatial maps, narrative.</p>
+        <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">See real sample reports</h2>
+        <p class="prose-p mt-3 max-w-2xl">Two recent case studies — same PDF + Excel + figures format every client receives. Download the full deliverables to see exactly what you'd get.</p>
       </div>
-      <a href="/sample_report_mouse_heart_scRNA.pdf" download class="inline-flex shrink-0 items-center gap-2 bg-accent hover:bg-accent-dark text-white px-5 py-3 rounded-md font-medium transition">
-        Download sample (PDF, 2.4 MB)
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      <a href="/case-studies/" class="text-accent font-medium hover:underline underline-offset-4 text-sm">
+        All case studies →
       </a>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {featuredCases.map((cs) => (
+        <a
+          href={`/case-studies/${cs.slug}/`}
+          class="group block bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-accent transition"
+        >
+          <div class="aspect-[16/10] bg-slate-50 overflow-hidden border-b border-slate-100">
+            <img src={cs.data.heroImage} alt={cs.data.heroAlt} class="w-full h-full object-cover group-hover:scale-[1.02] transition" />
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 text-xs text-slate-500 uppercase tracking-wide font-medium mb-3">
+              <span class="bg-accent/10 text-accent px-2 py-0.5 rounded-sm">{cs.data.omicsType}</span>
+              <span>·</span>
+              <span>{cs.data.sampleCount}</span>
+            </div>
+            <h3 class="text-lg font-semibold tracking-tight leading-snug group-hover:text-accent transition">{cs.data.title}</h3>
+            <p class="prose-p mt-3 text-sm">{cs.data.problem}</p>
+            <p class="mt-4 text-sm text-accent font-medium">Read case study →</p>
+          </div>
+        </a>
+      ))}
     </div>
   </section>
 
@@ -162,14 +192,14 @@ import Base from '../layouts/Base.astro';
     <div class="max-w-5xl mx-auto px-5 py-16">
       <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Get a quote</h2>
       <p class="prose-p mt-3 max-w-2xl">
-        Upload your data and a short brief. The intake agent drafts an analysis plan and a fixed quote in about a minute on the next page, with a copy in your inbox.
+        Email a short brief (omics type, sample count, the biological contrast you want tested) and a fixed quote comes back within 2 business days. NDA before any data is shared.
       </p>
 
       <div class="mt-8 grid md:grid-cols-2 gap-6 max-w-4xl">
         <div class="bg-white rounded-lg border border-slate-200 p-6 flex flex-col justify-between">
           <div>
-            <h4 class="font-semibold">Submit your data</h4>
-            <p class="prose-p mt-2 text-sm">Raw data files (FASTQ, RAW/mzML, count matrix — whatever your platform produces) + an optional metadata sheet + a short description of what you measured and what you want compared. We send back a plan and quote.</p>
+            <h4 class="font-semibold">Request a quote</h4>
+            <p class="prose-p mt-2 text-sm">Tell us what you measured and what you want compared — we send back a quote and a plan. You upload data after the quote is signed, not before.</p>
             <ul class="prose-p mt-4 text-sm space-y-1.5 list-disc list-inside text-slate-600">
               <li>Omics type and sample count</li>
               <li>Species and genome build (if known)</li>
@@ -177,20 +207,21 @@ import Base from '../layouts/Base.astro';
               <li>Any deadline you're working against</li>
             </ul>
           </div>
-          <a href="https://submit.omicsdesk.com/" class="mt-5 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition self-start">
-            Submit your data
+          <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="mt-5 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition self-start">
+            Email hello@omicsdesk.com
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
         </div>
         <div class="bg-white rounded-lg border border-slate-200 p-6 flex flex-col justify-between">
           <div>
-            <h4 class="font-semibold">Prefer to email or talk first?</h4>
+            <h4 class="font-semibold">Already have a signed quote?</h4>
             <p class="prose-p mt-2 text-sm">
-              Reach out to <a class="text-accent font-medium underline-offset-4 hover:underline" href="mailto:hello@omicsdesk.com">hello@omicsdesk.com</a> if you want to discuss scope before uploading, ask about custom work, or book a quick call.
+              Once scope is agreed and the kickoff invoice is paid, the intake agent at <a class="text-accent font-medium underline-offset-4 hover:underline" href="https://submit.omicsdesk.com/">submit.omicsdesk.com</a> walks through experimental-design confirmation and the upload step.
             </p>
           </div>
-          <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20pre-submission%20question" class="mt-5 inline-flex items-center gap-2 border border-slate-300 text-ink px-5 py-3 rounded-md font-medium hover:bg-slate-100 transition self-start">
-            Email us
+          <a href="https://submit.omicsdesk.com/" class="mt-5 inline-flex items-center gap-2 border border-slate-300 text-ink px-5 py-3 rounded-md font-medium hover:bg-slate-100 transition self-start">
+            Submit your data
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
         </div>
       </div>
