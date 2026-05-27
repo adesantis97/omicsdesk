@@ -8,13 +8,13 @@ const featuredCases = (await getCollection('case-studies'))
 ---
 <Base>
   <header id="top" class="max-w-5xl mx-auto px-5 pt-20 pb-16">
-    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4">Omics analysis, on demand</p>
+    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4">Bioinformatics for small biotech and academic labs</p>
     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
       Bioinformatics analysis,<br />
       <span class="text-accent">delivered as a report.</span>
     </h1>
     <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl leading-relaxed">
-      Per-omics pricing, fixed turnaround, reproducible pipelines. For biotechs and academic labs that need results — not a full-time hire.
+      We run RNA-seq, scRNA-seq, proteomics, ChIP-seq, ATAC-seq and multi-omics studies end to end, with expert interpretation written into every report. Fixed price, 7 to 10 business days, reproducible pipelines you can audit.
     </p>
     <div class="mt-8 flex flex-wrap gap-3">
       <a href="/case-studies/" class="inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition">
@@ -34,10 +34,10 @@ const featuredCases = (await getCollection('case-studies'))
     <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">What we do</h2>
     <div class="mt-6 grid sm:grid-cols-2 gap-8 max-w-4xl">
       <p class="prose-p">
-        OmicsDesk turns raw sequencing or mass-spec data into a decision-ready report. You email a short brief (omics type, samples, contrast), we send back a fixed quote, and once kicked off you receive a QC report, full statistical results, publication-ready figures, and a branded PDF summary — usually within 7–10 business days.
+        We turn raw sequencing or mass spec data into a decision ready report. You send a short brief (omics type, samples, contrast), we send back a fixed quote, and once we kick off you receive a QC report, full statistical results, publication ready figures, and a branded PDF summary, usually within 7 to 10 business days.
       </p>
       <p class="prose-p">
-        Every analysis is run on a versioned Snakemake pipeline with pinned conda environments. You receive the code alongside the results, so nothing is a black box. See the same report format on <a class="text-accent font-medium underline-offset-4 hover:underline" href="/case-studies/">real case studies</a>.
+        Every analysis runs on a versioned Snakemake pipeline with pinned conda environments, and the interpretation is written by a bioinformatician before delivery. You receive the code alongside the results, so the analysis is reproducible and the conclusions are owned by a person you can email. See the same report format on <a class="text-accent font-medium underline-offset-4 hover:underline" href="/case-studies/">real case studies</a>.
       </p>
     </div>
   </section>
@@ -47,7 +47,7 @@ const featuredCases = (await getCollection('case-studies'))
       <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
         <div>
           <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Services &amp; pricing</h2>
-          <p class="prose-p mt-3 max-w-2xl">Flat fees. No surprises. Every analysis includes QC, figures, Excel results, a PDF report, and the pipeline code.</p>
+          <p class="prose-p mt-3 max-w-2xl">Flat fees. No surprises. Every analysis includes QC, figures, an Excel workbook, a written PDF report, and the pipeline code we used.</p>
         </div>
         <a href="/pricing/" class="text-accent font-medium hover:underline underline-offset-4 text-sm">
           Full pricing &amp; scopes →
@@ -98,7 +98,7 @@ const featuredCases = (await getCollection('case-studies'))
           <h3 class="font-semibold">Analysis &amp; QC</h3>
           <span class="text-xs text-slate-400 font-mono">days 1–7</span>
         </div>
-        <p class="prose-p text-sm">Raw data is processed on a validated Snakemake pipeline. You receive a QC check-in after alignment so we can catch data-level issues early — before the clock runs out on downstream analysis.</p>
+        <p class="prose-p text-sm">Your data runs through the pipeline, and we look at it. After QC you get a check in: if the design has a problem, we surface it before downstream stats burn the clock.</p>
       </div>
       <div>
         <div class="flex items-center gap-3 mb-3">
@@ -106,7 +106,7 @@ const featuredCases = (await getCollection('case-studies'))
           <h3 class="font-semibold">Report &amp; handoff</h3>
           <span class="text-xs text-slate-400 font-mono">day 7 or 10</span>
         </div>
-        <p class="prose-p text-sm">Branded PDF report, Excel workbook with full statistical results, figures at 300 dpi, and the pipeline code. Raw data is deleted within 30 days of delivery.</p>
+        <p class="prose-p text-sm">Branded PDF report with a written executive summary and discussion, Excel workbook with full statistical results, figures at 300 dpi, and the pipeline code. Raw data is deleted within 30 days of delivery.</p>
       </div>
     </div>
   </section>
@@ -147,7 +147,7 @@ const featuredCases = (await getCollection('case-studies'))
     <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
       <div>
         <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">See real sample reports</h2>
-        <p class="prose-p mt-3 max-w-2xl">Two recent case studies — same PDF + Excel + figures format every client receives. Download the full deliverables to see exactly what you'd get.</p>
+        <p class="prose-p mt-3 max-w-2xl">Two case studies we ran end to end. Same PDF, Excel, and figures format every client receives. Download the full deliverables to see exactly what you would get.</p>
       </div>
       <a href="/case-studies/" class="text-accent font-medium hover:underline underline-offset-4 text-sm">
         All case studies →
@@ -181,10 +181,10 @@ const featuredCases = (await getCollection('case-studies'))
   <section class="max-w-5xl mx-auto px-5 py-16 border-t border-slate-100">
     <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">About</h2>
     <p class="prose-p mt-6 max-w-3xl">
-      OmicsDesk is run by <span class="font-semibold text-ink">Alessandro De Santis</span>, a computational biologist and co-founder of SynMiR (Italian biotech developing synthetic miRNA cancer therapeutics). The target discovery pipeline at SynMiR is built on the same multi-omics integration approach offered here: transcriptomics, proteomics, phosphoproteomics, and mutation data combined into patient-specific signaling networks.
+      I'm <span class="font-semibold text-ink">Alessandro De Santis</span>. I lead OmicsDesk and co-founded SynMiR, an Italian biotech developing synthetic miRNA cancer therapeutics. Day to day I run multi omics target discovery at SynMiR: transcriptomics, proteomics, phosphoproteomics, and mutation data combined into patient specific signaling networks. OmicsDesk brings the same workflow to small biotechs and academic labs that need an answer from their data without hiring a full time bioinformatician.
     </p>
     <p class="prose-p mt-4 max-w-3xl">
-      OmicsDesk exists to make that capability available to labs and biotechs without an in-house bioinformatics hire.
+      Every project is run, reviewed, and written up with expert interpretation. The pipelines are reproducible, so the code is shareable. The conclusions are written by us, so you have someone to ask about them.
     </p>
   </section>
 
