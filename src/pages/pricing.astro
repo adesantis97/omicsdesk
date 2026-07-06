@@ -13,6 +13,22 @@ interface Omics {
 
 const services: Omics[] = [
   {
+    slug: 'expert-review',
+    name: 'Expert review',
+    tagline: 'A second opinion on results you already have. Not a re-run, a read: do the conclusions hold?',
+    price: '€400',
+    upTo: '1 dataset / 1 contrast',
+    turnaround: '2 business days',
+    deliverables: [
+      'A check of your thresholds, outliers and normalisation choices',
+      'What I would change and why',
+      'A plain read of what the results mean for your biology',
+      'The two or three things worth digging into next',
+      'A short methods paragraph ready for a paper or grant',
+      'Credited against the project fee if it becomes a full analysis',
+    ],
+  },
+  {
     slug: 'rnaseq',
     name: 'RNA-seq (bulk)',
     tagline: 'Splice-aware alignment, DESeq2 differential expression, GSEA, TF activity inference.',

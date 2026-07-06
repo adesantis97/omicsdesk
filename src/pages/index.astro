@@ -10,11 +10,11 @@ const featuredCases = (await getCollection('case-studies'))
   <header id="top" class="max-w-5xl mx-auto px-5 pt-20 pb-16">
     <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4">Bioinformatics for small biotech and academic labs</p>
     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
-      Bioinformatics analysis,<br />
-      <span class="text-accent">delivered as a report.</span>
+      The analysis is the easy part.<br />
+      <span class="text-accent">We tell you what it means.</span>
     </h1>
     <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl leading-relaxed">
-      We run RNA-seq, scRNA-seq, proteomics, ChIP-seq, ATAC-seq and multi-omics studies end to end, with expert interpretation written into every report. Fixed price, 7 to 10 business days, reproducible pipelines you can audit.
+      RNA-seq, scRNA-seq, proteomics, ChIP-seq, ATAC-seq and multi-omics, run end to end by a bioinformatician who reads the biology: what the results say about your system, and where it is worth digging deeper. Fixed price, 7 to 10 business days, reproducible pipelines you can audit.
     </p>
     <div class="mt-8 flex flex-wrap gap-3">
       <a href="/case-studies/" class="inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition">
@@ -34,7 +34,7 @@ const featuredCases = (await getCollection('case-studies'))
     <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">What we do</h2>
     <div class="mt-6 grid sm:grid-cols-2 gap-8 max-w-4xl">
       <p class="prose-p">
-        We turn raw sequencing or mass spec data into a decision ready report. You send a short brief (omics type, samples, contrast), we send back a fixed quote, and once we kick off you receive a QC report, full statistical results, publication ready figures, and a branded PDF summary, usually within 7 to 10 business days.
+        Running DESeq2 and drawing a volcano plot is the commodity part. The value is the read on top: we turn your raw sequencing or mass spec data into a written interpretation of what stands out for your biology and what to do next, not just a folder of figures. You send a short brief (omics type, samples, contrast), we send back a fixed quote, and you receive a QC report, full statistical results, publication ready figures, and a branded PDF, usually within 7 to 10 business days.
       </p>
       <p class="prose-p">
         Every analysis runs on a versioned Snakemake pipeline with pinned conda environments, and the interpretation is written by a bioinformatician before delivery. You receive the code alongside the results, so the analysis is reproducible and the conclusions are owned by a person you can email. See the same report format on <a class="text-accent font-medium underline-offset-4 hover:underline" href="/case-studies/">real case studies</a>.
@@ -65,6 +65,7 @@ const featuredCases = (await getCollection('case-studies'))
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100">
+            <tr class="bg-accent/5"><td class="px-5 py-3 font-medium">Expert review <span class="text-slate-500 font-normal">(second opinion on results you have)</span></td><td class="px-5 py-3 font-mono">€400</td><td class="px-5 py-3">1 dataset</td><td class="px-5 py-3">2 business days</td></tr>
             <tr><td class="px-5 py-3 font-medium">RNA-seq (bulk)</td><td class="px-5 py-3 font-mono">€2,500</td><td class="px-5 py-3">24 samples</td><td class="px-5 py-3">7 business days</td></tr>
             <tr><td class="px-5 py-3 font-medium">scRNA-seq</td><td class="px-5 py-3 font-mono">€3,500</td><td class="px-5 py-3">16 libraries</td><td class="px-5 py-3">10 business days</td></tr>
             <tr><td class="px-5 py-3 font-medium">Proteomics</td><td class="px-5 py-3 font-mono">€3,000</td><td class="px-5 py-3">24 samples</td><td class="px-5 py-3">7 business days</td></tr>
