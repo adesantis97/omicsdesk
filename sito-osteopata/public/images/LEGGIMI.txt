@@ -1,0 +1,2 @@
+Metti qui le foto reali (es. ritratto.jpg, studio.jpg) e collegale come spiegato
+nel README (sezione "Foto"). Questo file può essere eliminato.

@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site.ts';
+---
+
+<Base title={`Cookie Policy — ${site.nome}`} noIndex>
+  <div class="container-x py-16 max-w-3xl">
+    <a href="/" class="text-sm text-brand-600 hover:underline">← Torna alla home</a>
+    <article class="prose prose-slate mt-6 max-w-none">
+      <h1>Cookie Policy</h1>
+      <p class="text-ink/60">
+        ⚠️ <strong>Template da personalizzare.</strong> Aggiorna l’elenco in base ai servizi che
+        attiverai (es. Google Maps, analytics). Se aggiungi cookie di profilazione/analytics
+        occorre un banner con consenso preventivo (Consent Management Platform).
+      </p>
+
+      <h2>Cosa sono i cookie</h2>
+      <p>
+        I cookie sono piccoli file di testo che i siti salvano sul dispositivo dell’utente per
+        farlo funzionare o per raccogliere informazioni.
+      </p>
+
+      <h2>Cookie utilizzati da questo sito</h2>
+      <ul>
+        <li>
+          <strong>Cookie tecnici / preferenze:</strong> necessari al funzionamento del sito (es.
+          memorizzazione del consenso al banner cookie). Non richiedono consenso preventivo.
+        </li>
+        <li>
+          <strong>Google Maps (di terze parti):</strong> la mappa dello studio è fornita da Google
+          e può impostare cookie. Consulta la
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy di Google</a>.
+        </li>
+        <li>
+          <strong>[Analytics / altri]:</strong> [descrivi eventuali strumenti di statistica se
+          attivati, con relativa base di consenso.]
+        </li>
+      </ul>
+
+      <h2>Gestione dei cookie</h2>
+      <p>
+        L’utente può gestire o eliminare i cookie dalle impostazioni del proprio browser. La
+        disabilitazione di alcuni cookie potrebbe limitare alcune funzionalità del sito.
+      </p>
+
+      <p class="text-sm text-ink/50">Ultimo aggiornamento: [data].</p>
+    </article>
+  </div>
+</Base>

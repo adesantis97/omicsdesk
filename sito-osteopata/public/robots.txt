@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# La sitemap viene generata automaticamente da Astro alla build.
+# ⚠️ Aggiorna il dominio in astro.config.mjs perché questo URL sia corretto.
+Sitemap: https://www.esempio-osteopata.it/sitemap-index.xml

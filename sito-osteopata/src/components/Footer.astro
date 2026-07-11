@@ -1,0 +1,59 @@
+---
+import { site, indirizzoCompleto } from '../data/site.ts';
+const year = new Date().getFullYear();
+
+const socials = [
+  { href: site.social.instagram, label: 'Instagram' },
+  { href: site.social.facebook, label: 'Facebook' },
+  { href: site.social.linkedin, label: 'LinkedIn' },
+].filter((s) => s.href);
+---
+
+<footer class="bg-brand-800 text-sand-100 mt-16">
+  <div class="container-x py-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <div>
+      <div class="flex items-center gap-2 font-semibold text-white">
+        <span class="inline-block w-3 h-3 rounded-full bg-brand-300"></span>
+        <span>{site.nome}</span>
+      </div>
+      <p class="mt-3 text-sm text-brand-100/80">{site.titolo}</p>
+      <p class="mt-1 text-sm text-brand-100/80">{site.albo}</p>
+    </div>
+
+    <div class="text-sm space-y-1.5">
+      <p class="font-semibold text-white">Studio</p>
+      <p>{indirizzoCompleto}</p>
+      <p>
+        <a href={`tel:${site.telefonoLink}`} class="hover:text-white">{site.telefono}</a>
+      </p>
+      <p>
+        <a href={`mailto:${site.email}`} class="hover:text-white">{site.email}</a>
+      </p>
+    </div>
+
+    <div class="text-sm space-y-1.5">
+      <p class="font-semibold text-white">Link utili</p>
+      <p><a href="/#contatti" class="hover:text-white">Prenota un appuntamento</a></p>
+      <p><a href="/privacy/" class="hover:text-white">Informativa Privacy</a></p>
+      <p><a href="/cookie-policy/" class="hover:text-white">Cookie Policy</a></p>
+      {
+        socials.length > 0 && (
+          <p class="flex gap-3 pt-2">
+            {socials.map((s) => (
+              <a href={s.href} target="_blank" rel="noopener" class="hover:text-white">
+                {s.label}
+              </a>
+            ))}
+          </p>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="border-t border-brand-700">
+    <div class="container-x py-5 text-xs text-brand-100/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+      <span>© {year} {site.nome} · P.IVA {site.partitaIva}</span>
+      <span>Le informazioni sul sito non sostituiscono il parere medico.</span>
+    </div>
+  </div>
+</footer>

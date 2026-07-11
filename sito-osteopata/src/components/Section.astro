@@ -1,0 +1,28 @@
+---
+interface Props {
+  id?: string;
+  title?: string;
+  eyebrow?: string; // piccola etichetta sopra il titolo
+  subtitle?: string;
+  alt?: boolean; // sfondo alternativo (bianco) per separare visivamente le sezioni
+  center?: boolean;
+}
+const { id, title, eyebrow, subtitle, alt = false, center = false } = Astro.props;
+---
+
+<section id={id} class={alt ? 'bg-white' : ''}>
+  <div class="container-x py-16 sm:py-20">
+    {
+      (eyebrow || title || subtitle) && (
+        <div class={`max-w-2xl ${center ? 'mx-auto text-center' : ''} mb-10`}>
+          {eyebrow && (
+            <p class="text-sm font-semibold uppercase tracking-wide text-brand-500">{eyebrow}</p>
+          )}
+          {title && <h2 class="mt-2 text-3xl sm:text-4xl text-ink">{title}</h2>}
+          {subtitle && <p class="mt-3 text-lg text-ink/70">{subtitle}</p>}
+        </div>
+      )
+    }
+    <slot />
+  </div>
+</section>

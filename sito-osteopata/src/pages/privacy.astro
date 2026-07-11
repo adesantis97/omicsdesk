@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, indirizzoCompleto } from '../data/site.ts';
+---
+
+<Base title={`Privacy — ${site.nome}`} noIndex>
+  <div class="container-x py-16 max-w-3xl">
+    <a href="/" class="text-sm text-brand-600 hover:underline">← Torna alla home</a>
+    <article class="prose prose-slate mt-6 max-w-none">
+      <h1>Informativa sulla Privacy</h1>
+      <p class="text-ink/60">
+        ⚠️ <strong>Template da personalizzare.</strong> Questo è un modello di base ai sensi del
+        Reg. UE 2016/679 (GDPR). Verifica e completa i contenuti — se tratti dati sanitari
+        (categorie particolari) è consigliabile far revisionare il testo a un professionista.
+      </p>
+
+      <h2>1. Titolare del trattamento</h2>
+      <p>
+        {site.nome} — {site.titolo}<br />
+        {indirizzoCompleto}<br />
+        Email: {site.email} · Tel: {site.telefono}<br />
+        P.IVA: {site.partitaIva}
+      </p>
+
+      <h2>2. Dati raccolti</h2>
+      <p>
+        Il sito raccoglie i dati che l’utente fornisce volontariamente tramite il modulo di
+        contatto (nome, email, telefono, messaggio) e, in caso di appuntamento, i dati necessari
+        all’erogazione della prestazione, inclusi eventuali dati relativi alla salute.
+      </p>
+
+      <h2>3. Finalità e base giuridica</h2>
+      <p>
+        I dati sono trattati per rispondere alle richieste, gestire gli appuntamenti ed erogare le
+        prestazioni. La base giuridica è il consenso dell’interessato e l’esecuzione di misure
+        precontrattuali/contrattuali.
+      </p>
+
+      <h2>4. Conservazione</h2>
+      <p>
+        I dati sono conservati per il tempo necessario alle finalità indicate e nel rispetto degli
+        obblighi di legge. [Specificare i tempi di conservazione.]
+      </p>
+
+      <h2>5. Diritti dell’interessato</h2>
+      <p>
+        L’utente può in ogni momento esercitare i diritti previsti dagli artt. 15–22 GDPR (accesso,
+        rettifica, cancellazione, limitazione, opposizione, portabilità) scrivendo a {site.email}.
+        È inoltre possibile proporre reclamo al Garante per la protezione dei dati personali.
+      </p>
+
+      <h2>6. Cookie</h2>
+      <p>
+        Per informazioni sui cookie utilizzati consulta la <a href="/cookie-policy/">Cookie Policy</a>.
+      </p>
+
+      <p class="text-sm text-ink/50">Ultimo aggiornamento: [data].</p>
+    </article>
+  </div>
+</Base>

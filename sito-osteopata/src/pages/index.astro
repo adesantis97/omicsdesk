@@ -1,0 +1,341 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import TreatmentCard from '../components/TreatmentCard.astro';
+import StepCard from '../components/StepCard.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import FaqItem from '../components/FaqItem.astro';
+import { site, whatsappUrl, indirizzoCompleto } from '../data/site.ts';
+
+const trattamenti = (await getCollection('trattamenti')).sort(
+  (a, b) => a.data.ordine - b.data.ordine,
+);
+
+const recensioniRaw = (await getCollection('recensioni')).sort(
+  (a, b) => a.data.ordine - b.data.ordine,
+);
+const recensioni = await Promise.all(
+  recensioniRaw.map(async (r) => ({ data: r.data, Content: (await r.render()).Content })),
+);
+
+// SEGNAPOSTO — modifica liberamente questi elenchi (testo statico, non da CMS)
+const disturbi = [
+  'Mal di schiena e lombalgia',
+  'Cervicalgia e torcicollo',
+  'Sciatalgia e lombosciatalgia',
+  'Cefalee ed emicranie',
+  'Dolori articolari e muscolari',
+  'Problemi posturali',
+  'Dolori dopo traumi o infortuni',
+  'Vertigini e disturbi dell’equilibrio',
+  'Tensioni da stress',
+];
+
+const pazienti = [
+  'Adulti',
+  'Sportivi',
+  'Donne in gravidanza',
+  'Neonati e bambini',
+  'Anziani',
+  'Lavoratori sedentari',
+];
+
+const steps = [
+  {
+    titolo: 'Anamnesi',
+    testo:
+      'Ascolto la tua storia, i sintomi e le abitudini per capire l’origine del problema.',
+  },
+  {
+    titolo: 'Valutazione',
+    testo: 'Esame osteopatico e dei movimenti per individuare le aree da trattare.',
+  },
+  {
+    titolo: 'Trattamento',
+    testo: 'Tecniche manuali personalizzate, dolci e mirate al tuo caso specifico.',
+  },
+  {
+    titolo: 'Consigli e follow-up',
+    testo: 'Indicazioni pratiche e, se serve, un piano di sedute per consolidare i risultati.',
+  },
+];
+
+const faq = [
+  {
+    q: 'Quanto dura una seduta?',
+    a: 'In media 45–60 minuti. La prima visita è di solito un po’ più lunga per l’anamnesi.',
+  },
+  {
+    q: 'Serve la prescrizione medica?',
+    a: 'No, l’osteopatia è un trattamento a cui ci si può rivolgere direttamente. In alcuni casi può essere utile portare esami già eseguiti.',
+  },
+  {
+    q: 'Quante sedute servono?',
+    a: 'Dipende dal disturbo. Spesso bastano poche sedute; il numero preciso viene valutato caso per caso.',
+  },
+  {
+    q: 'L’osteopatia fa male?',
+    a: 'Le tecniche sono generalmente dolci e non dolorose. Ogni trattamento è adattato alla persona.',
+  },
+];
+
+// Configurazione del form contatti (vedi src/data/site.ts e README)
+const formAction = site.formAction || `mailto:${site.email}`;
+const isFormspree = site.formAction.includes('formspree');
+---
+
+<Base>
+  <Hero />
+
+  <!-- CHI SONO -->
+  <Section id="chi-sono" eyebrow="Chi sono" title={`${site.nome}, ${site.titolo}`} alt>
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+      <!-- SEGNAPOSTO FOTO: ritratto o foto in studio -->
+      <div class="aspect-square w-full max-w-sm rounded-3xl bg-brand-100 border border-brand-200 grid place-items-center text-brand-400">
+        <div class="text-center px-6">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="mx-auto"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+          <p class="mt-3 text-sm">Foto (segnaposto)</p>
+        </div>
+      </div>
+      <div>
+        <p class="text-ink/80 leading-relaxed">
+          Testo di esempio — da sostituire. Sono {site.nome}, {site.titolo.toLowerCase()} a
+          {site.studio.citta}. Mi occupo del benessere delle persone con un approccio manuale,
+          personalizzato e attento all’ascolto. [Racconta qui la tua formazione, il tuo percorso
+          e la tua filosofia di lavoro.]
+        </p>
+        <p class="mt-4 text-ink/80 leading-relaxed">
+          [Aggiungi un secondo paragrafo: la scuola di osteopatia frequentata, l’anno di diploma,
+          eventuali specializzazioni o esperienze significative.]
+        </p>
+        <dl class="mt-8 grid grid-cols-3 gap-4">
+          <div class="rounded-xl bg-brand-50 p-4 text-center">
+            <dt class="text-2xl font-semibold text-brand-600">10+</dt>
+            <dd class="text-xs text-ink/60 mt-1">Anni di esperienza</dd>
+          </div>
+          <div class="rounded-xl bg-brand-50 p-4 text-center">
+            <dt class="text-2xl font-semibold text-brand-600">2.000+</dt>
+            <dd class="text-xs text-ink/60 mt-1">Trattamenti</dd>
+          </div>
+          <div class="rounded-xl bg-brand-50 p-4 text-center">
+            <dt class="text-2xl font-semibold text-brand-600">D.O.</dt>
+            <dd class="text-xs text-ink/60 mt-1">Diploma in Osteopatia</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </Section>
+
+  <!-- TRATTAMENTI -->
+  <Section
+    id="trattamenti"
+    eyebrow="Trattamenti"
+    title="Come posso aiutarti"
+    subtitle="Ogni trattamento è personalizzato in base alle tue esigenze."
+  >
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        trattamenti.map((t) => (
+          <TreatmentCard titolo={t.data.titolo} descrizione={t.data.descrizione} icona={t.data.icona} />
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- DISTURBI TRATTATI -->
+  <Section id="disturbi" eyebrow="A chi mi rivolgo" title="Disturbi trattati" alt>
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <h3 class="text-lg text-ink mb-4">Disturbi più comuni</h3>
+        <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
+          {
+            disturbi.map((d) => (
+              <li class="flex items-start gap-2 text-ink/80">
+                <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                {d}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg text-ink mb-4">Mi prendo cura di</h3>
+        <div class="flex flex-wrap gap-2">
+          {
+            pazienti.map((p) => (
+              <span class="rounded-full bg-white border border-sand-200 px-4 py-1.5 text-sm text-ink/80">
+                {p}
+              </span>
+            ))
+          }
+        </div>
+        <p class="mt-6 text-sm text-ink/60">
+          Non trovi il tuo disturbo? <a href="#contatti" class="text-brand-600 underline">Contattami</a>
+          e ne parliamo insieme.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- COME FUNZIONA -->
+  <Section
+    id="come-funziona"
+    eyebrow="Il percorso"
+    title="Come funziona una seduta"
+    subtitle="Un percorso semplice e chiaro, dal primo contatto ai consigli finali."
+  >
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {steps.map((s, i) => <StepCard numero={i + 1} titolo={s.titolo} testo={s.testo} />)}
+    </div>
+  </Section>
+
+  <!-- RECENSIONI -->
+  <Section id="recensioni" eyebrow="Dicono di me" title="Recensioni dei pazienti" alt>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        recensioni.map((r) => (
+          <ReviewCard autore={r.data.autore} stelle={r.data.stelle} data={r.data.data}>
+            <r.Content />
+          </ReviewCard>
+        ))
+      }
+    </div>
+    {
+      site.social.googleReviews && (
+        <div class="mt-8 text-center">
+          <a href={site.social.googleReviews} target="_blank" rel="noopener" class="btn-outline">
+            Lascia una recensione su Google
+          </a>
+        </div>
+      )
+    }
+  </Section>
+
+  <!-- TARIFFE (sezione opzionale: rimuovi questo blocco se non vuoi mostrare i prezzi) -->
+  <Section id="tariffe" eyebrow="Tariffe" title="Costi dei trattamenti">
+    <div class="grid gap-5 sm:grid-cols-2 max-w-2xl">
+      <div class="rounded-2xl bg-white border border-sand-200 p-6">
+        <h3 class="text-lg text-ink">Prima visita</h3>
+        <p class="mt-1 text-3xl font-semibold text-brand-600">€ [--]</p>
+        <p class="mt-2 text-sm text-ink/60">Anamnesi, valutazione e primo trattamento.</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-sand-200 p-6">
+        <h3 class="text-lg text-ink">Seduta successiva</h3>
+        <p class="mt-1 text-3xl font-semibold text-brand-600">€ [--]</p>
+        <p class="mt-2 text-sm text-ink/60">Trattamento osteopatico di controllo.</p>
+      </div>
+    </div>
+    <p class="mt-4 text-sm text-ink/50">I prezzi sono indicativi — inserisci le tariffe reali o rimuovi la sezione.</p>
+  </Section>
+
+  <!-- DOVE TROVARMI -->
+  <Section id="dove" eyebrow="Lo studio" title="Dove trovarmi" alt>
+    <div class="grid gap-8 lg:grid-cols-2 lg:items-start">
+      <div>
+        <div class="rounded-2xl bg-white border border-sand-200 p-6 space-y-4">
+          <div>
+            <p class="text-sm font-semibold text-brand-600">Indirizzo</p>
+            <p class="text-ink/80">{indirizzoCompleto}</p>
+            <a href={site.studio.mappaLink} target="_blank" rel="noopener" class="text-sm text-brand-600 underline">
+              Indicazioni stradali
+            </a>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-brand-600">Orari</p>
+            <ul class="mt-1 text-sm text-ink/80">
+              {
+                site.orari.map((o) => (
+                  <li class="flex justify-between border-b border-sand-100 py-1 last:border-0">
+                    <span>{o.giorno}</span>
+                    <span class="text-ink/60">{o.ore}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          {site.studio.noteAccesso && <p class="text-sm text-ink/60">{site.studio.noteAccesso}</p>}
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-sand-200 bg-white">
+        <!-- SEGNAPOSTO MAPPA: sostituisci l'URL in site.ts (studio.mappaEmbed) con la mappa reale -->
+        <iframe
+          title="Mappa dello studio"
+          src={site.studio.mappaEmbed}
+          width="100%"
+          height="360"
+          style="border:0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </Section>
+
+  <!-- CONTATTI -->
+  <Section
+    id="contatti"
+    eyebrow="Contatti"
+    title="Prenota un appuntamento"
+    subtitle="Scrivimi su WhatsApp, chiamami o compila il modulo: ti rispondo il prima possibile."
+  >
+    <div class="grid gap-8 lg:grid-cols-2">
+      <div class="space-y-3">
+        <a href={whatsappUrl} target="_blank" rel="noopener" class="btn-whatsapp w-full sm:w-auto">
+          Scrivi su WhatsApp
+        </a>
+        <div class="rounded-2xl bg-white border border-sand-200 divide-y divide-sand-100">
+          <a href={`tel:${site.telefonoLink}`} class="flex items-center gap-3 p-4 hover:bg-sand-50">
+            <svg class="w-5 h-5 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="text-ink/80">{site.telefono}</span>
+          </a>
+          <a href={`mailto:${site.email}`} class="flex items-center gap-3 p-4 hover:bg-sand-50">
+            <svg class="w-5 h-5 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+            <span class="text-ink/80">{site.email}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- FORM: vedi README per attivarlo con Formspree (gratis). Senza configurazione usa mailto. -->
+      <form
+        action={formAction}
+        method="POST"
+        class="rounded-2xl bg-white border border-sand-200 p-6 space-y-4"
+      >
+        {isFormspree && <input type="hidden" name="_next" value="/grazie/" />}
+        <!-- honeypot anti-spam (deve restare vuoto) -->
+        <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+        <div>
+          <label for="nome" class="block text-sm font-medium text-ink mb-1">Nome e cognome</label>
+          <input id="nome" name="nome" type="text" required class="w-full rounded-lg border border-sand-200 px-3 py-2" />
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label for="email" class="block text-sm font-medium text-ink mb-1">Email</label>
+            <input id="email" name="email" type="email" required class="w-full rounded-lg border border-sand-200 px-3 py-2" />
+          </div>
+          <div>
+            <label for="telefono" class="block text-sm font-medium text-ink mb-1">Telefono</label>
+            <input id="telefono" name="telefono" type="tel" class="w-full rounded-lg border border-sand-200 px-3 py-2" />
+          </div>
+        </div>
+        <div>
+          <label for="messaggio" class="block text-sm font-medium text-ink mb-1">Messaggio</label>
+          <textarea id="messaggio" name="messaggio" rows="4" required class="w-full rounded-lg border border-sand-200 px-3 py-2"></textarea>
+        </div>
+        <label class="flex items-start gap-2 text-sm text-ink/70">
+          <input type="checkbox" required class="mt-1" />
+          <span>Ho letto l’<a href="/privacy/" class="text-brand-600 underline">informativa privacy</a> e acconsento al trattamento dei dati.</span>
+        </label>
+        <button type="submit" class="btn-primary w-full">Invia richiesta</button>
+      </form>
+    </div>
+  </Section>
+
+  <!-- FAQ -->
+  <Section id="faq" eyebrow="Domande frequenti" title="FAQ" alt>
+    <div class="max-w-2xl">
+      {faq.map((f) => <FaqItem domanda={f.q}><p>{f.a}</p></FaqItem>)}
+    </div>
+  </Section>
+</Base>

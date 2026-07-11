@@ -1,0 +1,42 @@
+---
+// Banner cookie minimale e conforme all'uso base (nessun cookie di tracciamento attivo
+// di default). Se aggiungi analytics/tracking, va integrato un vero Consent Management
+// Platform (es. Iubenda, Cookiebot). Vedi note nel README.
+---
+
+<div
+  id="cookie-banner"
+  class="fixed inset-x-3 bottom-3 z-50 hidden rounded-2xl bg-white border border-sand-200 shadow-lg p-4 sm:p-5 sm:max-w-md sm:left-auto sm:right-5"
+  role="dialog"
+  aria-live="polite"
+  aria-label="Informativa cookie"
+>
+  <p class="text-sm text-ink/80">
+    Questo sito usa solo cookie tecnici necessari al funzionamento. Consultando le pagine ne
+    accetti l'uso. Maggiori dettagli nella
+    <a href="/cookie-policy/" class="text-brand-600 underline">Cookie Policy</a>.
+  </p>
+  <div class="mt-3 flex justify-end">
+    <button type="button" id="cookie-accept" class="btn-primary">Ho capito</button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var KEY = 'cookie-consent-v1';
+    var banner = document.getElementById('cookie-banner');
+    var accept = document.getElementById('cookie-accept');
+    if (!banner || !accept) return;
+    try {
+      if (!localStorage.getItem(KEY)) banner.classList.remove('hidden');
+    } catch (e) {
+      banner.classList.remove('hidden');
+    }
+    accept.addEventListener('click', function () {
+      try {
+        localStorage.setItem(KEY, '1');
+      } catch (e) {}
+      banner.classList.add('hidden');
+    });
+  })();
+</script>
