@@ -5,28 +5,26 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Compensa l'header sticky quando si salta a un'ancora */
     scroll-padding-top: 5rem;
   }
 
   body {
-    @apply bg-sand-50 text-ink antialiased;
+    @apply bg-cream-50 text-ink antialiased;
   }
 
   h1,
   h2,
   h3 {
-    @apply font-semibold tracking-tight;
+    @apply font-bold tracking-tight;
     text-wrap: balance;
   }
 
-  /* Focus visibile per accessibilità da tastiera */
   a:focus-visible,
   button:focus-visible,
   summary:focus-visible,
   input:focus-visible,
   textarea:focus-visible {
-    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-sand-50 rounded;
+    @apply outline-none ring-2 ring-offset-2 ring-lavender ring-offset-transparent rounded-xl;
   }
 }
 
@@ -35,17 +33,29 @@
     @apply max-w-content mx-auto px-5 sm:px-6;
   }
 
+  /* Occhiello: piccola etichetta lavanda sopra i titoli */
+  .eyebrow {
+    @apply text-sm font-semibold uppercase tracking-[0.15em] text-lavender;
+  }
+
+  /* Bottoni a pillola, grandi e morbidi */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline-none;
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full px-7 py-3.5 text-base font-semibold transition focus-visible:outline-none;
   }
   .btn-primary {
-    @apply btn bg-brand-500 text-white hover:bg-brand-600;
+    @apply btn bg-petrol-500 text-white hover:bg-petrol-600 shadow-soft;
+  }
+  .btn-light {
+    @apply btn bg-white text-petrol-700 hover:bg-cream-100 shadow-soft;
   }
   .btn-outline {
-    @apply btn border border-brand-500 text-brand-700 hover:bg-brand-50;
+    @apply btn border-2 border-petrol-500 text-petrol-700 hover:bg-petrol-50;
+  }
+  .btn-outline-light {
+    @apply btn border-2 border-white/80 text-white hover:bg-white/10;
   }
   .btn-whatsapp {
-    @apply btn bg-[#25D366] text-white hover:brightness-95;
+    @apply btn bg-[#25D366] text-white hover:brightness-95 shadow-soft;
   }
 }
 

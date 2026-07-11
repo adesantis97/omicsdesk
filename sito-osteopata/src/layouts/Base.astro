@@ -1,4 +1,9 @@
 ---
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
+import '@fontsource/poppins/800.css';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -81,6 +86,7 @@ const jsonLd = {
     {noIndex && <meta name="robots" content="noindex,nofollow" />}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0f5a54" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />

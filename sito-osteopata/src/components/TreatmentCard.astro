@@ -6,7 +6,6 @@ interface Props {
 }
 const { titolo, descrizione, icona } = Astro.props;
 
-// Set di icone semplici, richiamate per nome dal frontmatter dei trattamenti.
 const icons: Record<string, string> = {
   colonna:
     '<path d="M12 3v18"/><path d="M9 6h6"/><path d="M9 10h6"/><path d="M9 14h6"/><path d="M9 18h6"/>',
@@ -21,10 +20,10 @@ const icons: Record<string, string> = {
 const path = icons[icona] ?? icons.foglia;
 ---
 
-<article class="rounded-2xl bg-white border border-sand-200 p-6 hover:shadow-md hover:border-brand-200 transition">
-  <div class="w-11 h-11 rounded-xl bg-brand-50 text-brand-500 grid place-items-center">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={path} />
+<article class="rounded-4xl bg-white p-7 shadow-soft hover:-translate-y-1 transition duration-200">
+  <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-500 grid place-items-center">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={path} />
   </div>
-  <h3 class="mt-4 text-lg text-ink">{titolo}</h3>
-  <p class="mt-2 text-sm text-ink/70 leading-relaxed">{descrizione}</p>
+  <h3 class="mt-5 text-2xl text-petrol-700">{titolo}</h3>
+  <p class="mt-2.5 text-ink/70 leading-relaxed">{descrizione}</p>
 </article>

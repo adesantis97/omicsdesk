@@ -2,24 +2,32 @@
 interface Props {
   id?: string;
   title?: string;
-  eyebrow?: string; // piccola etichetta sopra il titolo
+  eyebrow?: string;
   subtitle?: string;
-  alt?: boolean; // sfondo alternativo (bianco) per separare visivamente le sezioni
+  tone?: 'cream' | 'white' | 'petrol' | 'indigo' | 'sky';
   center?: boolean;
 }
-const { id, title, eyebrow, subtitle, alt = false, center = false } = Astro.props;
+const { id, title, eyebrow, subtitle, tone = 'cream', center = false } = Astro.props;
+
+// Ogni "tone" è un blocco pieno di colore a tutta larghezza.
+const tones: Record<string, { bg: string; text: string; heading: string; eyebrow: string; sub: string }> = {
+  cream: { bg: 'bg-cream-50', text: 'text-ink', heading: 'text-petrol-700', eyebrow: 'text-indigo-500', sub: 'text-ink/70' },
+  white: { bg: 'bg-white', text: 'text-ink', heading: 'text-petrol-700', eyebrow: 'text-indigo-500', sub: 'text-ink/70' },
+  petrol: { bg: 'bg-petrol-600', text: 'text-white/90', heading: 'text-white', eyebrow: 'text-lavender', sub: 'text-white/80' },
+  indigo: { bg: 'bg-indigo-500', text: 'text-white/90', heading: 'text-white', eyebrow: 'text-lavender', sub: 'text-white/85' },
+  sky: { bg: 'bg-sky-500', text: 'text-white/90', heading: 'text-white', eyebrow: 'text-white', sub: 'text-white/85' },
+};
+const t = tones[tone];
 ---
 
-<section id={id} class={alt ? 'bg-white' : ''}>
-  <div class="container-x py-16 sm:py-20">
+<section id={id} class={`${t.bg} ${t.text}`}>
+  <div class="container-x py-20 sm:py-24">
     {
       (eyebrow || title || subtitle) && (
-        <div class={`max-w-2xl ${center ? 'mx-auto text-center' : ''} mb-10`}>
-          {eyebrow && (
-            <p class="text-sm font-semibold uppercase tracking-wide text-brand-500">{eyebrow}</p>
-          )}
-          {title && <h2 class="mt-2 text-3xl sm:text-4xl text-ink">{title}</h2>}
-          {subtitle && <p class="mt-3 text-lg text-ink/70">{subtitle}</p>}
+        <div class={`max-w-2xl ${center ? 'mx-auto text-center' : ''} mb-12`}>
+          {eyebrow && <p class={`eyebrow ${t.eyebrow}`}>{eyebrow}</p>}
+          {title && <h2 class={`mt-3 text-4xl sm:text-5xl leading-[1.05] ${t.heading}`}>{title}</h2>}
+          {subtitle && <p class={`mt-5 text-lg ${t.sub}`}>{subtitle}</p>}
         </div>
       )
     }

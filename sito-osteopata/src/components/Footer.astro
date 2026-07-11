@@ -9,26 +9,22 @@ const socials = [
 ].filter((s) => s.href);
 ---
 
-<footer class="bg-brand-800 text-sand-100 mt-16">
-  <div class="container-x py-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+<footer class="bg-petrol-800 text-white/80">
+  <div class="container-x py-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
     <div>
-      <div class="flex items-center gap-2 font-semibold text-white">
-        <span class="inline-block w-3 h-3 rounded-full bg-brand-300"></span>
+      <div class="flex items-center gap-2 font-bold text-white text-lg">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-lavender"></span>
         <span>{site.nome}</span>
       </div>
-      <p class="mt-3 text-sm text-brand-100/80">{site.titolo}</p>
-      <p class="mt-1 text-sm text-brand-100/80">{site.albo}</p>
+      <p class="mt-3 text-sm">{site.titolo}</p>
+      <p class="mt-1 text-sm text-white/60">{site.albo}</p>
     </div>
 
     <div class="text-sm space-y-1.5">
       <p class="font-semibold text-white">Studio</p>
       <p>{indirizzoCompleto}</p>
-      <p>
-        <a href={`tel:${site.telefonoLink}`} class="hover:text-white">{site.telefono}</a>
-      </p>
-      <p>
-        <a href={`mailto:${site.email}`} class="hover:text-white">{site.email}</a>
-      </p>
+      <p><a href={`tel:${site.telefonoLink}`} class="hover:text-white">{site.telefono}</a></p>
+      <p><a href={`mailto:${site.email}`} class="hover:text-white">{site.email}</a></p>
     </div>
 
     <div class="text-sm space-y-1.5">
@@ -50,8 +46,8 @@ const socials = [
     </div>
   </div>
 
-  <div class="border-t border-brand-700">
-    <div class="container-x py-5 text-xs text-brand-100/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+  <div class="border-t border-white/10">
+    <div class="container-x py-5 text-xs text-white/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
       <span>© {year} {site.nome} · P.IVA {site.partitaIva}</span>
       <span>Le informazioni sul sito non sostituiscono il parere medico.</span>
     </div>
