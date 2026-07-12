@@ -11,11 +11,11 @@
 
 export const site = {
   // — IDENTITÀ —
-  nome: '[Nome Cognome]',
+  nome: 'Dott. Ruggero De Santis',
   titolo: 'Osteopata D.O.', // es. "Osteopata D.O." — D.O. = Diploma in Osteopatia
-  claim: 'Osteopatia su misura per il tuo benessere', // frase breve di posizionamento
+  claim: 'Ritrova il tuo benessere, con un’osteopatia attenta alla persona', // frase breve di posizionamento
   descrizioneBreve:
-    'Trattamenti osteopatici personalizzati per dolori muscolo-scheletrici, postura e benessere. Studio a [Città]. Prenota una prima valutazione.',
+    'Osteopata D.O. a [Città]. Un approccio che considera la persona nella sua globalità — non solo il sintomo, ma anche lo stile di vita e le esigenze di ciascuno — per migliorare benessere, funzionalità e qualità della vita.',
 
   // — CONTATTI —
   // Telefono in formato internazionale SENZA spazi per i link (es. +393401234567)
@@ -69,7 +69,7 @@ export const site = {
   // — DATI FISCALI — (compaiono nel footer e nelle informative, come richiesto in Italia)
   partitaIva: '[Partita IVA]',
   // Ordine/registro professionale, se applicabile (es. iscrizione ROI)
-  albo: '[es. Iscritto al Registro degli Osteopati d’Italia - R.O.I. n. XXXX]',
+  albo: 'Iscritto al R.O.I. — Registro degli Osteopati Italiani',
 
   // — TECNICO —
   // Endpoint del form contatti. Consigliato Formspree (gratis): crea un form su formspree.io
