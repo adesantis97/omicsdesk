@@ -36,10 +36,10 @@ const disturbi = [
 const pazienti = ['Adulti', 'Sportivi', 'Donne in gravidanza', 'Neonati e bambini', 'Anziani'];
 
 const steps = [
-  { titolo: 'Anamnesi', testo: 'Ascolto la tua storia, i sintomi e le abitudini per capire l’origine del problema.' },
-  { titolo: 'Valutazione', testo: 'Esame osteopatico e dei movimenti per individuare le aree da trattare.' },
-  { titolo: 'Trattamento', testo: 'Tecniche manuali personalizzate, dolci e mirate al tuo caso specifico.' },
-  { titolo: 'Consigli e follow-up', testo: 'Indicazioni pratiche e, se serve, un piano di sedute per consolidare i risultati.' },
+  { titolo: 'Anamnesi', testo: 'Ascolto la tua storia, i sintomi e le abitudini per capire l’origine del problema.', img: '/images/step-1.jpg' },
+  { titolo: 'Valutazione', testo: 'Esame osteopatico e dei movimenti per individuare le aree da trattare.', img: '/images/step-2.jpg' },
+  { titolo: 'Trattamento', testo: 'Tecniche manuali personalizzate, dolci e mirate al tuo caso specifico.', img: '/images/step-3.jpg' },
+  { titolo: 'Consigli e follow-up', testo: 'Indicazioni pratiche e, se serve, un piano di sedute per consolidare i risultati.', img: '/images/step-4.jpg' },
 ];
 
 const faq = [
@@ -59,13 +59,12 @@ const isFormspree = site.formAction.includes('formspree');
   <!-- CHI SONO -->
   <Section id="chi-sono" eyebrow="Chi sono" title={`${site.nome}`} tone="cream" center>
     <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center max-w-5xl mx-auto">
-      <!-- SEGNAPOSTO FOTO: ritratto grande -->
-      <div class="aspect-[4/5] w-full rounded-4xl bg-gradient-to-br from-petrol-100 to-indigo-100 shadow-soft grid place-items-center text-petrol-300">
-        <div class="text-center px-6">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" class="mx-auto"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>
-          <p class="mt-3 text-sm font-medium">Foto ritratto (segnaposto)</p>
-        </div>
-      </div>
+      <img
+        src="/images/chi-sono.jpg"
+        alt="Dott. Ruggero De Santis durante un trattamento osteopatico"
+        class="aspect-[4/5] w-full rounded-4xl object-cover shadow-soft"
+        loading="lazy"
+      />
       <div class="text-left">
         <p class="text-lg text-ink/80 leading-relaxed">
           Sono <strong class="text-petrol-700">Ruggero De Santis</strong>, Osteopata D.O. iscritto al
@@ -106,13 +105,12 @@ const isFormspree = site.formAction.includes('formspree');
   <!-- COS'È L'OSTEOPATIA (sezione scura con foto grande) -->
   <Section id="osteopatia" eyebrow="Cos’è l’osteopatia" title="Il trattamento osteopatico" tone="petrol" center>
     <div class="grid gap-10 lg:grid-cols-2 lg:items-center max-w-5xl mx-auto">
-      <!-- SEGNAPOSTO FOTO: foto di un trattamento -->
-      <div class="aspect-[4/3] w-full rounded-4xl bg-white/10 border border-white/15 grid place-items-center text-white/50 order-last lg:order-first">
-        <div class="text-center px-6">
-          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" class="mx-auto"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="m4 18 5-4 4 3 3-2 4 3"/></svg>
-          <p class="mt-3 text-sm">Foto trattamento (segnaposto)</p>
-        </div>
-      </div>
+      <img
+        src="/images/osteopatia.jpg"
+        alt="Dott. Ruggero De Santis esegue un trattamento osteopatico"
+        class="aspect-[4/3] w-full rounded-4xl object-cover shadow-soft order-last lg:order-first"
+        loading="lazy"
+      />
       <div>
         <p class="text-lg text-white/85 leading-relaxed">
           L’osteopatia considera il corpo nella sua <strong class="text-white">globalità</strong>:
@@ -186,7 +184,7 @@ const isFormspree = site.formAction.includes('formspree');
     center
   >
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {steps.map((s, i) => <StepCard numero={i + 1} titolo={s.titolo} testo={s.testo} />)}
+      {steps.map((s, i) => <StepCard numero={i + 1} titolo={s.titolo} testo={s.testo} img={s.img} imgAlt={`${s.titolo} — trattamento osteopatico`} />)}
     </div>
   </Section>
 
@@ -247,16 +245,24 @@ const isFormspree = site.formAction.includes('formspree');
         </div>
         {site.studio.noteAccesso && <p class="text-sm text-white/70">{site.studio.noteAccesso}</p>}
       </div>
-      <div class="rounded-4xl overflow-hidden border border-white/15 min-h-[320px] bg-white/5">
-        <!-- SEGNAPOSTO MAPPA: sostituisci l'URL in site.ts (studio.mappaEmbed) -->
-        <iframe
-          title="Mappa dello studio"
-          src={site.studio.mappaEmbed}
-          width="100%"
-          height="100%"
-          style="border:0; min-height:320px"
+      <div class="space-y-6">
+        <img
+          src="/images/studio.jpg"
+          alt="Lo studio di osteopatia del Dott. Ruggero De Santis a Roma"
+          class="rounded-4xl w-full aspect-[16/10] object-cover shadow-soft"
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        />
+        <div class="rounded-4xl overflow-hidden border border-white/15 min-h-[280px] bg-white/5">
+          <!-- SEGNAPOSTO MAPPA: sostituisci l'URL in site.ts (studio.mappaEmbed) quando avrai l'indirizzo -->
+          <iframe
+            title="Mappa dello studio"
+            src={site.studio.mappaEmbed}
+            width="100%"
+            height="100%"
+            style="border:0; min-height:280px"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
     </div>
   </Section>

@@ -3,14 +3,23 @@ interface Props {
   numero: number;
   titolo: string;
   testo: string;
+  img?: string;
+  imgAlt?: string;
 }
-const { numero, titolo, testo } = Astro.props;
+const { numero, titolo, testo, img, imgAlt } = Astro.props;
 ---
 
 <div class="rounded-4xl bg-white shadow-soft overflow-hidden">
-  <!-- SEGNAPOSTO FOTO: area immagine dello step (opzionale) -->
-  <div class="relative aspect-[16/10] bg-gradient-to-br from-indigo-100 to-cream-100 grid place-items-center text-indigo-300">
-    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="m4 18 5-4 4 3 3-2 4 3"/></svg>
+  <div class="relative aspect-[16/10]">
+    {
+      img ? (
+        <img src={img} alt={imgAlt ?? ''} class="w-full h-full object-cover" loading="lazy" />
+      ) : (
+        <div class="w-full h-full bg-gradient-to-br from-indigo-100 to-cream-100 grid place-items-center text-indigo-300">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="m4 18 5-4 4 3 3-2 4 3"/></svg>
+        </div>
+      )
+    }
     <span class="absolute top-4 left-4 w-10 h-10 rounded-full bg-petrol-500 text-white grid place-items-center font-bold shadow-soft">{numero}</span>
   </div>
   <div class="p-6">

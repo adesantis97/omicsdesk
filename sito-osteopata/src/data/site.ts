@@ -15,25 +15,25 @@ export const site = {
   titolo: 'Osteopata D.O.', // es. "Osteopata D.O." — D.O. = Diploma in Osteopatia
   claim: 'Ritrova il tuo benessere, con un’osteopatia attenta alla persona', // frase breve di posizionamento
   descrizioneBreve:
-    'Osteopata D.O. a [Città]. Un approccio che considera la persona nella sua globalità — non solo il sintomo, ma anche lo stile di vita e le esigenze di ciascuno — per migliorare benessere, funzionalità e qualità della vita.',
+    'Osteopata D.O. a Roma. Un approccio che considera la persona nella sua globalità — non solo il sintomo, ma anche lo stile di vita e le esigenze di ciascuno — per migliorare benessere, funzionalità e qualità della vita.',
 
   // — CONTATTI —
   // Telefono in formato internazionale SENZA spazi per i link (es. +393401234567)
-  telefono: '+39 340 000 0000', // versione "leggibile" mostrata a schermo
-  telefonoLink: '+393400000000', // versione per il link tel: e wa.me (solo numeri e +)
+  telefono: '+39 320 622 5930', // versione "leggibile" mostrata a schermo
+  telefonoLink: '+393206225930', // versione per il link tel: e wa.me (solo numeri e +)
   // Numero WhatsApp in formato internazionale SENZA "+", spazi o zeri iniziali (es. 393401234567)
-  whatsapp: '393400000000',
-  whatsappMessaggio: 'Ciao, vorrei prenotare una seduta di osteopatia.',
-  email: 'info@esempio-osteopata.it',
+  whatsapp: '393206225930',
+  whatsappMessaggio: 'Ciao Dott. De Santis, vorrei prenotare una seduta di osteopatia.',
+  email: 'desantis.osteopata@gmail.com',
 
   // — STUDIO / INDIRIZZO —
   studio: {
-    nome: 'Studio di Osteopatia [Nome]',
-    via: '[Via e numero civico]',
+    nome: 'Studio di Osteopatia — Dott. Ruggero De Santis',
+    via: '[Via e numero civico]', // ⚠️ ancora da inserire
     cap: '[CAP]',
-    citta: '[Città]',
-    provincia: '[PR]', // sigla provincia, es. "MI"
-    regione: '[Regione]',
+    citta: 'Roma',
+    provincia: 'RM',
+    regione: 'Lazio',
     paese: 'Italia',
     // Link per aprire le indicazioni stradali (sostituisci con il link del profilo Google Maps)
     mappaLink: 'https://www.google.com/maps/search/?api=1&query=osteopata',
