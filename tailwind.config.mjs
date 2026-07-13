@@ -13,6 +13,16 @@ export default {
         ink: '#0f172a',
         accent: '#0d9488',
         'accent-dark': '#0f766e',
+        // Warm off-white page surfaces (never pure white)
+        paper: '#f8f8f5',
+        'paper-2': '#f1f3f1',
+        // Teal-tinted band + deep feature band
+        'tint': '#eaf3f0',
+        'tint-2': '#dcece7',
+      },
+      boxShadow: {
+        card: '0 1px 2px rgba(15,23,42,0.04), 0 8px 24px -12px rgba(15,23,42,0.10)',
+        'card-hover': '0 2px 4px rgba(15,23,42,0.06), 0 18px 40px -16px rgba(13,148,136,0.28)',
       },
       typography: ({ theme }) => ({
         DEFAULT: {

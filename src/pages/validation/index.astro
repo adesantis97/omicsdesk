@@ -32,7 +32,7 @@ const runs = (await getCollection('validation')).sort(
       {runs.map((r) => (
         <a
           href={`/validation/${r.slug}/`}
-          class="group block bg-white rounded-lg border border-slate-200 overflow-hidden hover:border-accent transition"
+          class="group block bg-white rounded-xl border border-slate-200/80 shadow-card overflow-hidden hover:border-accent/40 hover:shadow-card-hover hover:-translate-y-0.5 transition"
         >
           <div class="aspect-[4/3] bg-slate-50 overflow-hidden border-b border-slate-100">
             <img src={r.data.heroImage} alt={r.data.heroAlt} class="w-full h-full object-cover group-hover:scale-[1.02] transition" />
@@ -47,7 +47,7 @@ const runs = (await getCollection('validation')).sort(
     </div>
   </section>
 
-  <section class="bg-slate-50 border-y border-slate-100">
+  <section class="section-tint">
     <div class="max-w-5xl mx-auto px-5 py-14">
       <h2 class="text-xl sm:text-2xl font-semibold tracking-tight">How to read these</h2>
       <p class="prose-p mt-3 max-w-3xl text-sm">

@@ -31,7 +31,7 @@ const cases = (await getCollection('case-studies')).sort(
       {cases.map((cs) => (
         <a
           href={`/case-studies/${cs.slug}/`}
-          class="group block bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-accent transition"
+          class="group block bg-white rounded-xl border border-slate-200/80 shadow-card overflow-hidden hover:border-accent/40 hover:shadow-card-hover hover:-translate-y-0.5 transition"
         >
           <div class="aspect-[16/10] bg-slate-50 overflow-hidden border-b border-slate-100">
             <img src={cs.data.heroImage} alt={cs.data.heroAlt} class="w-full h-full object-cover group-hover:scale-[1.02] transition" />
@@ -51,7 +51,7 @@ const cases = (await getCollection('case-studies')).sort(
     </div>
   </section>
 
-  <section class="bg-slate-50 border-y border-slate-100">
+  <section class="section-tint">
     <div class="max-w-5xl mx-auto px-5 py-16">
       <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Want one like this on your data?</h2>
       <p class="prose-p mt-3 max-w-2xl">

@@ -7,8 +7,23 @@ const featuredCases = (await getCollection('case-studies'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 <Base>
-  <header id="top" class="max-w-5xl mx-auto px-5 pt-20 pb-16">
-    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4">Bioinformatics for small biotech and academic labs</p>
+  <!-- Full-bleed hero banner -->
+  <div class="relative w-full overflow-hidden -mt-px">
+    <img
+      src="/hero_banner.jpg"
+      alt=""
+      width="1376" height="768"
+      class="w-full h-[42vh] min-h-[300px] sm:h-[50vh] lg:h-[58vh] object-cover object-[68%_center]"
+      loading="eager" fetchpriority="high"
+    />
+    <!-- fade the banner into the warm page so the headline overlap blends -->
+    <div class="absolute inset-x-0 bottom-0 h-40 sm:h-52 bg-gradient-to-b from-transparent via-paper/70 to-paper" aria-hidden="true"></div>
+    <div class="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-paper/60 to-transparent" aria-hidden="true"></div>
+  </div>
+
+  <!-- Headline overlaps the lower edge of the banner, still fully readable -->
+  <header id="top" class="relative z-10 max-w-5xl mx-auto px-5 -mt-24 sm:-mt-32 lg:-mt-40 pb-16">
+    <p class="text-accent-dark font-semibold text-sm tracking-wide uppercase mb-4">Bioinformatics for small biotech and academic labs</p>
     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
       The analysis is the easy part.<br />
       <span class="text-accent">We tell you what it means.</span>
@@ -17,11 +32,11 @@ const featuredCases = (await getCollection('case-studies'))
       RNA-seq, scRNA-seq, proteomics, ChIP-seq, ATAC-seq and multi-omics, run end to end by a bioinformatician who reads the biology: what the results say about your system, and where it is worth digging deeper. Fixed price, 7 to 10 business days, reproducible pipelines you can audit.
     </p>
     <div class="mt-8 flex flex-wrap gap-3">
-      <a href="/case-studies/" class="inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition">
+      <a href="/case-studies/" class="inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition shadow-card">
         See sample reports
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
-      <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="inline-flex items-center gap-2 bg-white text-ink border border-slate-200 px-5 py-3 rounded-md font-medium hover:bg-slate-50 transition">
+      <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="inline-flex items-center gap-2 bg-white text-ink border border-slate-200 px-5 py-3 rounded-md font-medium hover:bg-slate-50 transition shadow-card">
         Request a quote
       </a>
       <a href="/pricing/" class="inline-flex items-center gap-2 text-slate-600 px-3 py-3 rounded-md font-medium hover:text-ink transition">
@@ -42,7 +57,7 @@ const featuredCases = (await getCollection('case-studies'))
     </div>
   </section>
 
-  <section id="services" class="bg-slate-50 border-y border-slate-100">
+  <section id="services" class="section-tint">
     <div class="max-w-5xl mx-auto px-5 py-16">
       <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
         <div>
@@ -54,9 +69,9 @@ const featuredCases = (await getCollection('case-studies'))
         </a>
       </div>
 
-      <div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+      <div class="overflow-x-auto rounded-xl border border-slate-200/80 bg-white shadow-card">
         <table class="w-full text-sm">
-          <thead class="bg-slate-50 text-slate-600">
+          <thead class="bg-tint text-accent-dark">
             <tr>
               <th class="text-left font-medium px-5 py-3">Omics type</th>
               <th class="text-left font-medium px-5 py-3">Price</th>
@@ -84,8 +99,8 @@ const featuredCases = (await getCollection('case-studies'))
 
   <section id="how" class="max-w-5xl mx-auto px-5 py-16">
     <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">How it works</h2>
-    <div class="mt-10 grid md:grid-cols-3 gap-8">
-      <div>
+    <div class="mt-10 grid md:grid-cols-3 gap-6">
+      <div class="card p-6 border-t-2 border-t-accent">
         <div class="flex items-center gap-3 mb-3">
           <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-semibold flex items-center justify-center">1</span>
           <h3 class="font-semibold">Intake &amp; NDA</h3>
@@ -93,7 +108,7 @@ const featuredCases = (await getCollection('case-studies'))
         </div>
         <p class="prose-p text-sm">You fill a short intake form (organism, sample count, contrasts, data access). NDA signed before any data is shared. Quote and proposal back within 2 business days.</p>
       </div>
-      <div>
+      <div class="card p-6 border-t-2 border-t-accent">
         <div class="flex items-center gap-3 mb-3">
           <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-semibold flex items-center justify-center">2</span>
           <h3 class="font-semibold">Analysis &amp; QC</h3>
@@ -101,7 +116,7 @@ const featuredCases = (await getCollection('case-studies'))
         </div>
         <p class="prose-p text-sm">Your data runs through the pipeline, and we look at it. After QC you get a check in: if the design has a problem, we surface it before downstream stats burn the clock.</p>
       </div>
-      <div>
+      <div class="card p-6 border-t-2 border-t-accent">
         <div class="flex items-center gap-3 mb-3">
           <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-semibold flex items-center justify-center">3</span>
           <h3 class="font-semibold">Report &amp; handoff</h3>
@@ -112,33 +127,34 @@ const featuredCases = (await getCollection('case-studies'))
     </div>
   </section>
 
-  <section class="bg-slate-50 border-y border-slate-100">
-    <div class="max-w-5xl mx-auto px-5 py-16">
-      <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">What you get, every time</h2>
+  <section class="section-deep">
+    <div class="max-w-5xl mx-auto px-5 py-16 sm:py-20">
+      <p class="eyebrow !text-teal-200/90 before:!bg-teal-200/50">Deliverables</p>
+      <h2 class="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight text-white">What you get, every time</h2>
       <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl">
-        <div class="bg-white rounded-lg border border-slate-200 p-5">
-          <h4 class="font-semibold text-sm">QC report</h4>
-          <p class="text-sm text-slate-500 mt-1">HTML + summary table</p>
+        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
+          <h4 class="font-semibold text-sm text-white">QC report</h4>
+          <p class="text-sm text-teal-100/70 mt-1">HTML + summary table</p>
         </div>
-        <div class="bg-white rounded-lg border border-slate-200 p-5">
-          <h4 class="font-semibold text-sm">Full statistical results</h4>
-          <p class="text-sm text-slate-500 mt-1">TSV + Excel workbook</p>
+        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
+          <h4 class="font-semibold text-sm text-white">Full statistical results</h4>
+          <p class="text-sm text-teal-100/70 mt-1">TSV + Excel workbook</p>
         </div>
-        <div class="bg-white rounded-lg border border-slate-200 p-5">
-          <h4 class="font-semibold text-sm">Publication-ready figures</h4>
-          <p class="text-sm text-slate-500 mt-1">PNG at 300 dpi</p>
+        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
+          <h4 class="font-semibold text-sm text-white">Publication-ready figures</h4>
+          <p class="text-sm text-teal-100/70 mt-1">PNG at 300 dpi</p>
         </div>
-        <div class="bg-white rounded-lg border border-slate-200 p-5">
-          <h4 class="font-semibold text-sm">Branded PDF report</h4>
-          <p class="text-sm text-slate-500 mt-1">Executive summary, methods, conclusions</p>
+        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
+          <h4 class="font-semibold text-sm text-white">Branded PDF report</h4>
+          <p class="text-sm text-teal-100/70 mt-1">Executive summary, methods, conclusions</p>
         </div>
-        <div class="bg-white rounded-lg border border-slate-200 p-5">
-          <h4 class="font-semibold text-sm">Reproducible pipeline code</h4>
-          <p class="text-sm text-slate-500 mt-1">Snakemake + conda, versioned</p>
+        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
+          <h4 class="font-semibold text-sm text-white">Reproducible pipeline code</h4>
+          <p class="text-sm text-teal-100/70 mt-1">Snakemake + conda, versioned</p>
         </div>
-        <div class="bg-white rounded-lg border border-slate-200 p-5">
-          <h4 class="font-semibold text-sm">NDA by default</h4>
-          <p class="text-sm text-slate-500 mt-1">Raw data deleted within 30 days</p>
+        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
+          <h4 class="font-semibold text-sm text-white">NDA by default</h4>
+          <p class="text-sm text-teal-100/70 mt-1">Raw data deleted within 30 days</p>
         </div>
       </div>
     </div>
@@ -159,7 +175,7 @@ const featuredCases = (await getCollection('case-studies'))
       {featuredCases.map((cs) => (
         <a
           href={`/case-studies/${cs.slug}/`}
-          class="group block bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-accent transition"
+          class="group block card-link overflow-hidden"
         >
           <div class="aspect-[16/10] bg-slate-50 overflow-hidden border-b border-slate-100">
             <img src={cs.data.heroImage} alt={cs.data.heroAlt} class="w-full h-full object-cover group-hover:scale-[1.02] transition" />
@@ -189,7 +205,7 @@ const featuredCases = (await getCollection('case-studies'))
     </p>
   </section>
 
-  <section id="contact" class="bg-slate-50 border-y border-slate-100">
+  <section id="contact" class="section-tint">
     <div class="max-w-5xl mx-auto px-5 py-16">
       <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Get a quote</h2>
       <p class="prose-p mt-3 max-w-2xl">
@@ -197,7 +213,7 @@ const featuredCases = (await getCollection('case-studies'))
       </p>
 
       <div class="mt-8 grid md:grid-cols-2 gap-6 max-w-4xl">
-        <div class="bg-white rounded-lg border border-slate-200 p-6 flex flex-col justify-between">
+        <div class="card p-6 flex flex-col justify-between">
           <div>
             <h4 class="font-semibold">Request a quote</h4>
             <p class="prose-p mt-2 text-sm">Tell us what you measured and what you want compared — we send back a quote and a plan. You upload data after the quote is signed, not before.</p>
@@ -213,7 +229,7 @@ const featuredCases = (await getCollection('case-studies'))
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
         </div>
-        <div class="bg-white rounded-lg border border-slate-200 p-6 flex flex-col justify-between">
+        <div class="card p-6 flex flex-col justify-between">
           <div>
             <h4 class="font-semibold">Already have a signed quote?</h4>
             <p class="prose-p mt-2 text-sm">

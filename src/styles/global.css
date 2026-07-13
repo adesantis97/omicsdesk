@@ -8,9 +8,62 @@ html {
 
 body {
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  position: relative;
+}
+
+/* Soft decorative glow behind the top of every page — kills the stark-white
+   feel without touching any page content. Fixed + behind everything. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 620px;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 100% at 78% -8%, rgba(13, 148, 136, 0.14), transparent 60%),
+    radial-gradient(52% 90% at 8% -12%, rgba(15, 118, 110, 0.10), transparent 62%);
 }
 
 .prose-p {
   color: #334155;
   line-height: 1.65;
+}
+
+@layer components {
+  /* Small uppercase coloured label above a heading */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-accent-dark font-semibold text-xs sm:text-sm tracking-[0.14em] uppercase;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply inline-block w-5 h-px bg-accent/60;
+  }
+
+  /* White panel that lifts off the warm page */
+  .card {
+    @apply bg-white rounded-xl border border-slate-200/80 shadow-card transition;
+  }
+  .card-link {
+    @apply card hover:shadow-card-hover hover:border-accent/40 hover:-translate-y-0.5;
+  }
+
+  /* Light teal-tinted section band */
+  .section-tint {
+    @apply relative border-y border-tint-2/70;
+    background: linear-gradient(180deg, #f4faf8 0%, #eaf3f0 100%);
+  }
+
+  /* Deep teal → ink full-bleed feature band */
+  .section-deep {
+    @apply relative text-white;
+    background:
+      radial-gradient(80% 120% at 85% 0%, rgba(20, 184, 166, 0.35), transparent 55%),
+      linear-gradient(155deg, #0f766e 0%, #115e59 42%, #0f172a 100%);
+  }
+
+  /* Pill chip / tag */
+  .chip {
+    @apply inline-flex items-center rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs font-medium text-slate-600;
+  }
 }
