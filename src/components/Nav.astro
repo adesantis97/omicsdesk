@@ -4,7 +4,7 @@ const isActive = (href: string) => pathname === href || pathname === href + '/';
 const links = [
   { href: '/case-studies/', label: 'Case studies', active: pathname.startsWith('/case-studies') },
   { href: '/validation/', label: 'Validation', active: pathname.startsWith('/validation') },
-  { href: '/pricing/', label: 'Pricing', active: isActive('/pricing') },
+  { href: '/pricing/', label: 'Services', active: isActive('/pricing') },
   { href: '/publications/', label: 'Publications', active: isActive('/publications') },
   { href: '/blog/', label: 'Blog', active: pathname.startsWith('/blog') },
 ];

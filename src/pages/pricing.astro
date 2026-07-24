@@ -5,7 +5,6 @@ interface Omics {
   slug: string;
   name: string;
   tagline: string;
-  price: string;
   upTo: string;
   turnaround: string;
   deliverables: string[];
@@ -16,14 +15,12 @@ const services: Omics[] = [
     slug: 'expert-review',
     name: 'Expert review',
     tagline: 'A second opinion on results you already have. Not a re-run, a read: do the conclusions hold?',
-    price: '€400',
     upTo: '1 dataset / 1 contrast',
     turnaround: '2 business days',
     deliverables: [
-      'A check of your thresholds, outliers and normalisation choices',
-      'What I would change and why',
       'A plain read of what the results mean for your biology',
       'The two or three things worth digging into next',
+      'A check of your thresholds, outliers and normalisation choices, and what I would change and why',
       'A short methods paragraph ready for a paper or grant',
       'Credited against the project fee if it becomes a full analysis',
     ],
@@ -31,127 +28,126 @@ const services: Omics[] = [
   {
     slug: 'rnaseq',
     name: 'RNA-seq (bulk)',
-    tagline: 'Splice-aware alignment, DESeq2 differential expression, GSEA, TF activity inference.',
-    price: '€2,500',
+    tagline: 'Which genes and pathways actually move, and what that says about your system.',
     upTo: '24 samples',
     turnaround: '7 business days',
     deliverables: [
-      'Adapter trimming + QC (fastp + MultiQC)',
-      'Splice-aware alignment + gene quantification',
-      'DESeq2 differential expression with shrinkage',
-      'PCA, volcano plot, heatmap of top DEGs',
-      'GSEA: GO, KEGG, Reactome',
-      'TF activity inference (DoRothEA / decoupleR)',
+      'A written read of the differential expression: what the signal means for your biology',
+      'Pathway and TF-activity interpretation, not just a GSEA table',
+      'DESeq2 differential expression with shrinkage; PCA, volcano, heatmap',
+      'GSEA (GO, KEGG, Reactome) + TF activity (DoRothEA / decoupleR)',
+      'Adapter trimming, splice-aware alignment and gene quantification (fastp, MultiQC)',
     ],
   },
   {
     slug: 'scrnaseq',
     name: 'scRNA-seq',
-    tagline: 'Cell-level QC, clustering, automated annotation, cross-condition DE.',
-    price: '€3,500',
+    tagline: 'Which cell populations change between conditions, and the programs driving them.',
     upTo: '16 libraries',
     turnaround: '10 business days',
     deliverables: [
-      'Cell-level QC, doublet removal, normalization',
-      'UMAP / t-SNE + Leiden clustering',
-      'Automated cell type annotation (CellTypist)',
-      'Marker gene identification per cluster',
-      'Differential expression across conditions / clusters',
+      'A written read of which populations shift and what that means',
+      'Cross-condition differential expression interpreted at the program level',
+      'UMAP / Leiden clustering + automated cell-type annotation',
+      'Marker genes per cluster; QC, doublet removal, normalization',
       'AnnData object (.h5ad) included',
     ],
   },
   {
     slug: 'proteomics',
     name: 'Proteomics',
-    tagline: 'MaxQuant / DIA-NN / FragPipe ingest, MSstats DA, pathway enrichment.',
-    price: '€3,000',
+    tagline: 'Which proteins and pathways shift at the protein level, read against your biology.',
     upTo: '24 samples',
     turnaround: '7 business days',
     deliverables: [
-      'Search-engine ingest (MaxQuant, DIA-NN, FragPipe)',
-      'Protein quantification matrix (LFQ, TMT, SILAC)',
-      'MSstats / limma differential abundance',
-      'PCA, volcano plot, heatmap',
-      'GO, KEGG, Reactome enrichment',
+      'A written read of the differential abundance and its biological meaning',
+      'Pathway interpretation (GO, KEGG, Reactome)',
+      'MSstats / limma differential abundance; PCA, volcano, heatmap',
+      'Search-engine ingest (MaxQuant, DIA-NN, FragPipe); LFQ / TMT / SILAC',
     ],
   },
   {
     slug: 'phosphoproteomics',
     name: 'Phosphoproteomics',
-    tagline: 'Proteomics + phosphosite quantification + kinase activity networks.',
-    price: '€3,500',
+    tagline: 'Which signaling pathways and kinases are active, not just which sites change.',
     upTo: '24 samples',
     turnaround: '10 business days',
     deliverables: [
+      'A written read of the active signaling, at the kinase and pathway level',
+      'Kinase activity inference (KSEA / decoupleR) + kinase–substrate networks',
+      'Phosphosite-level quantification with class-I localization',
       'All proteomics deliverables',
-      'Phosphosite-level quantification',
-      'Kinase activity inference (KSEA / decoupleR)',
-      'Kinase–substrate network visualization',
     ],
   },
   {
     slug: 'chipseq',
     name: 'ChIP-seq',
-    tagline: 'Bowtie2 + MACS3 narrow/broad peaks, ChIPseeker annotation, HOMER motifs.',
-    price: '€2,500',
+    tagline: 'Where a factor binds across the genome, what it regulates, and how that changes.',
     upTo: '24 samples',
     turnaround: '7 business days',
     deliverables: [
-      'Adapter trimming + alignment (Bowtie2)',
-      'Peak calling (MACS3) — narrow or broad',
-      'Peak annotation (ChIPseeker)',
-      'Motif enrichment analysis (HOMER)',
-      'Differential binding (DiffBind, if applicable)',
-      'BED / narrowPeak files included',
+      'A written read of the binding landscape and its regulatory meaning',
+      'Peak annotation + motif interpretation (ChIPseeker, HOMER)',
+      'Peak calling (MACS3, narrow or broad); differential binding (DiffBind)',
+      'Alignment (Bowtie2); BED / narrowPeak files included',
     ],
   },
   {
     slug: 'atacseq',
     name: 'ATAC-seq',
-    tagline: 'BAMPE peak calling, ENCODE QC thresholds, optional TF footprinting.',
-    price: '€2,500',
+    tagline: 'Where chromatin opens and closes, and which regulators sit behind the change.',
     upTo: '24 samples',
     turnaround: '7 business days',
     deliverables: [
-      'Adapter trimming + alignment (Bowtie2)',
-      'Accessible region calling (MACS3 BAMPE)',
-      'TSS enrichment + fragment-size QC (ENCODE)',
-      'Nucleosome positioning',
-      'Optional TF footprinting (TOBIAS)',
-      'Differential accessibility (DiffBind, if applicable)',
+      'A written read of the accessibility changes and the regulators implicated',
+      'Optional TF footprinting interpretation (TOBIAS)',
+      'Accessible-region calling (MACS3 BAMPE); differential accessibility (DiffBind)',
+      'ENCODE QC (TSS enrichment, fragment size); nucleosome positioning',
+    ],
+  },
+  {
+    slug: 'methylation',
+    name: 'DNA methylation',
+    tagline: 'Where the methylome shifts and how to read the direction correctly.',
+    upTo: '24 samples',
+    turnaround: '10 business days',
+    deliverables: [
+      'A written read of the differentially methylated regions and their meaning',
+      'Genomic-context annotation so direction is interpreted correctly',
+      'Per-CpG calls + DMR detection (methylKit; dmrseq / DSS on request)',
+      'Bisulfite/enzymatic alignment (Bismark) with conversion-efficiency QC',
     ],
   },
 ];
 ---
 <Base
-  title="Pricing — OmicsDesk"
-  description="Bioinformatics analysis with expert interpretation. Fixed prices, fixed scopes, fixed turnarounds for RNA-seq, scRNA-seq, proteomics, phosphoproteomics, ChIP-seq, ATAC-seq, and multi-omics integration."
+  title="Services — OmicsDesk"
+  description="Omics analysis read by a bioinformatician: what your data means for your biology and what to test next. RNA-seq, single-cell, proteomics, phosphoproteomics, ChIP-seq, ATAC-seq, methylation and multi-omics. Request a quote."
 >
   <header class="max-w-5xl mx-auto px-5 pt-16 pb-10">
-    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-3">Pricing</p>
+    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-3">Services &amp; how we work</p>
     <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-      Fixed price. Fixed scope. Fixed turnaround.
+      Every engagement includes the read on what it means.
     </h1>
     <p class="mt-5 text-lg text-slate-600 max-w-2xl leading-relaxed">
-      Each service below is a complete engagement: from FASTQ (or raw MS) to a branded PDF report, a statistical workbook, figures, and the pipeline code we used. Analysis is run on reproducible pipelines and interpreted by a bioinformatician. Quote back within 2 business days.
+      Each service below is a complete engagement, scoped to your biological question and written up as an interpretation: what stands out for your system and what is worth testing next, not just a folder of figures. Fixed scope and turnaround agreed up front; a quote comes back within 2 business days.
     </p>
+    <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="mt-6 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition shadow-card">
+      Request a quote
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
   </header>
 
   <section class="max-w-5xl mx-auto px-5 pb-16 grid md:grid-cols-2 gap-6">
     {services.map((s) => (
       <article id={s.slug} class="bg-white rounded-xl border border-slate-200/80 shadow-card p-6 flex flex-col">
-        <div class="flex items-start justify-between gap-4">
-          <div>
-            <h2 class="text-xl font-semibold text-ink">{s.name}</h2>
-            <p class="text-sm text-slate-600 mt-1">{s.tagline}</p>
-          </div>
-          <div class="text-right shrink-0">
-            <div class="text-2xl font-bold font-mono text-ink">{s.price}</div>
-          </div>
+        <div>
+          <h2 class="text-xl font-semibold text-ink">{s.name}</h2>
+          <p class="text-sm text-slate-600 mt-1">{s.tagline}</p>
         </div>
         <dl class="mt-5 grid grid-cols-2 gap-3 text-sm">
           <div class="bg-slate-50 rounded p-3">
-            <dt class="text-slate-500 text-xs uppercase tracking-wide">Up to</dt>
+            <dt class="text-slate-500 text-xs uppercase tracking-wide">Typical scope</dt>
             <dd class="font-medium text-ink mt-0.5">{s.upTo}</dd>
           </div>
           <div class="bg-slate-50 rounded p-3">
@@ -168,10 +164,10 @@ const services: Omics[] = [
           ))}
         </ul>
         <a
-          href="https://submit.omicsdesk.com/"
+          href={`mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20quote%20for%20${encodeURIComponent(s.name)}`}
           class="mt-6 inline-flex items-center justify-center gap-2 bg-ink text-white px-4 py-2.5 rounded-md font-medium text-sm hover:bg-slate-800 transition"
         >
-          Start project
+          Request a quote
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </article>
@@ -183,45 +179,43 @@ const services: Omics[] = [
       <div class="bg-white rounded-xl border border-slate-200/80 shadow-card p-6">
         <h3 class="text-lg font-semibold">Multi-omics integration</h3>
         <p class="text-sm text-slate-600 mt-2">
-          Combine 2+ omics layers into one integrated analysis with patient-specific regulatory networks.
+          Combine two or more omics layers into one integrated story: MOFA2 factor analysis, patient-specific regulatory networks, and cross-omics pathway convergence, interpreted as a single biological narrative rather than parallel reports.
         </p>
-        <div class="mt-4 space-y-2 text-sm">
-          <div class="flex justify-between border-b border-slate-100 pb-2">
-            <span>Integration base fee</span>
-            <span class="font-mono font-semibold">€2,000</span>
-          </div>
-          <div class="flex justify-between text-slate-500">
-            <span>+ each individual omics</span>
-            <span>at list price</span>
-          </div>
-        </div>
-        <p class="text-sm text-slate-500 mt-4">
-          Example: <span class="text-ink">RNA-seq + Proteomics + Integration = <span class="font-mono">€7,500</span></span>.
-          Includes MOFA2 factor analysis, patient-specific regulatory network, cross-omics pathway convergence, integrated PDF report.
-        </p>
+        <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20multi-omics%20integration" class="mt-4 inline-flex items-center gap-2 text-accent font-medium text-sm hover:underline underline-offset-4">
+          Request a quote →
+        </a>
       </div>
 
       <div class="bg-white rounded-xl border border-slate-200/80 shadow-card p-6">
-        <h3 class="text-lg font-semibold">Add-ons</h3>
-        <ul class="mt-4 space-y-2 text-sm">
-          <li class="flex justify-between border-b border-slate-100 pb-2">
-            <span>Rush delivery (3 business days)</span>
-            <span class="font-mono font-semibold">+50%</span>
-          </li>
-          <li class="flex justify-between border-b border-slate-100 pb-2">
-            <span>Extra samples (per batch of 6)</span>
-            <span class="font-mono font-semibold">+€250</span>
-          </li>
-          <li class="flex justify-between">
-            <span>Follow-up re-analysis (≤2 changes)</span>
-            <span class="font-mono font-semibold">+€400</span>
-          </li>
+        <h3 class="text-lg font-semibold">Options &amp; add-ons</h3>
+        <ul class="mt-4 space-y-2 text-sm text-slate-600">
+          <li class="flex gap-2"><span class="text-accent shrink-0 mt-1.5">•</span><span>Rush delivery when you are working against a deadline</span></li>
+          <li class="flex gap-2"><span class="text-accent shrink-0 mt-1.5">•</span><span>Larger studies, extra samples, unusual reference genomes</span></li>
+          <li class="flex gap-2"><span class="text-accent shrink-0 mt-1.5">•</span><span>Follow-up re-analysis and additional contrasts</span></li>
+          <li class="flex gap-2"><span class="text-accent shrink-0 mt-1.5">•</span><span>Ongoing analysis capacity on retainer, after a first project</span></li>
         </ul>
         <p class="text-sm text-slate-500 mt-4">
-          15% academic discount on all services (excluding rush) for requests from
-          <span class="font-mono text-slate-600">.edu</span> / <span class="font-mono text-slate-600">.ac.*</span> emails.
+          15% academic discount for requests from
+          <span class="font-mono text-slate-600">.edu</span> / <span class="font-mono text-slate-600">.ac.*</span> institutional emails.
         </p>
       </div>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-5 py-16">
+    <div class="rounded-xl border border-accent/30 bg-accent/5 p-8 md:p-10">
+      <p class="text-accent font-medium text-sm tracking-wide uppercase mb-2">For academic labs</p>
+      <h2 class="text-2xl font-semibold tracking-tight">Writing or resubmitting a grant?</h2>
+      <p class="text-slate-600 mt-3 max-w-2xl">
+        We strengthen the proposal with real preliminary data from public sources at no cost, and write the computational arm reviewers now expect. The downstream analysis of your own data is scoped into the budget and run only if the grant is funded, paid from grant funds. Zero risk to you, and no cost until it wins.
+      </p>
+      <a
+        href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20grant%20support"
+        class="mt-6 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition"
+      >
+        Ask about grant support
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
     </div>
   </section>
 
@@ -230,7 +224,7 @@ const services: Omics[] = [
       <p class="text-accent font-medium text-sm tracking-wide uppercase mb-2">Custom &amp; enterprise</p>
       <h2 class="text-2xl font-semibold tracking-tight">Outside the standard scope?</h2>
       <p class="text-slate-600 mt-3 max-w-2xl">
-        Studies above 24 samples, white-label work for CROs, ongoing analysis retainers, novel omics
+        Studies above the typical scope, white-label work for CROs, ongoing analysis retainers, novel omics
         types (spatial, Hi-C, long-read), or unusual reference genomes are all quotable. Email with the
         details, quote back within 2 business days.
       </p>
@@ -245,18 +239,17 @@ const services: Omics[] = [
   </section>
 
   <section class="max-w-5xl mx-auto px-5 pb-16">
-    <h2 class="text-xl font-semibold tracking-tight">Standard deliverables (every analysis)</h2>
+    <h2 class="text-xl font-semibold tracking-tight">What you get, every analysis</h2>
     <ul class="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-slate-600 max-w-3xl">
-      <li>QC report (HTML + summary table)</li>
+      <li class="font-medium text-ink">A written biological interpretation: what it means, what to test next</li>
+      <li>Branded PDF report (executive summary, methods, conclusions)</li>
       <li>Full statistical results (TSV + Excel workbook)</li>
       <li>Publication-ready figures (PNG, 300 dpi)</li>
-      <li>Branded PDF report (executive summary, methods, conclusions)</li>
       <li>Reproducible pipeline code (Snakemake + conda)</li>
       <li>NDA available; raw data deleted within 30 days</li>
     </ul>
     <p class="mt-6 text-sm text-slate-500">
-      Payment: 25% upfront / 75% on delivery for first engagement; 50/50 for returning clients.
-      EUR by default; USD invoicing available on request.
+      Payment terms and a fixed quote are agreed before any work begins. EUR by default; USD invoicing available on request.
     </p>
   </section>
 </Base>
