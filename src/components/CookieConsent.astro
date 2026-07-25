@@ -1,0 +1,145 @@
+---
+/**
+ * Cookie / analytics consent banner.
+ *
+ * The site loads NO third party script by default. The Cloudflare Web Analytics
+ * beacon is injected by this component only after the visitor accepts, and is
+ * never loaded again for a visitor who declines.
+ *
+ * The choice is stored in localStorage under `od_consent` (`granted` | `denied`)
+ * plus a timestamp. That storage is strictly necessary (it records the consent
+ * decision itself) so it does not require consent of its own.
+ *
+ * Re-opening the banner from anywhere: dispatch `od:open-consent` on window, or
+ * click any element with `data-consent-open` (the footer link does this).
+ */
+const CF_BEACON_TOKEN = '751eff37c34c433b84eb8a7cd1a53087';
+const CONSENT_VERSION = '1';
+---
+
+<div
+  id="cookie-consent"
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="cookie-consent-title"
+  aria-describedby="cookie-consent-body"
+  hidden
+  class="fixed inset-x-0 bottom-0 z-50 px-4 pb-4 sm:px-5 sm:pb-5 print:hidden"
+>
+  <div class="max-w-3xl mx-auto rounded-xl border border-slate-200 bg-white shadow-card p-5 sm:p-6">
+    <h2 id="cookie-consent-title" class="text-base font-semibold tracking-tight text-ink">
+      Analytics on this site
+    </h2>
+    <p id="cookie-consent-body" class="mt-2 text-sm text-slate-600 leading-relaxed">
+      This site uses no advertising or profiling cookies. We would like to use Cloudflare Web
+      Analytics, a privacy friendly and cookie free tool, to count page views so we know which
+      articles are useful. It runs only if you say yes. Declining changes nothing about how the
+      site works. Details in the
+      <a href="/privacy/" class="text-accent font-medium underline underline-offset-2">privacy and cookie policy</a>.
+    </p>
+    <div class="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+      <button
+        type="button"
+        data-consent="granted"
+        class="inline-flex items-center justify-center bg-ink text-white text-sm font-medium px-4 py-2.5 rounded-md hover:bg-slate-800 transition"
+      >
+        Accept analytics
+      </button>
+      <button
+        type="button"
+        data-consent="denied"
+        class="inline-flex items-center justify-center bg-white text-ink border border-slate-300 text-sm font-medium px-4 py-2.5 rounded-md hover:bg-slate-50 transition"
+      >
+        Decline
+      </button>
+      <a
+        href="/privacy/"
+        class="sm:ml-auto text-sm text-slate-500 hover:text-ink underline underline-offset-4 text-center sm:text-left"
+      >
+        Read the policy
+      </a>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ CF_BEACON_TOKEN, CONSENT_VERSION }}>
+  (function () {
+    var KEY = 'od_consent';
+    var banner = document.getElementById('cookie-consent');
+    if (!banner) return;
+
+    function read() {
+      try {
+        var raw = window.localStorage.getItem(KEY);
+        if (!raw) return null;
+        var v = JSON.parse(raw);
+        if (!v || v.version !== CONSENT_VERSION) return null;
+        return v.choice === 'granted' || v.choice === 'denied' ? v.choice : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function write(choice) {
+      try {
+        window.localStorage.setItem(
+          KEY,
+          JSON.stringify({ choice: choice, version: CONSENT_VERSION, at: new Date().toISOString() })
+        );
+      } catch (e) {
+        /* private mode or storage disabled: the choice just is not remembered */
+      }
+    }
+
+    var analyticsLoaded = false;
+    function loadAnalytics() {
+      if (analyticsLoaded || document.getElementById('cf-beacon')) return;
+      analyticsLoaded = true;
+      var s = document.createElement('script');
+      s.id = 'cf-beacon';
+      s.defer = true;
+      s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+      s.setAttribute('data-cf-beacon', JSON.stringify({ token: CF_BEACON_TOKEN }));
+      document.head.appendChild(s);
+    }
+
+    function show() {
+      banner.hidden = false;
+    }
+    function hide() {
+      banner.hidden = true;
+    }
+
+    function decide(choice) {
+      write(choice);
+      hide();
+      if (choice === 'granted') loadAnalytics();
+    }
+
+    var current = read();
+    if (current === 'granted') loadAnalytics();
+    if (current === null) show();
+
+    banner.addEventListener('click', function (ev) {
+      var btn = ev.target.closest('[data-consent]');
+      if (btn) decide(btn.getAttribute('data-consent'));
+    });
+
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && !banner.hidden && read() !== null) hide();
+    });
+
+    // Re-open from the footer link, so a decision can always be changed.
+    function reopen(ev) {
+      if (ev) ev.preventDefault();
+      show();
+      var first = banner.querySelector('[data-consent]');
+      if (first) first.focus();
+    }
+    window.addEventListener('od:open-consent', reopen);
+    document.addEventListener('click', function (ev) {
+      var opener = ev.target.closest('[data-consent-open]');
+      if (opener) reopen(ev);
+    });
+  })();
+</script>

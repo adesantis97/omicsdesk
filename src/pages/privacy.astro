@@ -1,0 +1,218 @@
+---
+import Base from '../layouts/Base.astro';
+
+// TODO (Alessandro): fill in the legal entity details before this goes public.
+// Leave `entity` as the trading name if you operate as a sole trader.
+const controller = {
+  entity: 'OmicsDesk (Alessandro De Santis)',
+  vat: '',          // e.g. 'IT01234567890'
+  address: '',      // registered address
+  email: 'hello@omicsdesk.com',
+};
+
+const lastUpdated = '25 July 2026';
+
+const storage = [
+  {
+    name: 'od_consent',
+    kind: 'Local storage, not a cookie',
+    purpose:
+      'Remembers whether you accepted or declined analytics, so the banner is not shown again on every page.',
+    party: 'OmicsDesk (first party)',
+    life: 'Until you clear your browser storage, or 12 months if you re-confirm',
+    consent: 'Strictly necessary, no consent required',
+  },
+  {
+    name: 'Cloudflare Web Analytics beacon',
+    kind: 'Script, sets no cookie and stores nothing on your device',
+    purpose:
+      'Counts page views, referrers and country so we know which articles people find useful. Aggregated only, no cross site tracking, no profiling, no advertising.',
+    party: 'Cloudflare, Inc. (third party)',
+    life: 'No device storage. Cloudflare retains aggregated statistics.',
+    consent: 'Loaded only after you click Accept analytics',
+  },
+  {
+    name: '__cf_bm and similar Cloudflare security tokens',
+    kind: 'Cookie, only if Cloudflare bot protection challenges your request',
+    purpose:
+      'Distinguishes humans from automated traffic and protects the site from abuse. It carries no identifying profile.',
+    party: 'Cloudflare, Inc. (processor for OmicsDesk)',
+    life: 'Up to 30 minutes',
+    consent: 'Strictly necessary for security, no consent required',
+  },
+];
+---
+
+<Base
+  title="Privacy and cookie policy — OmicsDesk"
+  description="How omicsdesk.com handles personal data, what it stores in your browser, and how to accept or decline analytics."
+>
+  <header class="max-w-3xl mx-auto px-5 pt-16 pb-8">
+    <p class="eyebrow mb-3">Legal</p>
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">Privacy and cookie policy</h1>
+    <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+      The short version: this site sets no advertising or profiling cookies, runs no social
+      trackers, and loads no third party script unless you accept analytics. Client data is never
+      handled through this website.
+    </p>
+    <p class="mt-3 text-sm text-slate-500">Last updated: {lastUpdated}</p>
+  </header>
+
+  <section class="max-w-3xl mx-auto px-5 pb-16 space-y-10">
+    <div class="card p-6">
+      <h2 class="text-lg font-semibold tracking-tight">Who is responsible for your data</h2>
+      <p class="mt-3 text-sm text-slate-700 leading-relaxed">
+        The data controller for omicsdesk.com is {controller.entity}.
+        {controller.address && <span>Registered address: {controller.address}.</span>}
+        {controller.vat && <span>VAT number: {controller.vat}.</span>}
+        For anything concerning your personal data, write to
+        <a href={`mailto:${controller.email}`} class="text-accent font-medium underline underline-offset-2">{controller.email}</a>.
+        We are not required to appoint a Data Protection Officer.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-semibold tracking-tight">What this site collects</h2>
+      <div class="mt-4 grid gap-4">
+        <div class="card p-6">
+          <h3 class="font-semibold text-ink">Nothing you do not send us</h3>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            There is no account, no login, no newsletter form and no upload form on this site. The
+            only way to give us your details is to email us. When you do, we process your name,
+            email address, organisation and whatever you choose to write, in order to answer you
+            and, if it goes further, to prepare a quote. The legal basis is our legitimate interest
+            in replying to a business enquiry, and the steps taken at your request before a
+            contract (Article 6(1)(b) and 6(1)(f) GDPR).
+          </p>
+        </div>
+
+        <div class="card p-6">
+          <h3 class="font-semibold text-ink">Server and security logs</h3>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            The site is hosted on Cloudflare Pages. Cloudflare processes the technical data every
+            web request carries, including your IP address, user agent and the page requested, to
+            deliver the page and to protect the site from attacks. This happens for every visitor
+            and cannot be switched off, because without it the site cannot be served safely. Legal
+            basis: legitimate interest in the security and availability of the service. Cloudflare
+            acts as our processor.
+          </p>
+        </div>
+
+        <div class="card p-6">
+          <h3 class="font-semibold text-ink">Analytics, only if you accept</h3>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            If you click Accept analytics, the site loads Cloudflare Web Analytics. It is cookie
+            free: it stores nothing on your device, does not follow you across sites and builds no
+            profile. We see aggregated page views, referrers and countries. If you decline, or
+            simply ignore the banner, that script is never loaded. Legal basis: your consent
+            (Article 6(1)(a) GDPR), which you can withdraw at any time from the link at the bottom
+            of every page.
+          </p>
+        </div>
+
+        <div class="card p-6">
+          <h3 class="font-semibold text-ink">Fonts and other assets</h3>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            Fonts, images and stylesheets are served from omicsdesk.com itself. Loading a page on
+            this site sends no request to Google, to a font CDN, or to any social network.
+          </p>
+        </div>
+
+        <div class="card p-6">
+          <h3 class="font-semibold text-ink">Client research data</h3>
+          <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+            Sequencing data, count matrices and any other research data belonging to clients are
+            never uploaded through this website. They are exchanged under a separate agreement,
+            with an NDA on request, and are covered by that agreement rather than by this policy.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-semibold tracking-tight">Cookies and browser storage in detail</h2>
+      <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+        This is the complete list of what may be written to your browser by omicsdesk.com.
+      </p>
+      <div class="mt-4 overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="text-left text-xs uppercase tracking-wide text-slate-500 border-b border-slate-200">
+              <th class="py-2 pr-4 font-medium">Name and type</th>
+              <th class="py-2 pr-4 font-medium">Purpose</th>
+              <th class="py-2 pr-4 font-medium">Set by</th>
+              <th class="py-2 pr-4 font-medium">Lifetime</th>
+              <th class="py-2 font-medium">Consent</th>
+            </tr>
+          </thead>
+          <tbody>
+            {storage.map((s) => (
+              <tr class="border-b border-slate-100 align-top">
+                <td class="py-3 pr-4">
+                  <div class="font-mono text-xs text-ink">{s.name}</div>
+                  <div class="text-xs text-slate-500 mt-1">{s.kind}</div>
+                </td>
+                <td class="py-3 pr-4 text-slate-700">{s.purpose}</td>
+                <td class="py-3 pr-4 text-slate-700">{s.party}</td>
+                <td class="py-3 pr-4 text-slate-700">{s.life}</td>
+                <td class="py-3 text-slate-700">{s.consent}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-sm text-slate-700 leading-relaxed">
+        You can change your analytics choice at any time using
+        <button type="button" data-consent-open class="text-accent font-medium underline underline-offset-2">cookie preferences</button>,
+        also linked in the footer of every page. You can additionally block or delete storage
+        through your browser settings, without breaking the site.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-semibold tracking-tight">Sharing and transfers</h2>
+      <p class="mt-3 text-sm text-slate-700 leading-relaxed">
+        We do not sell personal data and we do not share it for advertising. The only recipients
+        are the suppliers that make the service work: Cloudflare for hosting, security and
+        analytics, and our email provider for the messages you send us. Some of these providers
+        operate servers outside the European Economic Area. Where that happens, transfers rely on
+        the European Commission Standard Contractual Clauses and, where applicable, on the EU US
+        Data Privacy Framework.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-semibold tracking-tight">How long we keep things</h2>
+      <p class="mt-3 text-sm text-slate-700 leading-relaxed">
+        Email correspondence about an enquiry is kept for up to 24 months from the last message,
+        or for as long as an ongoing contract and the tax rules that apply to it require. Security
+        logs are kept for a short period by Cloudflare according to their retention policy.
+        Aggregated analytics contain no personal data once aggregated.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-semibold tracking-tight">Your rights</h2>
+      <p class="mt-3 text-sm text-slate-700 leading-relaxed">
+        Under the GDPR you can ask for access to your data, correction, erasure, restriction of
+        processing, portability, and you can object to processing based on legitimate interest.
+        Where processing is based on consent, you can withdraw it at any time without affecting
+        what was done before. Write to
+        <a href={`mailto:${controller.email}`} class="text-accent font-medium underline underline-offset-2">{controller.email}</a>
+        and we will answer within one month. If you are not satisfied, you can lodge a complaint
+        with your national supervisory authority. In Italy this is the Garante per la protezione
+        dei dati personali,
+        <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener" class="text-accent font-medium underline underline-offset-2">garanteprivacy.it</a>.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-semibold tracking-tight">Changes to this policy</h2>
+      <p class="mt-3 text-sm text-slate-700 leading-relaxed">
+        If we add a tool that processes personal data, this page is updated and, where the new tool
+        requires consent, the banner is shown again so you can make a fresh choice. The date at the
+        top of the page always reflects the current version.
+      </p>
+    </div>
+  </section>
+</Base>

@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
   title?: string;
@@ -44,17 +45,18 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Fonts are self-hosted (src/styles/fonts.css), so no request leaves for Google. -->
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin />
 
-  <!-- Cloudflare Web Analytics -->
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "751eff37c34c433b84eb8a7cd1a53087"}'></script>
-  <!-- End Cloudflare Web Analytics -->
+  <!--
+    No third party script is loaded here on purpose. The Cloudflare Web Analytics
+    beacon is injected by <CookieConsent /> only after the visitor accepts.
+  -->
 </head>
 <body class="font-sans text-ink bg-paper antialiased">
   <Nav />
   <slot />
   <Footer />
+  <CookieConsent />
 </body>
 </html>
