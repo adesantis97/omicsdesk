@@ -3,12 +3,15 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import JsonLd from '../components/JsonLd.astro';
 
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
   noIndex?: boolean;
+  /** schema.org JSON-LD for this page: one object or several. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -16,6 +19,7 @@ const {
   description = 'Expert biological interpretation of your omics data, by a bioinformatician who studies your project: what the results mean for your system and what is worth testing next. RNA-seq, single-cell, proteomics, ChIP/ATAC-seq, methylation and multi-omics.',
   ogImage = '/og_image.png',
   noIndex = false,
+  jsonLd,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
@@ -52,6 +56,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     No third party script is loaded here on purpose. The Cloudflare Web Analytics
     beacon is injected by <CookieConsent /> only after the visitor accepts.
   -->
+
+  {jsonLd && <JsonLd schema={jsonLd} />}
 </head>
 <body class="font-sans text-ink bg-paper antialiased">
   <Nav />

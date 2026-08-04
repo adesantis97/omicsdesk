@@ -1,12 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { organization, person, ORG_ID, SITE } from '../lib/schema';
 
 const featuredCases = (await getCollection('case-studies'))
   .filter((c) => c.data.featured)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const jsonLd = [
+  { '@context': 'https://schema.org', ...organization },
+  { '@context': 'https://schema.org', ...person },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE}/#website`,
+    url: `${SITE}/`,
+    name: 'OmicsDesk',
+    inLanguage: 'en',
+    publisher: { '@id': ORG_ID },
+  },
+];
 ---
-<Base>
+<Base jsonLd={jsonLd}>
   <!-- Full-bleed hero banner -->
   <div class="relative w-full overflow-hidden -mt-px">
     <img

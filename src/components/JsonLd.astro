@@ -1,0 +1,15 @@
+---
+/**
+ * Emits a schema.org JSON-LD block.
+ *
+ * Pass a single schema object or an array of them. The `<` escape keeps a stray
+ * "</script>" inside any string value from closing the tag early.
+ */
+interface Props {
+  schema: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { schema } = Astro.props;
+const json = JSON.stringify(schema).replace(/</g, '\\u003c');
+---
+<script type="application/ld+json" is:inline set:html={json} />

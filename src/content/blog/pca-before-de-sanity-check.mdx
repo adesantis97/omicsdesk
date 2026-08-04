@@ -14,7 +14,7 @@ If you go straight from counts to `DESeq()` without running PCA first, you don't
 
 I mean that literally. DESeq2 will happily fit its model, return p-values, and rank thousands of genes for you. The output will look exactly the same whether your strongest signal is the biological condition you care about, the date the libraries were prepped, or the fact that one sample is mislabeled. The function gives you the same numbers — they just mean radically different things.
 
-PCA before DE is the 30-second check that tells you which case you're in.
+PCA before DE is the 30-second check that tells you which case you're in. When it tells you the samples split by batch, the follow-up is the [five step batch diagnosis recipe](/blog/pca_for_batch_diagnosis_recipe/).
 
 ## The 30 seconds of code that saves the analysis
 

@@ -60,7 +60,7 @@ There's a host-specific gotcha on macOS arm64: `fastp --thread N` with N > 1 occ
 
 You're choosing between two paradigms.
 
-**STAR** does true splice-aware alignment and produces a BAM where every read has a coordinate. You want this whenever you might need the BAM for anything beyond gene-level counts — variant calling from the RNA, splice-junction analysis, IGV inspection of specific loci. The cost is RAM: a human-genome index needs ~30 GB resident, and you need disk for the BAMs.
+**STAR** does true splice-aware alignment and produces a BAM where every read has a coordinate. You want this whenever you might need the BAM for anything beyond gene-level counts — variant calling from the RNA, splice-junction analysis, IGV inspection of specific loci. The cost is RAM: a human-genome index needs ~30 GB resident, and you need disk for the BAMs. RAM is also where STAR fails first on a new machine, usually with a message that does not say "out of memory" ([the three memory errors and their fixes](/blog/star-alignment-memory-errors/)).
 
 ```bash
 STAR \

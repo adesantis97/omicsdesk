@@ -1,14 +1,48 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { organization, ORG_ID, PERSON_ID, SITE } from '../../lib/schema';
 
 const isProd = import.meta.env.PROD;
 const all = await getCollection('blog', ({ data }) => !isProd || !data.draft);
 const sorted = all.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': `${SITE}/blog/#blog`,
+    url: `${SITE}/blog/`,
+    name: 'OmicsDesk Blog',
+    description:
+      'Practical, technical posts on bioinformatics workflows: tool comparisons, troubleshooting guides, and field notes from real client work.',
+    inLanguage: 'en',
+    publisher: { '@id': ORG_ID },
+    blogPost: sorted.map((post) => ({
+      '@type': 'BlogPosting',
+      '@id': `${SITE}/blog/${post.slug}/#post`,
+      url: `${SITE}/blog/${post.slug}/`,
+      headline: post.data.title,
+      description: post.data.description,
+      datePublished: post.data.pubDate.toISOString().slice(0, 10),
+      author: { '@id': PERSON_ID },
+    })),
+  },
+  { '@context': 'https://schema.org', ...organization },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'OmicsDesk', item: `${SITE}/` },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE}/blog/` },
+    ],
+  },
+];
 ---
 <Base
   title="Blog — OmicsDesk"
   description="Practical, technical posts on bioinformatics workflows: tool comparisons, troubleshooting guides, and field notes from real client work."
+  jsonLd={jsonLd}
 >
   <header class="max-w-4xl mx-auto px-5 pt-16 pb-10">
     <p class="text-accent font-medium text-sm tracking-wide uppercase mb-3">Notes from the bench</p>

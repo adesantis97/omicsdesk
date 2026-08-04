@@ -15,7 +15,9 @@ is `FindMarkers`. It runs on cells. It is also statistically wrong for this ques
 error compounds with dataset size.
 
 This post explains why, what pseudobulk aggregation is, and how to run it correctly with
-pydeseq2 or edgeR.
+pydeseq2 or edgeR. Once you are in DESeq2 territory, the same rules apply as in bulk: run
+[PCA on the aggregated samples first](/blog/pca-before-de-sanity-check/), and think before
+[setting a log2 fold change threshold](/blog/deseq2-lfc-threshold-choice/).
 
 ## The tempting shortcut: per-cell Wilcoxon
 

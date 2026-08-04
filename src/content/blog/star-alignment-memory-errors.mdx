@@ -14,7 +14,9 @@ STAR is the most widely used RNA-seq aligner and one of the most likely to fail 
 memory error the first time you run it on a new machine or cluster node. The core reason is that
 STAR loads the entire genome index into memory before alignment begins, which is what makes it fast
 but also what makes it demanding. This post covers the three errors you are most likely to
-encounter, what each one actually means, and the specific flags that fix them.
+encounter, what each one actually means, and the specific flags that fix them. For where
+alignment sits in the wider run, see the [full FASTQ to differential expression
+pipeline](/blog/rnaseq-fastq-to-de-pipeline/).
 
 ## Why STAR loads the whole genome into RAM
 

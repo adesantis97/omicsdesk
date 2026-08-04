@@ -16,7 +16,7 @@ This post is about the choice between two enrichment methods that get used inter
 
 ## What over-representation analysis actually does
 
-ORA starts from a list. You run differential expression, apply a cutoff (say `padj < 0.05` and `|log2FC| > 1`), and you are left with, say, 80 genes. ORA asks one question of that list: are any pathways represented more often than you would expect by chance? It builds a 2x2 contingency table per gene set (in your list or not, in the pathway or not) and runs a hypergeometric or Fisher test.
+ORA starts from a list. You run differential expression, apply a cutoff (say `padj < 0.05` and `|log2FC| > 1`, a choice that [deserves more thought than a default](/blog/deseq2-lfc-threshold-choice/)), and you are left with, say, 80 genes. ORA asks one question of that list: are any pathways represented more often than you would expect by chance? It builds a 2x2 contingency table per gene set (in your list or not, in the pathway or not) and runs a hypergeometric or Fisher test.
 
 The mechanic that matters is in the first sentence: it starts from a list. Every gene that did not clear the cutoff is invisible to ORA. A gene at `padj` of 0.06 contributes exactly as much as a gene that was never sequenced, which is nothing. You have compressed a ranked, quantitative result down to a binary membership flag, and then asked a question about the flags.
 
