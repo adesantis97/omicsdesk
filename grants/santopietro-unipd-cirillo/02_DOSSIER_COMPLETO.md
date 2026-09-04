@@ -1,5 +1,6 @@
 # Dossier completo — Laboratorio Luca Cirillo (UniPD / ICR London)
-### Preparazione al bando e guida operativa post-vincita
+### Incarico di ricerca: *"How do cyclins and CDKs drive cell cycle progression?"*
+**Bando:** *Bando di selezione per il conferimento di un incarico di ricerca* — Dipartimento di Scienze Biomediche, Università degli Studi di Padova
 **Candidata:** Maria Virginia Santopietro
 **Redatto:** 4 settembre 2026 · **Fonti:** ricerca bibliografica su fonti pubbliche (vedi §12)
 
@@ -11,7 +12,7 @@
 2. [Stato dell'informazione: cosa è verificato e cosa manca](#2-stato-dellinformazione)
 3. [Luca Cirillo: profilo, traiettoria, network](#3-luca-cirillo--profilo-traiettoria-network)
 4. [I lavori chiave, letti e commentati](#4-i-lavori-chiave-letti-e-commentati)
-5. [Il campo in cui si entra: controllo spaziotemporale della divisione](#5-il-campo-controllo-spaziotemporale-della-divisione-cellulare)
+5. [Il cuore del bando: come cicline e CDK guidano il ciclo cellulare](#5-il-cuore-del-bando-come-cicline-e-cdk-guidano-il-ciclo-cellulare)
 6. [Maria Virginia Santopietro: profilo e mappatura delle competenze](#6-maria-virginia-santopietro--profilo-e-mappatura-competenze)
 7. [Il ponte scientifico: quattro proposte di progetto](#7-il-ponte-scientifico-quattro-proposte-di-progetto)
 8. [Panoramica generale delle tecniche di microscopia](#8-panoramica-generale-delle-tecniche-di-microscopia)
@@ -34,12 +35,14 @@ Il file `01_BRIEFING_ESSENZIALE.md` serve per il colloquio: una pagina, da rileg
 
 **Verificato su fonti pubbliche** (riferimenti in §12): identità, percorso e affiliazioni di Luca Cirillo; le sue pubblicazioni principali con rivista e anno; il contenuto scientifico dei suoi lavori; le pubblicazioni di M.V. Santopietro; il seminario Sapienza del 29/11/2024; l'esistenza e la struttura del DSB di Padova e della sua BioImaging facility.
 
+**Noto per via diretta (comunicato dal committente):** il bando è un *Bando di selezione per il conferimento di un incarico di ricerca* del DSB di Padova, sul tema **"How do cyclins and CDKs drive cell cycle progression?"**. Il §5 di questo dossier è costruito su quella domanda.
+
 **Non verificabile in questa sessione:**
 
 | Elemento | Perché | Come colmarlo |
 |---|---|---|
-| Testo, codice e scadenza del bando | `albo.biomed.unipd.it` è bloccato dalla policy di egress della rete (403 al CONNECT). Anche PubMed, Europe PMC, unige.ch e phd.uniroma1.it sono bloccati. | Incollare il testo o allegare il PDF |
-| Composizione della commissione | I nomi compaiono nel decreto di nomina, pubblicato sull'albo (stesso dominio bloccato), di norma dopo la scadenza | Recuperare il decreto e rifare il §"commissione" |
+| Testo integrale, codice e scadenza del bando | `albo.biomed.unipd.it` e `protocollo.unipd.it` sono bloccati dalla policy di egress della rete (403 al CONNECT). Anche PubMed, Europe PMC, unige.ch e phd.uniroma1.it sono bloccati. | Incollare il testo o allegare il PDF |
+| **Composizione della commissione** | I nomi compaiono nel decreto di nomina, pubblicato sull'albo (dominio bloccato) | Recuperare il decreto e rifare il §"commissione" del briefing |
 | I "paper che ti mostro" | Non allegati alla richiesta | Allegarli |
 | Elenco esaustivo pubblicazioni Cirillo | PubMed/Europe PMC/Scholar irraggiungibili: l'elenco in §4 è ricostruito da ricerca web ed è **probabilmente incompleto** | Verificare su ORCID/Scholar quando si ha accesso |
 
@@ -119,31 +122,93 @@ Primo autore. Mostra che UBAP2L forma nuclei distinti a monte di G3BP1 nella nuc
 
 ---
 
-## 5. Il campo: controllo spaziotemporale della divisione cellulare
+## 5. Il cuore del bando: come cicline e CDK guidano il ciclo cellulare
 
-Sintesi minima per orientarsi. Chi viene dal mondo cromatina deve ricostruire questo scheletro.
+Questa è la domanda esatta dell'incarico. La sezione è il primo capitolo da studiare: chi arriva dal mondo della cromatina deve ricostruire questo scheletro fino a poterlo disegnare a memoria alla lavagna.
 
-### 5.1 L'orologio: entrata e uscita dalla mitosi
+### 5.1 Il problema, formulato bene
 
-- **Cdk1–ciclina B1** è il motore. Si accumula in G2 tenuto spento dalla fosforilazione inibitoria di Wee1/Myt1; **Cdc25** toglie il freno.
-- **Bora + Aurora A → Plk1**: Plk1 attivato chiude il ciclo a feedback positivo che rende l'ingresso in mitosi un interruttore, non un reostato. (Il lavoro del 2016 di Cirillo è esattamente su questo nodo.)
-- **APC/C** (Anaphase-Promoting Complex/Cyclosome), ubiquitina-ligasi E3, con i coattivatori **Cdc20** e **Cdh1**: degrada **securina** (→ separasi libera → taglio della coesina → anafase) e **ciclina B1** (→ spegnimento di Cdk1 → uscita dalla mitosi).
-- **SAC** (Spindle Assembly Checkpoint): finché un cinetocore non è correttamente attaccato, il **MCC** (Mad2, BubR1, Bub3, Cdc20) inibisce l'APC/C. È il freno di sicurezza.
+La formulazione ingenua è "le CDK accendono le fasi del ciclo". La formulazione corretta è più interessante:
 
-### 5.2 Lo spazio: perché la posizione è un parametro
+> Come fa **un numero ristretto di chinasi**, la cui attività complessiva sale in modo sostanzialmente continuo, a produrre una **sequenza di eventi discreti, ordinati e irreversibili** — replicare il DNA una volta sola, condensare i cromosomi, smontare l'involucro nucleare, costruire il fuso, segregare, tagliare?
 
-Il punto teorico del laboratorio. In una cellula, la velocità di una reazione bimolecolare dipende dalla concentrazione **locale** dei partner. Ancorare enzima e substrato alla stessa superficie (cromosoma, centrosoma, midbody) equivale a un enorme aumento di concentrazione effettiva e a una riduzione della dimensionalità della ricerca (da 3D a 2D). Da qui:
+Tre risposte concorrono, e un candidato preparato le tiene distinte: **soglie di attività** (§5.3), **specificità conferita dalla ciclina** (§5.2), **irreversibilità imposta da feedback e proteolisi** (§5.4-5.5).
 
-- **Cromosomi come piattaforma** (Cirillo 2024, 2026)
-- **Centrosoma come piattaforma** per i pool di Plk1 (Dwivedi 2026)
-- **Midbody come piattaforma** — ed è qui che il lavoro del gruppo Dimitri su lncRNA e rimodellatori tocca lo stesso nervo
+### 5.2 Le coppie ciclina–CDK lungo il ciclo
 
-### 5.3 Le domande aperte su cui si giocherà il progetto
+| Transizione | Coppia principale | Ruolo | Inibitori |
+|---|---|---|---|
+| Ingresso in G1, mitogeni | **Ciclina D – CDK4/6** | Fosforila Rb, avvia il rilascio di E2F | INK4 (p16, p15, p18, p19) |
+| Restriction point → S | **Ciclina E – CDK2** | Iperfosforilazione di Rb, licenziamento e firing delle origini | CIP/KIP (p21, p27, p57) |
+| Fase S / G2 | **Ciclina A – CDK2, poi CDK1** | Completa la replicazione, blocca la ri-replicazione, prepara la mitosi | CIP/KIP |
+| G2 → M | **Ciclina B – CDK1** | Condensazione, NEBD, assemblaggio del fuso | Wee1/Myt1 (fosforilazione inibitoria) |
 
-1. Quali altri substrati dell'APC/C sono controllati spazialmente allo stesso modo?
-2. Che ruolo hanno le **modificazioni istoniche** nel definire la piattaforma cromosomica? (dominio naturale di MV)
-3. I **condensati** contribuiscono alla concentrazione locale dei regolatori mitotici?
-4. Come si integrano segnale spaziale e temporale quando la cellula sbaglia — aneuploidia, instabilità cromosomica, cancro?
+**Il punto concettuale:** la subunità catalitica è la CDK, ma è la **ciclina** a decidere *quando* (perché appare e scompare in una finestra precisa), *dove* (porta segnali di localizzazione: la ciclina B1 fa la spola nucleo-citoplasma e si accumula sui centrosomi prima della NEBD) e *su cosa* (siti di docking come l'**RxL/Cy motif** riconosciuto dalle cicline di tipo A ed E, o il **motivo di legame idrofobico** che indirizza la specificità).
+
+**Il dato che smonta il modello "una ciclina, una funzione":** i topi possono completare lo sviluppo embrionale con **la sola CDK1** (Santamaria *et al.*, 2007). CDK2, CDK4 e CDK6 sono specializzazioni tessuto-specifiche, non ingranaggi logicamente necessari. Da citare al colloquio: mostra che si conosce la letteratura fondativa e non solo lo schema del libro di testo.
+
+### 5.3 Il modello quantitativo: come una sola attività ordina molti eventi
+
+Idea centrale (formalizzata su lievito da Stern & Nurse, poi estesa alle cellule umane): l'attività CDK **cresce progressivamente** e i substrati hanno **soglie diverse**.
+
+- Substrati con **buon sito di docking** e residui facilmente accessibili vengono fosforilati **presto**, a bassa attività CDK → eventi della fase S.
+- Substrati con **affinità scarsa**, o protetti da fosfatasi attive, richiedono attività **alta** → eventi mitotici.
+- L'ordine non è codificato in enzimi diversi: è codificato **nella biochimica del substrato**.
+
+Il corollario sperimentale, elegante e da conoscere: modulando artificialmente il livello di attività CDK si possono **riordinare** gli eventi del ciclo — segno che la soglia è davvero il parametro di controllo.
+
+**Il contrappeso indispensabile: le fosfatasi.** La fosforilazione netta è un equilibrio. **PP2A-B55** e **PP1** contrastano le CDK, e la loro inibizione durante la mitosi (via la via Greatwall/MASTL → ENSA/ARPP19) è ciò che permette ai substrati mitotici di accumulare fosfato. All'uscita dalla mitosi, la riattivazione delle fosfatasi inverte i substrati in ordine inverso rispetto a come sono stati fosforilati. Chi parla solo di chinasi ha metà del quadro.
+
+### 5.4 Gli interruttori bistabili: perché le transizioni non tornano indietro
+
+- **Wee1/Myt1** fosforilano Cdk1 su Thr14/Tyr15 e la tengono spenta; **Cdc25** (A, B, C) rimuove quei fosfati.
+- Cdk1 attiva **inibisce Wee1** e **attiva Cdc25** → doppio feedback positivo → **bistabilità**: sotto una soglia il sistema resta spento, sopra scatta e resta acceso. Non un reostato, un interruttore.
+- **Bora + Aurora A → Plk1** è il modulo che innesca il tutto: Plk1 attiva Cdc25 e inibisce Wee1. **È esattamente il nodo su cui Cirillo ha lavorato a Ginevra** (Thomas, Cirillo *et al.*, *Cell Reports* 2016: Cdk1 fosforila SPAT-1/Bora per promuovere l'attivazione di Plk1). Da citare.
+- La stessa architettura spiega il **recupero dal danno al DNA**: il checkpoint (ATR/Chk1) abbatte Cdc25 e mantiene il freno finché la lesione non è riparata.
+
+### 5.5 La proteolisi: la freccia del tempo del ciclo cellulare
+
+Le CDK non si spengono per esaurimento: le cicline vengono **distrutte**. È la degradazione a rendere il ciclo unidirezionale.
+
+- **SCF** (Skp1–Cullin–F-box), attivo costitutivamente, riconosce substrati **fosforilati**: degrada ciclina E, p27, Cdc25A. La CDK stessa marca i propri regolatori per la distruzione.
+- **APC/C** (Anaphase-Promoting Complex/Cyclosome), attivato dai coattivatori:
+  - **APC/C^Cdc20** in mitosi → degrada **securina** (libera la separasi → taglio della coesina → **anafase**) e **ciclina B1** (crollo di Cdk1 → **uscita dalla mitosi**);
+  - **APC/C^Cdh1** in mitosi tarda e G1 → mantiene basso il livello di CDK e permette il licenziamento delle origini.
+- **SAC** (Spindle Assembly Checkpoint): finché un cinetocore non è attaccato correttamente, il **MCC** (Mad2, BubR1, Bub3, Cdc20) sequestra Cdc20 e inibisce l'APC/C. È il freno di sicurezza che impedisce di segregare cromosomi non allineati.
+- I substrati sono riconosciuti via **D-box** e **KEN-box**; l'ordine di degradazione (ciclina A prima, in prometafase nonostante il SAC attivo; securina e ciclina B1 poi) è a sua volta un meccanismo di ordinamento.
+
+### 5.6 Il livello che il campo ha aggiunto negli ultimi 15 anni: la singola cellula
+
+Le curve dei libri di testo sono medie di popolazione, e le medie nascondono il meccanismo. Con i **biosensori di attività CDK** e i reporter FUCCI si è visto che:
+
+- all'uscita dalla mitosi le cellule figlie si **biforcano**: alcune riaccendono subito CDK2 e proseguono verso un nuovo ciclo, altre entrano in una **quiescenza** transitoria — decisione presa in poche ore e correlata a stress replicativo e p21 ereditati dalla madre;
+- il **restriction point** non è un istante ma una finestra probabilistica;
+- la variabilità cellula-a-cellula nella durata delle fasi è enorme, e va misurata, non mediata via.
+
+**Implicazione metodologica diretta sul bando:** rispondere alla domanda "come cicline e CDK guidano la progressione" richiede oggi **imaging quantitativo in cellula singola** e deplezione acuta, non solo western blot su popolazioni sincronizzate. È il motivo per cui questo laboratorio lavora come lavora (§9).
+
+### 5.7 Il contributo originale del laboratorio: aggiungere lo *spazio*
+
+Alla dimensione temporale (**quanta** attività, **quando**) il gruppo aggiunge quella spaziale (**dove**).
+
+In una cellula, la velocità di una reazione bimolecolare dipende dalla concentrazione **locale** dei partner. Ancorare enzima e substrato alla stessa superficie equivale a un forte aumento di concentrazione effettiva e a una riduzione della dimensionalità della ricerca reciproca (da 3D a 2D). Perciò:
+
+- **Cromosomi come piattaforma** — APC/C e ciclina B1 si incontrano *sull'apparato mitotico*; l'arginine anchor N-terminale della ciclina B1 lega il nucleosoma (Cirillo *et al.*, *EMBO J* 2024; review *BioEssays* 2026).
+- **Centrosoma come piattaforma** — pool distinti di Plk1 accesi da coattivatori diversi (Bora, CEP192, Cenexin) governano transizioni diverse (Dwivedi *et al.*, *Nat Commun* 2026).
+- **Midbody come piattaforma** — ed è qui che il lavoro del gruppo Dimitri su lncRNA e rimodellatori tocca lo stesso nervo.
+
+> **La sintesi da portare al colloquio:** *"La domanda del bando è come cicline e CDK ordinano il ciclo. La risposta classica è temporale: soglie di attività crescente e substrati con affinità diverse. Il vostro lavoro aggiunge la variabile che mancava — la posizione. La stessa attività, sulla superficie giusta, ha una cinetica diversa. E la superficie, in mitosi, è cromatina: che è il materiale su cui ho lavorato finora."*
+
+### 5.8 Le domande aperte su cui si giocherà il progetto
+
+1. Quali altri substrati dell'APC/C sono controllati spazialmente come la ciclina B1?
+2. Le **modificazioni e le varianti istoniche** definiscono l'affinità della piattaforma cromosomica? (dominio naturale della candidata: SRCAP deposita H2A.Z)
+3. I **condensati biomolecolari** contribuiscono alla concentrazione locale dei regolatori mitotici?
+4. Come si integrano segnale spaziale e temporale quando la cellula sbaglia — aneuploidia, instabilità cromosomica, cancro? E perché gli inibitori di CDK4/6 funzionano in clinica mentre quelli pan-CDK no?
+
+### 5.9 Glossario minimo da non sbagliare
+
+**CDK** chinasi ciclina-dipendente · **CAK** chinasi attivante le CDK (fosforila il T-loop) · **INK4/CIP-KIP** le due famiglie di inibitori · **Rb–E2F** l'interruttore trascrizionale di G1/S · **NEBD** rottura dell'involucro nucleare, il "tempo zero" convenzionale della mitosi · **SAC** checkpoint del fuso · **MCC** complesso di checkpoint mitotico · **APC/C** ubiquitina-ligasi dell'anafase · **D-box / KEN-box** segnali di degradazione · **Greatwall/MASTL–ENSA** via che inibisce PP2A-B55 in mitosi · **FUCCI** reporter fluorescente della posizione nel ciclo.
 
 ---
 
