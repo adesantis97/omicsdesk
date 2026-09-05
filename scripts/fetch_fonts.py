@@ -2,22 +2,26 @@
 """Download the latin + latin-ext subsets of the site webfonts and emit a
 self-hosted @font-face stylesheet, so the site stops calling fonts.googleapis.com.
 
-Inter and JetBrains Mono are shipped by Google as variable fonts: every weight
+JetBrains Mono is shipped by Google as a variable font: every weight
 of a given family+subset resolves to the same woff2. We therefore keep one file
 per family+subset and declare a weight RANGE instead of four identical copies.
 """
 import re, urllib.request, pathlib
 
 CSS_URL = ("https://fonts.googleapis.com/css2?"
-           "family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap")
+           "family=JetBrains+Mono:wght@400;500&display=swap")
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
 
-SITE = pathlib.Path("/Volumes/Untitled/BioAnalytics/apps/site")
+SITE = pathlib.Path("/Users/presuttic10/Desktop/Alessandro/Business/OmicsDesk/apps/site")
 OUT_DIR = SITE / "public" / "fonts"
 OUT_CSS = SITE / "src" / "styles" / "fonts.css"
 KEEP = ["latin", "latin-ext"]
-WEIGHTS = {"Inter": "100 900", "JetBrains Mono": "100 800"}
+# Inter was dropped on 2026-09-05: the UI font is now the Apple system stack
+# (tailwind.config.mjs -> fontFamily.sans), which downloads nothing. Only the
+# mono face is still self-hosted. Do NOT re-add Inter here without also
+# changing fontFamily.sans, or the site will fetch a font it never uses.
+WEIGHTS = {"JetBrains Mono": "100 800"}
 
 
 def get(url):

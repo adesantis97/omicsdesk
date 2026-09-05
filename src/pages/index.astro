@@ -20,6 +20,32 @@ const jsonLd = [
     publisher: { '@id': ORG_ID },
   },
 ];
+
+const method = [
+  { n: '1', title: 'We study your project', body: 'Your system and its literature, framed into testable hypotheses.' },
+  { n: '2', title: 'We analyze', body: 'Reproducible pipelines you can audit, run end to end.' },
+  { n: '3', title: 'We interpret', body: 'What actually stands out, and what it means for your biology.' },
+  { n: '4', title: 'We stress-test it', body: 'Follow-up analyses and public data, so the conclusions hold up.' },
+  { n: '5', title: 'You get the read', body: 'What it means for your system, and what is worth testing next.', accent: true },
+];
+
+const analyses = [
+  { title: 'Expert review', body: 'A senior read on results you already have: do the conclusions hold, and what is worth digging into next. The natural foot in the door.', accent: true },
+  { title: 'RNA-seq (bulk)', body: 'Which genes and pathways actually move, and what that says about your system.' },
+  { title: 'scRNA-seq', body: 'Which cell populations shift between conditions, and the programs driving them.' },
+  { title: 'Proteomics & phosphoproteomics', body: 'Which proteins move, and which signaling pathways and kinases are actually active, not just which sites change.' },
+  { title: 'ChIP-seq & ATAC-seq', body: 'Where regulation moves across the genome, and which transcription factors are behind it.' },
+  { title: 'DNA methylation & multi-omics', body: 'Where the methylome shifts and how to read the direction correctly, or one integrated story across several omics layers.' },
+];
+
+const deliverables = [
+  { title: 'QC report', body: 'HTML + summary table' },
+  { title: 'Full statistical results', body: 'TSV + Excel workbook' },
+  { title: 'Publication-ready figures', body: 'PNG at 300 dpi' },
+  { title: 'Branded PDF report', body: 'Executive summary, methods, conclusions' },
+  { title: 'Reproducible pipeline code', body: 'Snakemake + conda, versioned' },
+  { title: 'NDA by default', body: 'Raw data deleted within 30 days' },
+];
 ---
 <Base jsonLd={jsonLd}>
   <!-- Full-bleed hero banner -->
@@ -37,32 +63,34 @@ const jsonLd = [
   </div>
 
   <!-- Headline overlaps the lower edge of the banner, still fully readable -->
-  <header id="top" class="relative z-10 max-w-5xl mx-auto px-5 -mt-24 sm:-mt-32 lg:-mt-40 pb-16">
-    <p class="text-accent-dark font-semibold text-sm tracking-wide uppercase mb-4">Bioinformatics for small biotech and academic labs</p>
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+  <header id="top" class="relative z-10 max-w-5xl mx-auto px-5 -mt-24 sm:-mt-32 lg:-mt-40 pb-section-sm sm:pb-section">
+    <p class="eyebrow mb-stack">Bioinformatics for small biotech and academic labs</p>
+    <h1 class="text-title-1 sm:text-display-sm lg:text-display">
       The analysis is the easy part.<br />
       <span class="text-accent">We tell you what it means.</span>
     </h1>
-    <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl leading-relaxed">
+    <p class="mt-stack text-lead text-slate-600 max-w-measure">
       RNA-seq, scRNA-seq, proteomics, ChIP-seq, ATAC-seq, methylation and multi-omics, run end to end by a bioinformatician who reads the biology: what the results say about your system, and where it is worth digging deeper. Reproducible and fully documented, so the conclusions are owned by a person you can email.
     </p>
-    <div class="mt-8 flex flex-wrap gap-3">
-      <a href="/case-studies/" class="inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition shadow-card">
+    <div class="mt-block flex flex-wrap items-center gap-3">
+      <a href="/case-studies/" class="btn-primary">
         See sample reports
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
-      <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="inline-flex items-center gap-2 bg-white text-ink border border-slate-200 px-5 py-3 rounded-md font-medium hover:bg-slate-50 transition shadow-card">
+      <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="btn-secondary">
         Request a quote
       </a>
-      <a href="/pricing/" class="inline-flex items-center gap-2 text-slate-600 px-3 py-3 rounded-md font-medium hover:text-ink transition">
+      <a href="/pricing/" class="btn-quiet ml-1">
         How we work →
       </a>
     </div>
   </header>
 
-  <section class="max-w-5xl mx-auto px-5 py-14 border-t border-slate-100">
-    <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">What we do</h2>
-    <div class="mt-6 grid sm:grid-cols-2 gap-8 max-w-4xl">
+  <!-- "What we do" and "How we work" are one argument, so they sit 64px apart
+       while every unrelated section is 96px away. -->
+  <section class="max-w-5xl mx-auto px-5 pt-section-sm sm:pt-section">
+    <h2 class="text-title-2">What we do</h2>
+    <div class="mt-block grid sm:grid-cols-2 gap-8 max-w-4xl">
       <p class="prose-p">
         Running DESeq2 and drawing a volcano plot is the <strong class="font-semibold text-ink">commodity part</strong>. The value is <strong class="font-semibold text-ink">the read on top</strong>: we turn your raw sequencing or mass spec data into a <strong class="font-semibold text-ink">written interpretation of what stands out for your biology and what to do next</strong>, not just a folder of figures. You send a short brief, we send back a fixed quote, and you receive a QC report, full statistical results, publication ready figures, and a branded PDF, usually within 7 to 10 business days.
       </p>
@@ -73,220 +101,167 @@ const jsonLd = [
   </section>
 
   <!-- How we work: the interpretation-led method, as a clean workflow strip -->
-  <section class="max-w-5xl mx-auto px-5 pb-4 pt-2">
-    <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">How we work</h2>
-    <p class="prose-p mt-3 max-w-2xl">Not "upload data, get a pipeline output". We study the project first, and the biology drives every step.</p>
-    <img src="/how-we-work.png" alt="Our method in five steps: study the project, analyze, interpret, stress-test, deliver the read" class="mt-6 w-full h-24 sm:h-32 object-cover object-center" loading="lazy" />
-    <ol class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-3">
-      <li class="relative rounded-xl border border-slate-200/80 bg-white p-5 shadow-card">
-        <span class="inline-flex w-7 h-7 rounded-full bg-accent text-white text-sm font-semibold items-center justify-center">1</span>
-        <h3 class="font-semibold text-sm mt-3">We study your project</h3>
-        <p class="text-sm text-slate-600 mt-1">Your system and its literature, framed into testable hypotheses.</p>
-      </li>
-      <li class="relative rounded-xl border border-slate-200/80 bg-white p-5 shadow-card">
-        <span class="inline-flex w-7 h-7 rounded-full bg-accent text-white text-sm font-semibold items-center justify-center">2</span>
-        <h3 class="font-semibold text-sm mt-3">We analyze</h3>
-        <p class="text-sm text-slate-600 mt-1">Reproducible pipelines you can audit, run end to end.</p>
-      </li>
-      <li class="relative rounded-xl border border-slate-200/80 bg-white p-5 shadow-card">
-        <span class="inline-flex w-7 h-7 rounded-full bg-accent text-white text-sm font-semibold items-center justify-center">3</span>
-        <h3 class="font-semibold text-sm mt-3">We interpret</h3>
-        <p class="text-sm text-slate-600 mt-1">What actually stands out, and what it means for your biology.</p>
-      </li>
-      <li class="relative rounded-xl border border-slate-200/80 bg-white p-5 shadow-card">
-        <span class="inline-flex w-7 h-7 rounded-full bg-accent text-white text-sm font-semibold items-center justify-center">4</span>
-        <h3 class="font-semibold text-sm mt-3">We stress-test it</h3>
-        <p class="text-sm text-slate-600 mt-1">Follow-up analyses and public data, so the conclusions hold up.</p>
-      </li>
-      <li class="relative rounded-xl border border-accent/30 bg-accent/5 p-5 shadow-card">
-        <span class="inline-flex w-7 h-7 rounded-full bg-ink text-white text-sm font-semibold items-center justify-center">5</span>
-        <h3 class="font-semibold text-sm mt-3">You get the read</h3>
-        <p class="text-sm text-slate-600 mt-1">What it means for your system, and what is worth testing next.</p>
-      </li>
+  <section class="max-w-5xl mx-auto px-5 pt-section-sm pb-section-sm sm:pb-section">
+    <h2 class="text-title-2">How we work</h2>
+    <p class="prose-p mt-stack max-w-measure">Not "upload data, get a pipeline output". We study the project first, and the biology drives every step.</p>
+    <img src="/how-we-work.png" alt="Our method in five steps: study the project, analyze, interpret, stress-test, deliver the read" class="mt-block w-full h-24 sm:h-32 object-cover object-center" loading="lazy" />
+    <ol class="mt-block grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-3">
+      {method.map((m) => (
+        <li class={`relative rounded-card border p-6 lg:p-4 shadow-card transition duration-250 ease-apple hover:-translate-y-0.5 hover:shadow-card-hover ${m.accent ? 'border-accent/30 bg-accent/5' : 'border-slate-200/80 bg-white'}`}>
+          <span class={`inline-flex w-7 h-7 rounded-pill text-white text-caption font-semibold items-center justify-center ${m.accent ? 'bg-ink' : 'bg-accent'}`}>{m.n}</span>
+          <h3 class="card-title mt-4">{m.title}</h3>
+          <p class="prose-p-sm mt-2">{m.body}</p>
+        </li>
+      ))}
     </ol>
   </section>
 
   <section id="services" class="section-tint">
-    <div class="max-w-5xl mx-auto px-5 py-16">
-      <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+    <div class="section-wrap">
+      <div class="flex items-end justify-between flex-wrap gap-4">
         <div>
-          <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">What we analyze</h2>
-          <p class="prose-p mt-3 max-w-2xl">Every engagement is scoped to your biological question, run end to end, and written up as an interpretation, not a folder of figures. Fixed scope agreed up front; a quote comes back within 2 business days.</p>
+          <h2 class="text-title-2">What we analyze</h2>
+          <p class="prose-p mt-stack max-w-measure">Every engagement is scoped to your biological question, run end to end, and written up as an interpretation, not a folder of figures. Fixed scope agreed up front; a quote comes back within 2 business days.</p>
         </div>
-        <a href="/pricing/" class="text-accent font-medium hover:underline underline-offset-4 text-sm">
+        <a href="/pricing/" class="link-more">
           Services &amp; scopes →
         </a>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="rounded-xl border border-accent/30 bg-accent/5 p-5 shadow-card">
-          <h3 class="font-semibold text-sm">Expert review</h3>
-          <p class="prose-p mt-1.5 text-sm">A senior read on results you already have: do the conclusions hold, and what is worth digging into next. The natural foot in the door.</p>
-        </div>
-        <div class="rounded-xl border border-slate-200/80 bg-white p-5 shadow-card">
-          <h3 class="font-semibold text-sm">RNA-seq (bulk)</h3>
-          <p class="prose-p mt-1.5 text-sm">Which genes and pathways actually move, and what that says about your system.</p>
-        </div>
-        <div class="rounded-xl border border-slate-200/80 bg-white p-5 shadow-card">
-          <h3 class="font-semibold text-sm">scRNA-seq</h3>
-          <p class="prose-p mt-1.5 text-sm">Which cell populations shift between conditions, and the programs driving them.</p>
-        </div>
-        <div class="rounded-xl border border-slate-200/80 bg-white p-5 shadow-card">
-          <h3 class="font-semibold text-sm">Proteomics &amp; phosphoproteomics</h3>
-          <p class="prose-p mt-1.5 text-sm">Which proteins move, and which signaling pathways and kinases are actually active, not just which sites change.</p>
-        </div>
-        <div class="rounded-xl border border-slate-200/80 bg-white p-5 shadow-card">
-          <h3 class="font-semibold text-sm">ChIP-seq &amp; ATAC-seq</h3>
-          <p class="prose-p mt-1.5 text-sm">Where regulation moves across the genome, and which transcription factors are behind it.</p>
-        </div>
-        <div class="rounded-xl border border-slate-200/80 bg-white p-5 shadow-card">
-          <h3 class="font-semibold text-sm">DNA methylation &amp; multi-omics</h3>
-          <p class="prose-p mt-1.5 text-sm">Where the methylome shifts and how to read the direction correctly, or one integrated story across several omics layers.</p>
-        </div>
+      <!-- Translucent over the tinted gradient: there is something behind to blur. -->
+      <div class="mt-block grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {analyses.map((a) => (
+          <div class={`p-6 hover:-translate-y-0.5 hover:shadow-card-hover ${a.accent ? 'rounded-card border border-accent/30 bg-accent/[0.07] backdrop-blur-xl shadow-card transition duration-250 ease-apple' : 'card-glass'}`}>
+            <h3 class="card-title">{a.title}</h3>
+            <p class="prose-p-sm mt-2">{a.body}</p>
+          </div>
+        ))}
       </div>
 
-      <div class="mt-6 rounded-2xl border-2 border-accent/40 bg-gradient-to-br from-accent/[0.08] to-tint p-6 sm:p-8 shadow-card">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="text-xs font-semibold uppercase tracking-wide text-accent-dark bg-accent/15 px-2.5 py-1 rounded-full">For academic labs</span>
-        </div>
-        <h3 class="text-xl sm:text-2xl font-bold tracking-tight">Writing a grant? We make it more fundable, at zero risk.</h3>
-        <p class="prose-p mt-3 max-w-3xl">We strengthen your proposal with <strong class="font-semibold text-ink">real preliminary data from public sources at no cost</strong>, and write the computational arm reviewers now expect. The downstream analysis of your own data is scoped into the budget and <strong class="font-semibold text-ink">run only if the grant is funded, paid from grant funds</strong>. No cost until it wins.</p>
-        <ul class="mt-4 grid sm:grid-cols-3 gap-3 text-sm">
-          <li class="rounded-lg bg-white/70 border border-accent/15 p-3"><span class="font-semibold text-ink">1 · Free dossier</span><br/>causal de-risking + a real preliminary figure from public data</li>
-          <li class="rounded-lg bg-white/70 border border-accent/15 p-3"><span class="font-semibold text-ink">2 · Into the proposal</span><br/>a ready computational arm + a named analysis unit</li>
-          <li class="rounded-lg bg-white/70 border border-accent/15 p-3"><span class="font-semibold text-ink">3 · Paid only if funded</span><br/>from grant funds, no success fee, zero risk to you</li>
+      <div class="mt-block rounded-panel border-2 border-accent/40 bg-gradient-to-br from-accent/[0.08] to-tint p-6 sm:p-8 shadow-card">
+        <p class="eyebrow">For academic labs</p>
+        <h3 class="text-title-3 mt-stack sm:text-title-2">Writing a grant? We make it more fundable, at zero risk.</h3>
+        <p class="prose-p mt-stack max-w-measure">We strengthen your proposal with <strong class="font-semibold text-ink">real preliminary data from public sources at no cost</strong>, and write the computational arm reviewers now expect. The downstream analysis of your own data is scoped into the budget and <strong class="font-semibold text-ink">run only if the grant is funded, paid from grant funds</strong>. No cost until it wins.</p>
+        <ul class="mt-block grid sm:grid-cols-3 gap-3">
+          <li class="rounded-tile bg-white/70 border border-accent/20 p-4"><span class="card-title">1 · Free dossier</span><p class="prose-p-sm mt-1">causal de-risking + a real preliminary figure from public data</p></li>
+          <li class="rounded-tile bg-white/70 border border-accent/20 p-4"><span class="card-title">2 · Into the proposal</span><p class="prose-p-sm mt-1">a ready computational arm + a named analysis unit</p></li>
+          <li class="rounded-tile bg-white/70 border border-accent/20 p-4"><span class="card-title">3 · Paid only if funded</span><p class="prose-p-sm mt-1">from grant funds, no success fee, zero risk to you</p></li>
         </ul>
-        <img src="/grant-process.png" alt="Grant support flow: free preliminary data from public sources, written into the proposal, and downstream analysis run only if the grant is funded" class="mt-5 w-full h-20 sm:h-24 object-cover object-center mix-blend-multiply" loading="lazy" />
-        <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20grant%20support" class="mt-5 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition self-start">
+        <img src="/grant-process.png" alt="Grant support flow: free preliminary data from public sources, written into the proposal, and downstream analysis run only if the grant is funded" class="mt-block w-full h-20 sm:h-24 object-cover object-center mix-blend-multiply" loading="lazy" />
+        <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20grant%20support" class="btn-primary mt-block">
           Ask about grant support
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </div>
 
-      <div class="mt-8 flex flex-wrap items-center gap-4">
-        <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition shadow-card">
+      <div class="mt-block flex flex-wrap items-center gap-4">
+        <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="btn-primary">
           Request a quote
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
-        <p class="text-sm text-slate-500 leading-relaxed">Fixed scope and turnaround agreed up front. 15% academic discount for institutional emails.</p>
+        <p class="text-caption text-slate-600">Fixed scope and turnaround agreed up front. 15% academic discount for institutional emails.</p>
       </div>
     </div>
   </section>
 
-  <section id="how" class="max-w-5xl mx-auto px-5 py-16">
-    <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">How it works</h2>
-    <div class="mt-10 grid md:grid-cols-3 gap-6">
-      <div class="card p-6 border-t-2 border-t-accent">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-semibold flex items-center justify-center">1</span>
-          <h3 class="font-semibold">Intake &amp; NDA</h3>
-          <span class="text-xs text-slate-400 font-mono">day 0</span>
+  <section id="how" class="section-wrap">
+    <h2 class="text-title-2">How it works</h2>
+    <div class="mt-block grid md:grid-cols-3 gap-6">
+      <div class="card p-6 border-t-2 border-t-accent hover:-translate-y-0.5 hover:shadow-card-hover">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-pill bg-accent text-white text-body-sm font-semibold flex items-center justify-center">1</span>
+          <h3 class="text-title-3">Intake &amp; NDA</h3>
+          <!-- was slate-400 on white: 2.62:1, well under the 4.5:1 floor -->
+          <span class="text-caption text-slate-500 font-mono">day 0</span>
         </div>
-        <p class="prose-p text-sm">You fill a short intake form (organism, sample count, contrasts, data access). NDA signed before any data is shared. Quote and proposal back within 2 business days.</p>
+        <p class="prose-p-sm mt-stack">You fill a short intake form (organism, sample count, contrasts, data access). NDA signed before any data is shared. Quote and proposal back within 2 business days.</p>
       </div>
-      <div class="card p-6 border-t-2 border-t-accent">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-semibold flex items-center justify-center">2</span>
-          <h3 class="font-semibold">Analysis &amp; QC</h3>
-          <span class="text-xs text-slate-400 font-mono">days 1–7</span>
+      <div class="card p-6 border-t-2 border-t-accent hover:-translate-y-0.5 hover:shadow-card-hover">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-pill bg-accent text-white text-body-sm font-semibold flex items-center justify-center">2</span>
+          <h3 class="text-title-3">Analysis &amp; QC</h3>
+          <span class="text-caption text-slate-500 font-mono">days 1–7</span>
         </div>
-        <p class="prose-p text-sm">Your data is analysed and, more importantly, studied. After QC you get a check in: if the design has a problem, we surface it before downstream stats burn the clock.</p>
+        <p class="prose-p-sm mt-stack">Your data is analysed and, more importantly, studied. After QC you get a check in: if the design has a problem, we surface it before downstream stats burn the clock.</p>
       </div>
-      <div class="card p-6 border-t-2 border-t-accent">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-semibold flex items-center justify-center">3</span>
-          <h3 class="font-semibold">Report &amp; handoff</h3>
-          <span class="text-xs text-slate-400 font-mono">day 7 or 10</span>
+      <div class="card p-6 border-t-2 border-t-accent hover:-translate-y-0.5 hover:shadow-card-hover">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-pill bg-accent text-white text-body-sm font-semibold flex items-center justify-center">3</span>
+          <h3 class="text-title-3">Report &amp; handoff</h3>
+          <span class="text-caption text-slate-500 font-mono">day 7 or 10</span>
         </div>
-        <p class="prose-p text-sm">Branded PDF report with a written executive summary and discussion, Excel workbook with full statistical results, figures at 300 dpi, and the pipeline code. Raw data is deleted within 30 days of delivery.</p>
+        <p class="prose-p-sm mt-stack">Branded PDF report with a written executive summary and discussion, Excel workbook with full statistical results, figures at 300 dpi, and the pipeline code. Raw data is deleted within 30 days of delivery.</p>
       </div>
     </div>
   </section>
 
   <section class="section-deep">
-    <div class="max-w-5xl mx-auto px-5 py-16 sm:py-20">
-      <p class="eyebrow !text-teal-200/90 before:!bg-teal-200/50">Deliverables</p>
-      <h2 class="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight text-white">What you get, every time</h2>
-      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl">
-        <div class="rounded-xl border border-teal-300/40 bg-teal-300/[0.12] backdrop-blur-sm p-5 hover:bg-teal-300/[0.16] transition sm:col-span-2 lg:col-span-3">
-          <h4 class="font-semibold text-sm text-white">A written biological interpretation</h4>
-          <p class="text-sm text-teal-100/80 mt-1">What stands out for your biology, what it means, and what is worth testing next — the read on top of the figures. This is the product.</p>
+    <div class="section-wrap">
+      <p class="eyebrow-invert">Deliverables</p>
+      <h2 class="mt-stack text-title-2 text-white">What you get, every time</h2>
+      <div class="mt-block grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl">
+        <div class="rounded-card border border-teal-300/40 bg-teal-300/[0.14] backdrop-blur-xl p-6 transition duration-250 ease-apple hover:bg-teal-300/[0.2] sm:col-span-2 lg:col-span-3">
+          <h3 class="card-title text-white">A written biological interpretation</h3>
+          <!-- teal-100/70 measured 4.23:1 on this gradient; /90 gives 5.7:1 -->
+          <p class="text-body-sm text-teal-50/90 mt-2">What stands out for your biology, what it means, and what is worth testing next — the read on top of the figures. This is the product.</p>
         </div>
-        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
-          <h4 class="font-semibold text-sm text-white">QC report</h4>
-          <p class="text-sm text-teal-100/70 mt-1">HTML + summary table</p>
-        </div>
-        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
-          <h4 class="font-semibold text-sm text-white">Full statistical results</h4>
-          <p class="text-sm text-teal-100/70 mt-1">TSV + Excel workbook</p>
-        </div>
-        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
-          <h4 class="font-semibold text-sm text-white">Publication-ready figures</h4>
-          <p class="text-sm text-teal-100/70 mt-1">PNG at 300 dpi</p>
-        </div>
-        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
-          <h4 class="font-semibold text-sm text-white">Branded PDF report</h4>
-          <p class="text-sm text-teal-100/70 mt-1">Executive summary, methods, conclusions</p>
-        </div>
-        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
-          <h4 class="font-semibold text-sm text-white">Reproducible pipeline code</h4>
-          <p class="text-sm text-teal-100/70 mt-1">Snakemake + conda, versioned</p>
-        </div>
-        <div class="rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-sm p-5 hover:bg-white/[0.1] transition">
-          <h4 class="font-semibold text-sm text-white">NDA by default</h4>
-          <p class="text-sm text-teal-100/70 mt-1">Raw data deleted within 30 days</p>
-        </div>
+        {deliverables.map((d) => (
+          <div class="card-glass-invert p-6">
+            <h3 class="card-title text-white">{d.title}</h3>
+            <p class="text-body-sm text-teal-50/90 mt-2">{d.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="max-w-5xl mx-auto px-5 py-16">
-    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+  <section class="section-wrap">
+    <div class="flex items-end justify-between flex-wrap gap-4">
       <div>
-        <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">See real sample reports</h2>
-        <p class="prose-p mt-3 max-w-2xl">Two case studies we ran end to end. Same PDF, Excel, and figures format every client receives. Download the full deliverables to see exactly what you would get.</p>
+        <h2 class="text-title-2">See real sample reports</h2>
+        <p class="prose-p mt-stack max-w-measure">Two case studies we ran end to end. Same PDF, Excel, and figures format every client receives. Download the full deliverables to see exactly what you would get.</p>
       </div>
-      <a href="/case-studies/" class="text-accent font-medium hover:underline underline-offset-4 text-sm">
+      <a href="/case-studies/" class="link-more">
         All case studies →
       </a>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6">
+    <div class="mt-block grid md:grid-cols-2 gap-6">
       {featuredCases.map((cs) => (
         <a
           href={`/case-studies/${cs.slug}/`}
           class="group block card-link overflow-hidden"
         >
           <div class="aspect-[16/10] bg-slate-50 overflow-hidden border-b border-slate-100">
-            <img src={cs.data.heroImage} alt={cs.data.heroAlt} class="w-full h-full object-cover group-hover:scale-[1.02] transition" />
+            <img src={cs.data.heroImage} alt={cs.data.heroAlt} class="w-full h-full object-cover transition duration-250 ease-apple group-hover:scale-[1.02]" />
           </div>
           <div class="p-6">
-            <div class="flex items-center gap-2 text-xs text-slate-500 uppercase tracking-wide font-medium mb-3">
-              <span class="bg-accent/10 text-accent px-2 py-0.5 rounded-sm">{cs.data.omicsType}</span>
+            <div class="flex items-center gap-2 text-caption text-slate-600 uppercase tracking-wide font-medium">
+              <span class="bg-accent/10 text-accent-dark px-2.5 py-0.5 rounded-pill">{cs.data.omicsType}</span>
               <span>·</span>
               <span>{cs.data.sampleCount}</span>
             </div>
-            <h3 class="text-lg font-semibold tracking-tight leading-snug group-hover:text-accent transition">{cs.data.title}</h3>
-            <p class="prose-p mt-3 text-sm">{cs.data.problem}</p>
-            <p class="mt-4 text-sm text-accent font-medium">Read case study →</p>
+            <h3 class="mt-stack text-title-3 leading-snug group-hover:text-accent transition duration-250 ease-apple">{cs.data.title}</h3>
+            <p class="prose-p-sm mt-2">{cs.data.problem}</p>
+            <p class="mt-4 text-body-sm text-accent font-medium">Read case study →</p>
           </div>
         </a>
       ))}
     </div>
   </section>
 
-  <section class="max-w-5xl mx-auto px-5 py-16 border-t border-slate-100">
-    <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">About</h2>
-    <div class="mt-6 flex flex-col sm:flex-row gap-6 sm:gap-8 max-w-3xl">
-      <img src="/alessandro.jpg" alt="Alessandro De Santis, founder of OmicsDesk" width="96" height="96" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover object-[50%_18%] shrink-0 shadow-card ring-2 ring-white" loading="lazy" />
+  <section class="section-wrap">
+    <h2 class="text-title-2">About</h2>
+    <div class="mt-block flex flex-col sm:flex-row gap-6 sm:gap-8 max-w-3xl">
+      <img src="/alessandro.jpg" alt="Alessandro De Santis, founder of OmicsDesk" width="96" height="96" class="w-20 h-20 sm:w-24 sm:h-24 rounded-pill object-cover object-[50%_18%] shrink-0 shadow-card ring-2 ring-white" loading="lazy" />
       <div>
         <p class="prose-p">
           I'm <span class="font-semibold text-ink">Alessandro De Santis</span>, a <strong class="font-semibold text-ink">cancer researcher by training</strong> and the <strong class="font-semibold text-ink">CEO and co-founder of SynMiR</strong>, an Italian biotech developing synthetic miRNA therapeutics for cancer. Day to day I run <strong class="font-semibold text-ink">multi-omics target discovery</strong>: transcriptomics, proteomics, phosphoproteomics and mutation data combined into patient-specific signaling networks.
         </p>
-        <p class="prose-p mt-4">
+        <p class="prose-p mt-stack">
           My background is in <strong class="font-semibold text-ink">RNA biology and the genomics of cancer</strong>, built over years of academic research and <strong class="font-semibold text-ink">peer-reviewed publications</strong>. That is exactly what OmicsDesk does for clients: not just running the analysis, but <strong class="font-semibold text-ink">reading what it means for the biology</strong>, the way you would for a paper. <a href="/publications/" class="text-accent font-medium underline-offset-4 hover:underline">See selected publications →</a>
         </p>
-        <p class="prose-p mt-4">
+        <p class="prose-p mt-stack">
           OmicsDesk brings that expertise to small biotechs and academic labs that need an answer from their data without hiring a full-time bioinformatician. <strong class="font-semibold text-ink">Every project is run, reviewed, and written up by a person you can email</strong>, so the conclusions are owned, not just generated.
         </p>
       </div>
@@ -294,37 +269,37 @@ const jsonLd = [
   </section>
 
   <section id="contact" class="section-tint">
-    <div class="max-w-5xl mx-auto px-5 py-16">
-      <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Get a quote</h2>
-      <p class="prose-p mt-3 max-w-2xl">
+    <div class="section-wrap">
+      <h2 class="text-title-2">Get a quote</h2>
+      <p class="prose-p mt-stack max-w-measure">
         Email a short brief (omics type, sample count, the biological contrast you want tested) and a fixed quote comes back within 2 business days. NDA before any data is shared.
       </p>
 
-      <div class="mt-8 grid md:grid-cols-2 gap-6 max-w-4xl">
-        <div class="card p-6 flex flex-col justify-between">
+      <div class="mt-block grid md:grid-cols-2 gap-6 max-w-4xl">
+        <div class="card-glass p-6 flex flex-col justify-between">
           <div>
-            <h4 class="font-semibold">Request a quote</h4>
-            <p class="prose-p mt-2 text-sm">Tell us what you measured and what you want compared — we send back a quote and a plan. You upload data after the quote is signed, not before.</p>
-            <ul class="prose-p mt-4 text-sm space-y-1.5 list-disc list-inside text-slate-600">
+            <h3 class="text-title-3">Request a quote</h3>
+            <p class="prose-p-sm mt-stack">Tell us what you measured and what you want compared — we send back a quote and a plan. You upload data after the quote is signed, not before.</p>
+            <ul class="mt-4 text-body-sm space-y-2 list-disc list-inside text-slate-600">
               <li>Omics type and sample count</li>
               <li>Species and genome build (if known)</li>
               <li>The biological contrast you want tested</li>
               <li>Any deadline you're working against</li>
             </ul>
           </div>
-          <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="mt-5 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition self-start">
+          <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="btn-primary mt-block self-start">
             Email hello@omicsdesk.com
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
         </div>
-        <div class="card p-6 flex flex-col justify-between">
+        <div class="card-glass p-6 flex flex-col justify-between">
           <div>
-            <h4 class="font-semibold">What happens next</h4>
-            <p class="prose-p mt-2 text-sm">
+            <h3 class="text-title-3">What happens next</h3>
+            <p class="prose-p-sm mt-stack">
               We reply with a fixed quote and a short analysis plan scoped to your question. Once the scope is agreed and the kickoff invoice is paid, we send you a private link to confirm the experimental design and hand over the data. No data upload before a quote is signed.
             </p>
           </div>
-          <a href="/case-studies/" class="mt-5 inline-flex items-center gap-2 border border-slate-300 text-ink px-5 py-3 rounded-md font-medium hover:bg-slate-100 transition self-start">
+          <a href="/case-studies/" class="btn-outline mt-block self-start">
             See a sample report
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>

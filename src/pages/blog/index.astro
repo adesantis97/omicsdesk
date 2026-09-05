@@ -44,22 +44,22 @@ const jsonLd = [
   description="Practical, technical posts on bioinformatics workflows: tool comparisons, troubleshooting guides, and field notes from real client work."
   jsonLd={jsonLd}
 >
-  <header class="max-w-4xl mx-auto px-5 pt-16 pb-10">
-    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-3">Notes from the bench</p>
-    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+  <header class="max-w-4xl mx-auto px-5 pt-section-sm sm:pt-section pb-block">
+    <p class="eyebrow mb-stack">Notes from the bench</p>
+    <h1 class="text-title-2 sm:text-title-1 lg:text-display-sm">
       Bioinformatics, with the receipts.
     </h1>
-    <p class="mt-5 text-lg text-slate-600 max-w-2xl leading-relaxed">
+    <p class="mt-stack text-lead text-slate-600 max-w-measure">
       Specific troubleshooting, tool comparisons, and workflow notes from real client projects.
       No "intro to RNA-seq" — only the parts that actually trip people up.
     </p>
   </header>
 
   {sorted.length === 0 && (
-    <section class="max-w-4xl mx-auto px-5 pb-20">
-      <div class="rounded-xl border-2 border-dashed border-slate-200 p-8 md:p-10 bg-slate-50">
-        <h2 class="text-lg font-semibold tracking-tight">First post coming soon</h2>
-        <p class="text-sm text-slate-600 mt-2">
+    <section class="max-w-4xl mx-auto px-5 pb-section-sm sm:pb-section">
+      <div class="rounded-card border-2 border-dashed border-slate-200 p-8 md:p-10 bg-slate-50">
+        <h2 class="text-title-3">First post coming soon</h2>
+        <p class="prose-p-sm mt-2">
           New posts every 2–3 weeks. Check back, or subscribe by emailing
           <a href="mailto:hello@omicsdesk.com" class="text-accent underline">hello@omicsdesk.com</a>.
         </p>
@@ -67,9 +67,9 @@ const jsonLd = [
     </section>
   )}
 
-  <section class="max-w-4xl mx-auto px-5 pb-20 grid sm:grid-cols-2 gap-5">
+  <section class="max-w-4xl mx-auto px-5 pb-section-sm sm:pb-section grid sm:grid-cols-2 gap-5">
     {sorted.map((post) => (
-      <a href={`/blog/${post.slug}/`} class="flex flex-col overflow-hidden bg-white rounded-xl border border-slate-200/80 shadow-card hover:border-accent/40 hover:shadow-card-hover hover:-translate-y-0.5 transition group">
+      <a href={`/blog/${post.slug}/`} class="flex flex-col overflow-hidden bg-white rounded-card border border-slate-200/80 shadow-card hover:border-accent/40 hover:shadow-card-hover hover:-translate-y-0.5 transition group">
         <div class="aspect-[16/9] bg-slate-50 border-b border-slate-200/80 overflow-hidden flex items-center justify-center">
           {post.data.heroImage ? (
             <img
@@ -79,24 +79,24 @@ const jsonLd = [
               loading="lazy"
             />
           ) : (
-            <span class="text-xs font-mono uppercase tracking-wide text-slate-400">OmicsDesk</span>
+            <span class="text-caption font-mono uppercase tracking-wide text-slate-500">OmicsDesk</span>
           )}
         </div>
         <div class="p-6 flex flex-col flex-1">
-          <div class="text-xs font-mono uppercase tracking-wide text-slate-500">
+          <div class="text-caption font-mono uppercase tracking-wide text-slate-600">
             {post.data.pubDate.toISOString().slice(0, 10)}
             {post.data.draft && <span class="ml-2 text-amber-600">DRAFT</span>}
           </div>
-          <h2 class="text-lg font-semibold text-ink mt-2 leading-snug group-hover:text-accent transition">
+          <h2 class="text-title-3 mt-2 leading-snug transition duration-250 ease-apple group-hover:text-accent">
             {post.data.title}
           </h2>
-          <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+          <p class="prose-p-sm mt-stack">
             {post.data.description}
           </p>
           {post.data.tags.length > 0 && (
             <div class="mt-4 pt-1 flex flex-wrap gap-1.5 items-end flex-1">
               {post.data.tags.map((t) => (
-                <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">#{t}</span>
+                <span class="text-caption bg-slate-100 text-slate-700 px-2.5 py-1 rounded-pill">#{t}</span>
               ))}
             </div>
           )}

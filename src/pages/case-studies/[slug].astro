@@ -12,8 +12,8 @@ const { cs } = Astro.props as Props;
 const { Content } = await cs.render();
 ---
 <Base title={`${cs.data.title} — OmicsDesk case study`} description={cs.data.problem}>
-  <header class="max-w-3xl mx-auto px-5 pt-16 pb-8">
-    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4">Case study · {cs.data.omicsType}</p>
+  <header class="max-w-3xl mx-auto px-5 pt-section-sm sm:pt-section pb-block">
+    <p class="eyebrow mb-stack">Case study · {cs.data.omicsType}</p>
     <h1 class="text-3xl sm:text-4xl font-bold tracking-tight leading-tight">{cs.data.title}</h1>
     <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">{cs.data.problem}</p>
     <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-500">
@@ -27,13 +27,13 @@ const { Content } = await cs.render();
 
   <section class="max-w-3xl mx-auto px-5">
     <figure>
-      <img src={cs.data.heroImage} alt={cs.data.heroAlt} class="w-full rounded-lg border border-slate-200" />
+      <img src={cs.data.heroImage} alt={cs.data.heroAlt} class="w-full rounded-card border border-slate-200" />
       <figcaption class="mt-2 text-xs text-slate-500 italic">{cs.data.heroAlt}</figcaption>
     </figure>
   </section>
 
   <section class="max-w-3xl mx-auto px-5 mt-10">
-    <h2 class="text-xl font-semibold tracking-tight">What we found</h2>
+    <h2 class="text-title-3">What we found</h2>
     <ul class="mt-4 space-y-3">
       {cs.data.findings.map((finding) => (
         <li class="flex gap-3">
@@ -49,7 +49,7 @@ const { Content } = await cs.render();
   </section>
 
   <section class="max-w-3xl mx-auto px-5 mt-12">
-    <div class="bg-ink text-white rounded-xl p-6 sm:p-8">
+    <div class="bg-ink text-white rounded-card p-6 sm:p-8">
       <div class="flex flex-col sm:flex-row sm:items-start gap-5 justify-between">
         <div class="flex-1">
           <h3 class="text-lg font-semibold">Download the full deliverable</h3>
@@ -74,30 +74,30 @@ const { Content } = await cs.render();
           </ul>
         </div>
         {cs.data.deliverablesZip && (
-          <a href={cs.data.deliverablesZip} download class="inline-flex shrink-0 items-center gap-2 bg-accent hover:bg-accent-dark text-white px-5 py-3 rounded-md font-medium transition">
+          <a href={cs.data.deliverablesZip} download class="btn shrink-0 bg-accent text-white shadow-card hover:bg-accent-dark">
             Download zip {cs.data.deliverablesZipSize && (<span class="text-xs opacity-80">({cs.data.deliverablesZipSize})</span>)}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           </a>
         )}
       </div>
-      <div class="mt-5 pt-4 border-t border-white/10 text-xs text-slate-400">
+      <div class="mt-block pt-4 border-t border-white/10 text-caption text-slate-400">
         Prefer just the PDF? <a href={cs.data.reportPdf} download class="text-accent hover:underline underline-offset-4">Download report.pdf only</a>
       </div>
     </div>
   </section>
 
-  <section class="max-w-3xl mx-auto px-5 mt-12 pb-20">
-    <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
+  <section class="max-w-3xl mx-auto px-5 mt-block pb-section-sm sm:pb-section">
+    <div class="bg-slate-50 border border-slate-200 rounded-card p-6">
       <h3 class="font-semibold">Start a project like this</h3>
       <p class="prose-p text-sm mt-2">Fixed-fee, 7–10 business days. Email with your omics type + sample count and a quote comes back within 2 business days.</p>
       <div class="mt-4 flex flex-wrap gap-3">
-        <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="inline-flex items-center gap-2 bg-ink text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-slate-800 transition">
+        <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="btn-compact bg-ink text-white shadow-card hover:bg-slate-800">
           Request a quote
         </a>
-        <a href="/pricing/" class="inline-flex items-center gap-2 border border-slate-300 text-ink px-4 py-2 rounded-md text-sm font-medium hover:bg-white transition">
+        <a href="/pricing/" class="btn-compact border border-slate-300 text-ink hover:bg-white">
           See pricing
         </a>
-        <a href="/case-studies/" class="inline-flex items-center gap-2 text-slate-600 px-4 py-2 rounded-md text-sm font-medium hover:text-ink transition">
+        <a href="/case-studies/" class="btn-quiet">
           ← All case studies
         </a>
       </div>

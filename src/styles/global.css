@@ -9,7 +9,6 @@ html {
 }
 
 body {
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   position: relative;
 }
 
@@ -27,27 +26,80 @@ body::before {
     radial-gradient(52% 90% at 8% -12%, rgba(15, 118, 110, 0.10), transparent 62%);
 }
 
-.prose-p {
-  color: #334155;
-  line-height: 1.65;
+/* Respect the OS "reduce motion" setting: every hover lift, scale and
+   transition below collapses to nothing rather than being re-specified. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transform: none !important;
+  }
 }
 
 @layer components {
-  /* Small uppercase coloured label above a heading */
+  /* ── Type roles ──────────────────────────────────────────────────── */
+
+  /* Small uppercase coloured label above a heading. ONE definition for the
+     whole site: it used to exist in three variants that differed in colour,
+     weight and size, and one of them also changed size at the breakpoint. */
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-accent-dark font-semibold text-xs sm:text-sm tracking-[0.14em] uppercase;
+    @apply inline-flex items-center gap-2 text-accent-dark text-eyebrow uppercase;
   }
   .eyebrow::before {
     content: '';
     @apply inline-block w-5 h-px bg-accent/60;
   }
+  /* Same label on the deep teal band, where accent-dark has no contrast. */
+  .eyebrow-invert {
+    @apply inline-flex items-center gap-2 text-teal-200 text-eyebrow uppercase;
+  }
+  .eyebrow-invert::before {
+    content: '';
+    @apply inline-block w-5 h-px bg-teal-200/60;
+  }
 
-  /* White panel that lifts off the warm page */
+  /* Reading paragraph (17px) and in-card paragraph (14px). Replaces the
+     hand-written "prose-p text-sm" pairing scattered across the pages. */
+  .prose-p {
+    @apply text-body text-slate-700;
+  }
+  .prose-p-sm {
+    @apply text-body-sm text-slate-600;
+  }
+
+  /* Card heading: 16px semibold over a 14px body. Both used to be 14px, so
+     the only thing separating a title from its text was font-weight. */
+  .card-title {
+    @apply text-title-4 text-ink;
+  }
+
+  /* ── Layout ──────────────────────────────────────────────────────── */
+
+  /* The one place the vertical rhythm lives. */
+  .section-wrap {
+    @apply max-w-5xl mx-auto px-5 py-section-sm sm:py-section;
+  }
+
+  /* ── Surfaces ────────────────────────────────────────────────────── */
+
+  /* White panel that lifts off the warm page. */
   .card {
-    @apply bg-white rounded-xl border border-slate-200/80 shadow-card transition;
+    @apply bg-white rounded-card border border-slate-200/80 shadow-card transition duration-250 ease-apple;
   }
   .card-link {
     @apply card hover:shadow-card-hover hover:border-accent/40 hover:-translate-y-0.5;
+  }
+
+  /* Translucent panel — ONLY for use over the gradient bands, where there is
+     actually something behind to blur. On the flat paper ground a blur costs
+     GPU and shows nothing, so plain .card is used there. */
+  .card-glass {
+    @apply rounded-card border border-white/60 bg-white/70 backdrop-blur-xl shadow-card transition duration-250 ease-apple;
+  }
+  .card-glass-invert {
+    @apply rounded-card border border-white/15 bg-white/[0.08] backdrop-blur-xl transition duration-250 ease-apple hover:bg-white/[0.14];
   }
 
   /* Light teal-tinted section band */
@@ -64,8 +116,69 @@ body::before {
       linear-gradient(155deg, #0f766e 0%, #115e59 42%, #0f172a 100%);
   }
 
+  /* ── Controls ────────────────────────────────────────────────────── */
+
+  /* Every button on the site. min-h-[44px] is the touch-target floor; the
+     pill radius and the 1.02 hover scale are the skill's button pattern. */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill px-6 py-3 min-h-[44px]
+           font-medium text-body-sm transition duration-250 ease-apple hover:scale-[1.02];
+  }
+  .btn-primary {
+    @apply btn bg-ink text-white shadow-card hover:bg-slate-800;
+  }
+  .btn-secondary {
+    @apply btn bg-white text-ink border border-slate-200 shadow-card hover:bg-slate-50;
+  }
+  .btn-outline {
+    @apply btn bg-transparent text-ink border border-slate-300 hover:bg-slate-100;
+  }
+  /* Compact pill for dense chrome (nav bar, cookie banner, in-page footers).
+     40px instead of 44: these are secondary shortcuts that duplicate a CTA
+     already present at full size in the page body. */
+  .btn-compact {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill px-4 py-2.5 min-h-[40px]
+           text-body-sm font-medium transition duration-250 ease-apple hover:scale-[1.02];
+  }
+
+  /* Text-level action: no button chrome, so it never competes with a real CTA. */
+  .btn-quiet {
+    @apply inline-flex items-center gap-1.5 min-h-[44px] text-body-sm font-medium text-slate-600
+           transition duration-250 ease-apple hover:text-ink;
+  }
+
+  /* Inline "more →" link that sits next to a section heading. */
+  .link-more {
+    @apply text-accent font-medium text-body-sm underline-offset-4 hover:underline
+           transition duration-250 ease-apple;
+  }
+
   /* Pill chip / tag */
   .chip {
-    @apply inline-flex items-center rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs font-medium text-slate-600;
+    @apply inline-flex items-center rounded-pill border border-slate-200 bg-white/70 px-3 py-1 text-caption font-medium text-slate-600;
+  }
+
+  /* ── Progressive disclosure ──────────────────────────────────────── */
+
+  /* Zero-JS <details>. The chevron is a CSS pseudo-element that rotates on
+     open, so no icon markup and no script are needed. */
+  .disclosure > summary {
+    @apply inline-flex items-center gap-1.5 cursor-pointer list-none min-h-[44px]
+           text-body-sm font-medium text-accent transition duration-250 ease-apple hover:text-accent-dark;
+  }
+  .disclosure > summary::-webkit-details-marker {
+    display: none;
+  }
+  .disclosure > summary::after {
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translate(-1px, -1px);
+    transition: transform 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .disclosure[open] > summary::after {
+    transform: rotate(-135deg) translate(-2px, -2px);
   }
 }

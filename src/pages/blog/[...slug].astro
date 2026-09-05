@@ -64,10 +64,10 @@ const jsonLd = [
   ogImage={post.data.heroImage ?? '/og_image.png'}
   jsonLd={jsonLd}
 >
-  <article class="max-w-3xl mx-auto px-5 pt-12 pb-20">
+  <article class="max-w-3xl mx-auto px-5 pt-block pb-section-sm sm:pb-section">
     <a href="/blog/" class="text-sm text-slate-500 hover:text-ink">← All posts</a>
     <header class="mt-6">
-      <div class="text-xs font-mono uppercase tracking-wide text-slate-500">
+      <div class="text-caption font-mono uppercase tracking-wide text-slate-600">
         {post.data.pubDate.toISOString().slice(0, 10)} · by {post.data.author}
       </div>
       <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mt-3 leading-tight">
@@ -79,7 +79,7 @@ const jsonLd = [
       {post.data.tags.length > 0 && (
         <div class="mt-4 flex flex-wrap gap-1.5">
           {post.data.tags.map((t) => (
-            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">#{t}</span>
+            <span class="text-caption bg-slate-100 text-slate-700 px-2.5 py-1 rounded-pill">#{t}</span>
           ))}
         </div>
       )}
@@ -90,7 +90,7 @@ const jsonLd = [
         <img
           src={post.data.heroImage}
           alt={post.data.heroAlt ?? post.data.title}
-          class="w-full rounded-xl border border-slate-200 bg-slate-50"
+          class="w-full rounded-card border border-slate-200 bg-slate-50"
           loading="eager"
         />
         {post.data.heroCaption && (
@@ -119,15 +119,15 @@ const jsonLd = [
 
     {related.length > 0 && (
       <section class="mb-12">
-        <h2 class="text-lg font-semibold tracking-tight">Keep reading</h2>
+        <h2 class="text-title-3">Keep reading</h2>
         <ul class="mt-4 grid sm:grid-cols-3 gap-4">
           {related.map((r) => (
             <li>
               <a
                 href={`/blog/${r.slug}/`}
-                class="block h-full rounded-xl border border-slate-200/80 bg-white p-4 shadow-card hover:border-accent/40 hover:shadow-card-hover hover:-translate-y-0.5 transition"
+                class="block h-full rounded-card border border-slate-200/80 bg-white p-4 shadow-card hover:border-accent/40 hover:shadow-card-hover hover:-translate-y-0.5 transition"
               >
-                <span class="text-xs font-mono uppercase tracking-wide text-slate-500">
+                <span class="text-caption font-mono uppercase tracking-wide text-slate-600">
                   {r.data.pubDate.toISOString().slice(0, 10)}
                 </span>
                 <span class="mt-2 block font-semibold leading-snug tracking-tight">
@@ -145,8 +145,8 @@ const jsonLd = [
       </section>
     )}
 
-    <aside class="bg-slate-50 rounded-xl p-6 border border-slate-200">
-      <h2 class="text-lg font-semibold tracking-tight">Need this run on your data?</h2>
+    <aside class="bg-slate-50 rounded-card p-6 border border-slate-200">
+      <h2 class="text-title-3">Need this run on your data?</h2>
       <p class="text-sm text-slate-600 mt-2 max-w-2xl">
         OmicsDesk runs this analysis end-to-end as a productized service —
         from FASTQ to a branded PDF report, fixed price, fixed turnaround.

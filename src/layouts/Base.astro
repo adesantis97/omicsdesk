@@ -49,8 +49,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
 
-  <!-- Fonts are self-hosted (src/styles/fonts.css), so no request leaves for Google. -->
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin />
+  <!--
+    The UI font is the Apple system stack (SF Pro / Segoe UI / Roboto): nothing
+    is downloaded, so there is no webfont preload and no swap flash. The only
+    self-hosted face left is JetBrains Mono (src/styles/fonts.css), used by
+    font-mono on a handful of labels, and it is not on the critical path.
+  -->
 
   <!--
     No third party script is loaded here on purpose. The Cloudflare Web Analytics

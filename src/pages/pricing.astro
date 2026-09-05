@@ -124,48 +124,66 @@ const services: Omics[] = [
   title="Services — OmicsDesk"
   description="Omics analysis read by a bioinformatician: what your data means for your biology and what to test next. RNA-seq, single-cell, proteomics, phosphoproteomics, ChIP-seq, ATAC-seq, methylation and multi-omics. Request a quote."
 >
-  <header class="max-w-5xl mx-auto px-5 pt-16 pb-10">
-    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-3">Services &amp; how we work</p>
-    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+  <header class="max-w-5xl mx-auto px-5 pt-section-sm sm:pt-section pb-block">
+    <p class="eyebrow mb-stack">Services &amp; how we work</p>
+    <h1 class="text-title-2 sm:text-title-1 lg:text-display-sm">
       Every engagement includes the read on what it means.
     </h1>
-    <p class="mt-5 text-lg text-slate-600 max-w-2xl leading-relaxed">
+    <p class="mt-stack text-lead text-slate-600 max-w-measure">
       Each service below is a complete engagement, scoped to your biological question and written up as an interpretation: what stands out for your system and what is worth testing next, not just a folder of figures. Fixed scope and turnaround agreed up front; a quote comes back within 2 business days.
     </p>
-    <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="mt-6 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition shadow-card">
+    <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20request%20a%20quote" class="btn-primary mt-block">
       Request a quote
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
     </a>
   </header>
 
-  <section class="max-w-5xl mx-auto px-5 pb-16 grid md:grid-cols-2 gap-6">
+  <!-- Progressive disclosure: the first two deliverables carry the pitch, the
+       rest sit behind a <details> so eight cards do not open as ~40 bullets.
+       Native element, zero JS. -->
+  <section class="max-w-5xl mx-auto px-5 pb-section-sm sm:pb-section grid md:grid-cols-2 gap-6">
     {services.map((s) => (
-      <article id={s.slug} class="bg-white rounded-xl border border-slate-200/80 shadow-card p-6 flex flex-col">
+      <article id={s.slug} class="card p-6 flex flex-col hover:-translate-y-0.5 hover:shadow-card-hover">
         <div>
-          <h2 class="text-xl font-semibold text-ink">{s.name}</h2>
-          <p class="text-sm text-slate-600 mt-1">{s.tagline}</p>
+          <h2 class="text-title-3">{s.name}</h2>
+          <p class="prose-p-sm mt-2">{s.tagline}</p>
         </div>
-        <dl class="mt-5 grid grid-cols-2 gap-3 text-sm">
-          <div class="bg-slate-50 rounded p-3">
-            <dt class="text-slate-500 text-xs uppercase tracking-wide">Typical scope</dt>
-            <dd class="font-medium text-ink mt-0.5">{s.upTo}</dd>
+        <dl class="mt-block grid grid-cols-2 gap-3">
+          <div class="bg-slate-50 rounded-tile p-4">
+            <dt class="text-eyebrow text-slate-500">Typical scope</dt>
+            <dd class="text-body-sm font-medium text-ink mt-1">{s.upTo}</dd>
           </div>
-          <div class="bg-slate-50 rounded p-3">
-            <dt class="text-slate-500 text-xs uppercase tracking-wide">Turnaround</dt>
-            <dd class="font-medium text-ink mt-0.5">{s.turnaround}</dd>
+          <div class="bg-slate-50 rounded-tile p-4">
+            <dt class="text-eyebrow text-slate-500">Turnaround</dt>
+            <dd class="text-body-sm font-medium text-ink mt-1">{s.turnaround}</dd>
           </div>
         </dl>
-        <ul class="mt-5 space-y-1.5 text-sm text-slate-600 flex-grow">
-          {s.deliverables.map((d) => (
-            <li class="flex gap-2">
-              <span class="text-accent shrink-0 mt-1.5">•</span>
-              <span>{d}</span>
-            </li>
-          ))}
-        </ul>
+        <div class="mt-block flex-grow">
+          <ul class="space-y-2 text-body-sm text-slate-600">
+            {s.deliverables.slice(0, 2).map((d) => (
+              <li class="flex gap-2">
+                <span class="text-accent shrink-0 mt-1.5">•</span>
+                <span>{d}</span>
+              </li>
+            ))}
+          </ul>
+          {s.deliverables.length > 2 && (
+            <details class="disclosure">
+              <summary>{`${s.deliverables.length - 2} more deliverables`}</summary>
+              <ul class="space-y-2 text-body-sm text-slate-600 pb-1">
+                {s.deliverables.slice(2).map((d) => (
+                  <li class="flex gap-2">
+                    <span class="text-accent shrink-0 mt-1.5">•</span>
+                    <span>{d}</span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </div>
         <a
           href={`mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20quote%20for%20${encodeURIComponent(s.name)}`}
-          class="mt-6 inline-flex items-center justify-center gap-2 bg-ink text-white px-4 py-2.5 rounded-md font-medium text-sm hover:bg-slate-800 transition"
+          class="btn-primary mt-block w-full"
         >
           Request a quote
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -175,62 +193,62 @@ const services: Omics[] = [
   </section>
 
   <section class="section-tint">
-    <div class="max-w-5xl mx-auto px-5 py-14 grid md:grid-cols-2 gap-6">
-      <div class="bg-white rounded-xl border border-slate-200/80 shadow-card p-6">
-        <h3 class="text-lg font-semibold">Multi-omics integration</h3>
-        <p class="text-sm text-slate-600 mt-2">
+    <div class="section-wrap grid md:grid-cols-2 gap-6">
+      <div class="card-glass p-6">
+        <h2 class="text-title-3">Multi-omics integration</h2>
+        <p class="prose-p-sm mt-stack">
           Combine two or more omics layers into one integrated story: MOFA2 factor analysis, patient-specific regulatory networks, and cross-omics pathway convergence, interpreted as a single biological narrative rather than parallel reports.
         </p>
-        <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20multi-omics%20integration" class="mt-4 inline-flex items-center gap-2 text-accent font-medium text-sm hover:underline underline-offset-4">
+        <a href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20multi-omics%20integration" class="link-more mt-block inline-flex">
           Request a quote →
         </a>
       </div>
 
-      <div class="bg-white rounded-xl border border-slate-200/80 shadow-card p-6">
-        <h3 class="text-lg font-semibold">Options &amp; add-ons</h3>
-        <ul class="mt-4 space-y-2 text-sm text-slate-600">
+      <div class="card-glass p-6">
+        <h2 class="text-title-3">Options &amp; add-ons</h2>
+        <ul class="mt-stack space-y-2 text-body-sm text-slate-600">
           <li class="flex gap-2"><span class="text-accent shrink-0 mt-1.5">•</span><span>Rush delivery when you are working against a deadline</span></li>
           <li class="flex gap-2"><span class="text-accent shrink-0 mt-1.5">•</span><span>Larger studies, extra samples, unusual reference genomes</span></li>
           <li class="flex gap-2"><span class="text-accent shrink-0 mt-1.5">•</span><span>Follow-up re-analysis and additional contrasts</span></li>
           <li class="flex gap-2"><span class="text-accent shrink-0 mt-1.5">•</span><span>Ongoing analysis capacity on retainer, after a first project</span></li>
         </ul>
-        <p class="text-sm text-slate-500 mt-4">
+        <p class="text-caption text-slate-600 mt-block">
           15% academic discount for requests from
-          <span class="font-mono text-slate-600">.edu</span> / <span class="font-mono text-slate-600">.ac.*</span> institutional emails.
+          <span class="font-mono text-slate-700">.edu</span> / <span class="font-mono text-slate-700">.ac.*</span> institutional emails.
         </p>
       </div>
     </div>
   </section>
 
-  <section class="max-w-5xl mx-auto px-5 py-16">
-    <div class="rounded-xl border border-accent/30 bg-accent/5 p-8 md:p-10">
-      <p class="text-accent font-medium text-sm tracking-wide uppercase mb-2">For academic labs</p>
-      <h2 class="text-2xl font-semibold tracking-tight">Writing or resubmitting a grant?</h2>
-      <p class="text-slate-600 mt-3 max-w-2xl">
+  <!-- Grant and custom used to be two py-16 sections: 128px of dead air between
+       two panels that make the same "write to us" point. One section, 40px apart. -->
+  <section class="section-wrap">
+    <div class="rounded-panel border border-accent/30 bg-accent/5 p-6 sm:p-8 md:p-10">
+      <p class="eyebrow mb-stack">For academic labs</p>
+      <h2 class="text-title-2">Writing or resubmitting a grant?</h2>
+      <p class="prose-p mt-stack max-w-measure">
         We strengthen the proposal with real preliminary data from public sources at no cost, and write the computational arm reviewers now expect. The downstream analysis of your own data is scoped into the budget and run only if the grant is funded, paid from grant funds. Zero risk to you, and no cost until it wins.
       </p>
       <a
         href="mailto:hello@omicsdesk.com?subject=OmicsDesk%20%E2%80%94%20grant%20support"
-        class="mt-6 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition"
+        class="btn-primary mt-block"
       >
         Ask about grant support
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
     </div>
-  </section>
 
-  <section class="max-w-5xl mx-auto px-5 py-16">
-    <div class="rounded-xl border-2 border-dashed border-slate-200 p-8 md:p-10">
-      <p class="text-accent font-medium text-sm tracking-wide uppercase mb-2">Custom &amp; enterprise</p>
-      <h2 class="text-2xl font-semibold tracking-tight">Outside the standard scope?</h2>
-      <p class="text-slate-600 mt-3 max-w-2xl">
+    <div class="mt-block rounded-panel border-2 border-dashed border-slate-300 p-6 sm:p-8 md:p-10">
+      <p class="eyebrow mb-stack">Custom &amp; enterprise</p>
+      <h2 class="text-title-2">Outside the standard scope?</h2>
+      <p class="prose-p mt-stack max-w-measure">
         Studies above the typical scope, white-label work for CROs, ongoing analysis retainers, novel omics
         types (spatial, Hi-C, long-read), or unusual reference genomes are all quotable. Email with the
         details, quote back within 2 business days.
       </p>
       <a
         href="mailto:hello@omicsdesk.com?subject=Custom%20engagement%20enquiry"
-        class="mt-6 inline-flex items-center gap-2 bg-ink text-white px-5 py-3 rounded-md font-medium hover:bg-slate-800 transition"
+        class="btn-primary mt-block"
       >
         Discuss a custom engagement
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -238,9 +256,9 @@ const services: Omics[] = [
     </div>
   </section>
 
-  <section class="max-w-5xl mx-auto px-5 pb-16">
-    <h2 class="text-xl font-semibold tracking-tight">What you get, every analysis</h2>
-    <ul class="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-slate-600 max-w-3xl">
+  <section class="max-w-5xl mx-auto px-5 pb-section-sm sm:pb-section">
+    <h2 class="text-title-2">What you get, every analysis</h2>
+    <ul class="mt-block grid sm:grid-cols-2 gap-x-6 gap-y-2 text-body-sm text-slate-600 max-w-3xl">
       <li class="font-medium text-ink">A written biological interpretation: what it means, what to test next</li>
       <li>Branded PDF report (executive summary, methods, conclusions)</li>
       <li>Full statistical results (TSV + Excel workbook)</li>
@@ -248,7 +266,7 @@ const services: Omics[] = [
       <li>Reproducible pipeline code (Snakemake + conda)</li>
       <li>NDA available; raw data deleted within 30 days</li>
     </ul>
-    <p class="mt-6 text-sm text-slate-500">
+    <p class="mt-block text-caption text-slate-600">
       Payment terms and a fixed quote are agreed before any work begins. EUR by default; USD invoicing available on request.
     </p>
   </section>
